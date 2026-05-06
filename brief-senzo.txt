@@ -1,0 +1,20 @@
+- estado de hover distinto, botón mas moderno y mas grande. Uso de border radius. Poppins + Montalban (Senzo  + titulo de secicon)
+- cambiar el Senzo Studio y descripción mas botón, ponerlo que no moleste
+- eliminar la sección de introducción, añadir esa info en el hero mas el botón
+- cards de proyectos con tres estados (reposo, hover, active), 1 gap menor
+- añadir tracking como servicio y poner la info clara desde el principio
+- sección de about, añadir botón de LinkedIn individual, reel individual
+- sección FAQ (4-5 preguntas) copy a definir
+- sección Footer y contacto mezclada (redes sociales: LinkedIn, Vimeo, Behance, CLutch
+	https://www.behance.net/senzostudio
+	https://clutch.co/profile/senzo-studio
+- sección de contacto (4 opciones - Empleado, cliente, general, redes sociales)
+---
+SENZO STUDIO
+High-End VFX, CGI & FX Simulations
+We are a Madrid-based full-service VFX & CGI boutique with a core specialization in high-end FX and simulations. We deliver comprehensive visual solutions across Feature Films, Advertising, TV Series, and Animation.
+---
+Assets necesarios
+- 9 imágenes de proyecto + 9 títulos + 9 descripciones
+- 9 imágenes de servicios + 9 títulos + 9 descripciones
+- Nº de preguntas y respuestas

@@ -1,0 +1,122 @@
+import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import ModalVimeo from '../ModalVimeo';
+import Btn from '../Btn';
+import { hero } from '../../data/content';
+
+const OVERLAY_INSET = 'var(--space-6)';
+
+export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [reelOpen, setReelOpen] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+
+  return (
+    <section
+      id="hero"
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100vh',
+        overflow: 'hidden',
+        background: 'var(--color-background)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      {/* Cover while video loads */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'var(--color-background)',
+          zIndex: 1,
+          opacity: videoReady ? 0 : 1,
+          transition: 'opacity 0.6s ease',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Video background */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onPlaying={() => setVideoReady(true)}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          pointerEvents: 'none',
+        }}
+      >
+        <source src={hero.videoSrc} type="video/mp4" />
+      </video>
+
+      {/* Dark overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(6,0,0,0.5) 0%, rgba(6,0,0,0.3) 50%, rgba(6,0,0,0.75) 100%)',
+        }}
+      />
+
+
+      {/* CTA — bottom left */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        style={{
+          position: 'absolute',
+          bottom: OVERLAY_INSET,
+          left: OVERLAY_INSET,
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          gap: 'var(--space-5)',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+          <p
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(2rem, 5vw, 4rem)',
+              fontWeight: 400,
+              letterSpacing: 'var(--letter-spacing-wide)',
+              color: 'var(--color-neutral-50)',
+              textTransform: 'uppercase',
+              lineHeight: 1,
+            }}
+          >
+            Senzo Studio
+          </p>
+          <p className="text-xl" style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            {hero.tagline}
+          </p>
+          <p className="text-base" style={{ maxWidth: '36rem', lineHeight: 1.6 }}>
+            {hero.description}
+          </p>
+        </div>
+
+        <Btn variant="primary" onClick={() => setReelOpen(true)}>
+          {hero.ctaLabel}
+        </Btn>
+      </motion.div>
+
+      <ModalVimeo
+        url={hero.reelUrl}
+        isOpen={reelOpen}
+        onClose={() => setReelOpen(false)}
+      />
+    </section>
+  );
+}

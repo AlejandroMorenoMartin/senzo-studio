@@ -1,0 +1,162 @@
+﻿Technical Specification: Senzo Studio Web Forms V2
+This document contains the final copy, structure, and technical requirements for the implementation of the Senzo Studio web forms. All UX/UI friction points and logic errors have been resolved, including recent updates to optimize for serverless deployment.
+
+
+1. Global Tech Stack & Architectural Guidelines
+The forms are to be developed using the following stack. Adherence to these constraints is mandatory to ensure performance and avoid deployment failures.
+* Framework: React 19 + Vite 6
+* Styling: Tailwind v4
+* Language: TypeScript (Strict Mode required to ensure robust conditional logic rendering).
+* Animations: Framer Motion (Used for smooth multi-step transitions and the dynamic progress bar).
+* Hosting & API Constraint (Vercel): The application is hosted on Vercel (Free Tier). To avoid the strict 4.5 MB serverless payload limit, direct file uploads have been completely removed from the architecture. All file sharing must happen via external links (Google Drive, WeTransfer, Frame.io) pasted into the text areas.
+
+
+2. Form 1: Freelancer Application Form
+Goal: Streamline the ingestion of freelancer profiles into the studio's recruitment database.
+Step 1: Personal Information
+Label
+	Field Type
+	Validation / Notes
+ 
+	First Name *
+	Text Input
+	Required
+	Last Name *
+	Text Input
+	Required
+	Email Address *
+	Email Input
+	Standard Email Validation. Required.
+	Country of Residence *
+	Dropdown / Searchable
+	Required
+	
+
+Step 2: Professional Profile
+Label
+	Field Type
+	Validation / Notes
+ 
+	Department(s) *
+	Checkbox Grid (Multi-select)
+	Grouped logically: 2D & Comp, 3D & Anim, FX & Render, Other. Required.
+	Main Software(s) *
+	Text Area
+	Required
+	Years of Experience *
+	Number Input
+	Min: 0. Required.
+	Expected Rate *
+	Number Input + Dropdown
+	Qty + Currency (USD, EUR, GBP). Required.
+	Availability *
+	Dropdown
+	Immediate, 1-2 weeks, 1 month, Future. Required.
+	
+
+Step 3: Portfolio & Links
+Label
+	Field Type
+	Validation / Notes
+ 
+	Reel Link *
+	URL Input
+	Strict URL format (https://...). Required.
+	Reel Password
+	Text Input
+	Conditional: Show only if Vimeo or private link detected.
+	Portfolio / ArtStation
+	URL Input
+	Strict URL format
+	Personal Website
+	URL Input
+	Strict URL format
+	
+
+Step 4: Final Details
+Label
+	Field Type
+	Validation / Notes
+ 
+	How did you hear from us? *
+	Dropdown
+	LinkedIn, Instagram, Friend, Other. Required.
+	Additional Message
+	Text Area
+	Optional
+	Privacy Policy *
+	Checkbox
+	Must be checked to submit. Link to policy.
+	
+
+3. Form 2: Business Inquiries
+Goal: Capture qualified leads securely while protecting client IP. Lightweight ingestion compatible with serverless APIs.
+Step 1: Contact Information
+Label
+	Field Type
+	Validation / Notes
+ 
+	Full Name *
+	Text Input
+	Required
+	Work Email *
+	Email Input
+	Required
+	Company / Organization *
+	Text Input
+	Required
+	Role *
+	Dropdown
+	Agency, Studio, Director, Other. Required.
+	Country *
+	Dropdown
+	Required
+	
+
+Step 2: Nature of Inquiry
+* Option A: I have a specific project to discuss. (Proceeds to Step 3)
+* Option B: General inquiry / Partnership / Just saying hi. (Skips Step 3, goes to Step 4)
+
+
+Step 3: Project Specifications (Conditional)
+Label
+	Field Type
+	Validation / Notes
+ 
+	Project Category *
+	Dropdown
+	Feature Film, Advertising, TV Series, Animation, Other. Required.
+	Industry / Brand *
+	Dropdown
+	Automotive, Beauty, Tech, Entertainment, Other. Required.
+	Estimated Budget (USD) *
+	Dropdown
+	$0-$10k, $10k-$30k, $30k-$50k, Over $50k. Required.
+	Target Deadline
+	Date Picker
+	Optional
+	Estimated Start Date *
+	Dropdown
+	Immediate, 1 week, 2 weeks, 1 month, +1 month. Required.
+	
+
+Step 4: Message & External Links (UPDATED)
+Label
+	Field Type
+	Validation / Notes
+ 
+	Tell us more... *
+	Text Area
+	Placeholder: "Describe your project. Include any external links to briefs or references here (Drive, WeTransfer, etc.)." Max 3,000 characters. Required.
+	NDA Requirement
+	Checkbox
+	Legal Trigger: Used as an informational marker in the DB. Does not trigger UI changes since file uploads are removed.
+	Privacy Policy *
+	Checkbox
+	Must be checked to submit.
+	
+
+4. Global Security & Integration Requirements
+* Form Tracking (Progress): Implement a visual progress bar (Step X of 4) for both forms using Framer Motion to reduce abandonment rates.
+* Anti-Spam Protection: Implement reCAPTCHA v3 (invisible) or a hidden Honeypot field. Validate the token before calling the serverless API.
+* Data Transmission: Payload must be strictly JSON. No FormData parsing is required since file inputs have been eliminated. Send data to the designated webhook or serverless endpoint via HTTPS.

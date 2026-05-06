@@ -1,0 +1,368 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Montalban";
+  src: url("/fonts/Montalban.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+} 
+
+@font-face {
+  font-family: "Montalban";
+  src: url("/fonts/Montalban Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montalban";
+  src: url("/fonts/Montalban Bold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-heading: "Montalban", serif;
+  --font-body: "Poppins", sans-serif;
+
+  /* ── Background ──────────────────────────────── */
+  --color-background: #060000;
+
+  /* ── Neutral scale ───────────────────────────── */
+  --color-neutral-50:  #FFFFFF;
+  --color-neutral-100: #F2F4F7;
+  --color-neutral-200: #EBEBEB;
+  --color-neutral-300: #DEDEDE;
+  --color-neutral-400: #BFBFBF;
+  --color-neutral-500: #AFAFAF;
+  --color-neutral-600: #9E9E9E;
+  --color-neutral-700: #848484;
+  --color-neutral-800: #717171;
+  --color-neutral-900: #222222;
+  --color-neutral-950: #070707;
+
+  /* ── Red scale ───────────────────────────────── */
+  --color-red-50:  #FFF0F3;
+  --color-red-100: #FFC2CF;
+  --color-red-200: #FF859D;
+  --color-red-300: #FF5C7E;
+  --color-red-400: #FF3361;
+  --color-red-500: #FF0A44;
+  --color-red-600: #D60839;
+  --color-red-700: #A3062B;
+  --color-red-800: #70041E;
+  --color-red-900: #3D0210;
+  --color-red-950: #1F0009;
+
+  /* ── Semantic colors ─────────────────────────── */
+  --color-green:  #4ADE80;
+  --color-yellow: #FACC15;
+  --color-cyan:   #22D3EE;
+
+  --radius: 0.25rem;
+  --shadow: none;
+}
+
+/* ── Semantic tokens ─────────────────────────── */
+:root {
+  --color-surface: #0A0000;
+  --color-border:  var(--color-neutral-900);
+
+  --color-input-bg:     var(--color-surface);
+  --color-input-border: var(--color-neutral-900);
+  --color-input-hover:  var(--color-neutral-700);
+  --color-input-focus:  var(--color-neutral-400);
+  --color-input-error:  var(--color-red-500);
+  --color-input-filled: var(--color-neutral-200);
+  --color-placeholder:  var(--color-neutral-700);
+  --color-text:    var(--color-neutral-300);
+  --color-muted:   var(--color-neutral-600);
+  --color-accent:  var(--color-red-500);
+
+  --border: 0.5px solid var(--color-border);
+
+  --space-1:  0.125rem;
+  --space-2:  0.25rem;
+  --space-3:  0.5rem;
+  --space-4:  0.75rem;
+  --space-5:  1rem;
+  --space-6:  1.5rem;
+  --space-7:  2rem;
+  --space-8:  4rem;
+  --space-9:  8rem;
+  --space-10: 16rem;
+
+  --section-padding: 6rem 1.5rem;
+  --max-width: 1280px;
+  --max-width-modal: 960px;
+
+  --height-nav: 3.5rem;
+  --size-icon-btn: 2.25rem;
+  --size-crop-mark: 1.25rem;
+  --gap-crop-mark: 1.5rem;
+
+  --letter-spacing-brand: 0.08em;
+  --letter-spacing-wide: 0.1em;
+  --letter-spacing-wider: 0.12em;
+
+  --font-size-filter: 0.625rem;
+
+  --transition-hover: 0.15s ease-out;
+}
+
+/* ── Reset ───────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  border-radius: var(--radius);
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255, 10, 68, 0.04) 0%, transparent 70%);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Bold — color change only, no weight change ─ */
+strong, b {
+  font-weight: inherit;
+  color: var(--color-red-500);
+}
+
+/* ── Links — internal ────────────────────────── */
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-hover);
+}
+.link:hover,
+.link:focus-visible {
+  color: var(--color-neutral-50);
+}
+
+/* ── Links — external (new tab) ──────────────── */
+.link-external {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-hover);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+}
+.link-external:hover,
+.link-external:focus-visible {
+  color: var(--color-neutral-50);
+}
+
+/* ── Typography scale ────────────────────────── */
+.title-xl {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: auto;
+  color: var(--color-neutral-50);
+}
+
+.title-l {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: auto;
+  color: var(--color-neutral-100);
+}
+
+.text-xl {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: auto;
+  color: var(--color-neutral-200);
+}
+
+.text-l {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: auto;
+  color: var(--color-neutral-300);
+}
+
+.text-base {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: auto;
+  color: var(--color-neutral-400);
+}
+
+.text-s {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: auto;
+  color: var(--color-neutral-500);
+}
+
+.text-xs {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: auto;
+  color: var(--color-neutral-600);
+}
+
+/* ── Layout ──────────────────────────────────── */
+.section-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--section-padding);
+}
+
+/* ── Borders ─────────────────────────────────── */
+.border-subtle {
+  border: var(--border);
+}
+
+.border-strong {
+  border: 0.5px solid var(--color-neutral-400);
+}
+
+/* ── Accent ──────────────────────────────────── */
+.accent-underline {
+  border-bottom: 1.5px solid var(--color-accent);
+  padding-bottom: 2px;
+}
+
+/* ── Desktop breakpoint ──────────────────────── */
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* ── CropMarks — desktop only ────────────────── */
+.crop-marks {
+  display: none;
+}
+@media (min-width: 768px) {
+  .crop-marks {
+    display: block;
+  }
+}
+
+/* ── Desktop overlay — hero metadata ─────────── */
+.desktop-overlay {
+  display: none;
+}
+@media (min-width: 768px) {
+  .desktop-overlay {
+    display: inline;
+  }
+}
+
+/* ── Work section ────────────────────────────── */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) {
+  .work-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+/* ── Services section ────────────────────────── */
+.service-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) {
+  .service-row {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-5);
+  }
+  .service-row > *:first-child {
+    flex: 0 0 17.5rem;
+  }
+  .service-row > *:last-child {
+    flex: 1;
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.chip {
+  padding: var(--space-2) var(--space-5);
+  border: var(--border);
+  color: var(--color-neutral-400);
+  font-family: var(--font-body);
+  font-size: var(--text-base-size, 1rem);
+  background: var(--color-neutral-950);
+}
+
+/* ── About section ───────────────────────────── */
+.crew-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) {
+  .crew-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Contact section ─────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Navbar & Footer — square edges ─────────────── */
+nav, footer { --radius: 0; }
+
+/* ── Modal padding — responsive ─────────────────── */
+.modal-content {
+  padding: var(--space-6);
+}
+@media (min-width: 768px) {
+  .modal-content {
+    padding: var(--space-8);
+  }
+}
+
+/* ── Clients — infinite scroll ───────────────── */
+@keyframes scroll-infinite {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

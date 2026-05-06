@@ -1,0 +1,14 @@
+Para terminar el MPV
+- Completar ambos formularios y ver que no haya errores. Iterar aquello que vea que es mejorable
+- Conectar los forms a airtable y hacer una demos para ver la recodiga de datos
+- Preparar la info para informar a Senzo de como funciona y darles las creddenciales a airtable
+- Auditoria accesibilidad
+- Auditoria SEO tradicional y SEO AI
+- Modificaciones pertiniectes en metadatos
+- Auditoria front-end antes de preparer la version mobile (inconsitencias, hardcodeos, cosas raras)
+- Version mobile
+- Hacer push
+- Deploy en vercel 
+- Entrar al dominio de prueba
+- Iterar cosas que vea tanto en desktop como mobile
+- Pasar link a Senzo Studio

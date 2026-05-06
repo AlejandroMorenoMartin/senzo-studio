@@ -1,0 +1,96 @@
+SENZO STUDIO — MVP BRIEFING
+Fecha: 2026-04-28
+========================================
+
+## QUÉ ES EL MVP
+
+Web oficial de Senzo Studio. One-pager scroll-driven con estética de monitor de postproducción.
+Stack: React 19 + Vite 6 + Tailwind v4 + TypeScript + Framer Motion.
+
+Secciones implementadas:
+- Hero           — Vídeo de fondo con loop controlado (s4–s40), overlays de visor de cámara
+                   en las 4 esquinas (REC, formato, timecode, status), entrance animation
+- Statement      — Mantra + body + mercados (Feature Film, Advertising, TV, Animation)
+- Work           — Grid 3 columnas, 9 proyectos placeholder, filtrado por categoría (5 tags)
+- Services       — 3 servicios con visualización diferenciada:
+                     · FX Simulations: Before/After slider
+                     · Compositing: Layer Stack interactivo
+                     · CGI Pipeline: Hotspots con tooltips técnicos
+- About          — Perfiles de Sergio y Rubén con foto, rol y bio
+- FAQ            — 8 preguntas con acordeón animado
+- Footer         — Email CTA grande, socials, copyright
+
+Componentes de sistema:
+- Btn.tsx        — Componente de botón unificado (primary, nav, filter) con efecto roller en nav
+- CropMarks.tsx  — Marcas de encuadre en las 4 esquinas del viewport
+- SectionReveal  — Animación de entrada al hacer scroll
+- Navbar         — Fija con blur al scroll, links con efecto roller
+
+Sistema de diseño:
+- Tipografía: Montalban (headings) + Space Grotesk (body) + Space Mono (labels/mono)
+- Base: 16px mobile / 18px desktop
+- Colores: zinc scale + red-500 como accent
+- Fondo: gradiente radial rojo al 4% para profundidad ambiental
+- Grid: múltiplos de 16px, max-width 1280px
+
+
+## COSAS PENDIENTES DE VALIDAR CON EL CLIENTE
+
+- Copy: Statement, bios de About y FAQ — revisar y aprobar con Sergio y Rubén
+- Reel URL: actualizar URL de Vimeo en src/data/content.ts
+- Assets reales: vídeo hero, thumbnails de proyectos, imágenes before/after de FX
+- Email y redes sociales reales en src/data/content.ts
+- Definir si el Pipeline (Roto, Keying, etc.) va en Servicios o en About
+- Decidir qué categorías de filtrado de Work son las definitivas
+- Confirmar si quieren i18n en el MVP o es post-lanzamiento
+
+
+## IDEAS DE MEJORAS POST-MVP
+
+Visual / UX:
+- Crosshair cursor con coordenadas X/Y dinámicas (desktop only) — coherente con estética visor
+- Transición entre secciones con línea de escáner roja
+- Modo "reduced motion" para usuarios que lo prefieran
+- Cursor personalizado sobre las cards de Work (zoom-in ya implementado, afinar)
+
+Contenido:
+- i18n: ES como idioma adicional (el sitio es en inglés por defecto)
+- Página de proyecto individual al hacer click en una card de Work
+- Testimonios de clientes o créditos de proyectos reales
+
+Técnico:
+- Lazy loading de imágenes (ya añadido en Services, pendiente en Work y About)
+- Optimización del vídeo hero (WebM como formato alternativo para Chrome)
+- Google Search Console tras migración de dominio
+- Analytics: Hotjar o Plausible
+- Auditoría de accesibilidad completa (ver sección de pendientes)
+
+
+## ESTADO DE TAREAS INFRAESTRUCTURA
+
+URGENTE — ANTES DE LA REUNIÓN:
+[ ] Deploy en Vercel de la rama actual — para tener enlace de demo
+
+SEMANA DEL 2026-05-04 — MIGRACIÓN DE DOMINIO:
+[ ] Transferencia de dominio: IONOS → Cloudflare (o directo a Vercel DNS)
+    IMPORTANTE: preservar los registros MX de Google Workspace durante toda la migración
+    para que el correo no se interrumpa ni un momento.
+    Orden correcto:
+      1. Añadir dominio en Vercel y obtener los nameservers
+      2. Añadir registros MX de Google Workspace en Vercel/Cloudflare ANTES de transferir
+      3. Transferir dominio
+      4. Verificar que el correo sigue funcionando
+      5. Eliminar hosting antiguo en IONOS solo cuando todo esté confirmado
+
+POST-MIGRACIÓN:
+[ ] Google Search Console — verificar dominio y forzar indexación
+[ ] Configurar dominio de preview (rama dev) en Vercel para Senzo Studio
+[ ] Eliminar hosting antiguo de IONOS — solo cuando el dominio esté migrado y verificado
+
+
+## PENDIENTES DE ACCESIBILIDAD (no bloquean demo)
+
+- Focus trap + role="dialog" + aria-modal en ModalVimeo.tsx y ModalImage.tsx
+- Cards de Work: cambiar div a button o añadir role="button" + tabIndex + onKeyDown
+- aria-expanded en botón de acordeón en Faq.tsx
+- role="slider" + aria-valuenow/min/max + navegación por teclado en BeforeAfterSlider
