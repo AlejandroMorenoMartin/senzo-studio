@@ -1,6 +1,7 @@
 import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
 import BtnIcon from '../BtnIcon';
+import KittLine from '../KittLine';
 import { about } from '../../data/content';
 
 const IconLinkedin = () => (
@@ -39,8 +40,8 @@ function WaveformSvg() {
 
 export default function About() {
   return (
-    <section id="about" style={{ background: 'var(--color-background)', borderTop: 'var(--border)', borderBottom: 'var(--border)', borderRadius: 0 }}>
-      <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', padding: 'var(--space-9) 1.5rem', display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
+    <section id="about" style={{ background: 'var(--color-background)' }}>
+      <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
         <SectionLabel>About</SectionLabel>
 
         <p

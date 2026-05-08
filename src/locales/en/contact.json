@@ -1,5 +1,6 @@
 {
   "sectionLabel": "Contact",
+  "email": "info@senzostudio.com",
   "emailTooltip": {
     "clickToCopy": "Click to copy",
     "copied": "Copied!"
@@ -22,7 +23,7 @@
     "intro": "Looking for high-end VFX or CGI for your next production? Fill out the form below, and our team will get back to you within one business day.",
     "steps": [
       "Contact Information",
-      "Nature of inquiry",
+      "Nature of Inquiry",
       "Project Specifications",
       "Message & Attachments"
     ],
@@ -155,7 +156,7 @@
     "intro": "Join our talent roster and be considered for future productions. Fill out the form — our team reviews all applications.",
     "callout": "Please note that we currently only collaborate with freelancers. You must be officially registered as a freelancer or self-employed in your country of residence to apply.",
     "steps": [
-      "Personal information",
+      "Personal Information",
       "Professional Profile",
       "Portfolio & Links",
       "Final Details"

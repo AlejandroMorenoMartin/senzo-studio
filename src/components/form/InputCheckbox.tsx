@@ -8,6 +8,7 @@ interface InputCheckboxProps {
   registration: UseFormRegisterReturn;
   checked: boolean;
   value?: string;
+  type?: 'checkbox' | 'radio';
 }
 
 const CheckIcon = () => (
@@ -16,7 +17,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-export default function InputCheckbox({ label, error, disabled, registration, checked, value }: InputCheckboxProps) {
+export default function InputCheckbox({ label, error, disabled, registration, checked, value, type = 'checkbox' }: InputCheckboxProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -33,7 +34,7 @@ export default function InputCheckbox({ label, error, disabled, registration, ch
     >
       <input
         {...registration}
-        type={value !== undefined ? 'radio' : 'checkbox'}
+        type={type}
         disabled={disabled}
         value={value}
         checked={checked}

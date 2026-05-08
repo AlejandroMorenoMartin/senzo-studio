@@ -9,6 +9,7 @@ import Callout from './Callout';
 import FormField from './form/FormField';
 import InputText from './form/InputText';
 import InputSelect from './form/InputSelect';
+import InputCheckbox from './form/InputCheckbox';
 import InputTextarea from './form/InputTextarea';
 import FormStepper from './form/FormStepper';
 import { COUNTRY_OPTIONS } from '../data/countries';
@@ -61,13 +62,16 @@ const step1Schema = z.object({
 });
 
 const step2Schema = z.object({
-  department: z.string().min(1, 'Select your department'),
+  department: z.array(z.string()).min(1, 'Select at least one department'),
   departmentOther: z.string().optional(),
   mainSoftware: z.string().min(1, 'List your main software (e.g. Houdini, Nuke, Maya)'),
   yearsExperience: z.string().min(1, 'Enter your years of experience'),
   expectedRate: z.string().min(1, 'Enter your expected daily or hourly rate'),
   availability: z.string().min(1, 'Select your availability'),
-});
+}).refine(
+  (data) => !data.department.includes('Other') || (data.departmentOther && data.departmentOther.trim().length > 0),
+  { message: 'Please specify your department', path: ['departmentOther'] }
+);
 
 const optionalHttpsUrl = z.string().optional().refine((v) => !v || /^https:\/\/.+\..+/.test(v), 'Enter a valid https URL');
 
@@ -94,7 +98,7 @@ const fullSchema = z.object({
   lastName: z.string().min(1, 'Enter your last name'),
   email: z.string().min(1, 'Enter your email address').email('Enter a valid email address (e.g. name@email.com)'),
   country: z.string().min(1, 'Select your country'),
-  department: z.string().optional(),
+  department: z.array(z.string()).optional(),
   departmentOther: z.string().optional(),
   mainSoftware: z.string().optional(),
   yearsExperience: z.string().optional(),
@@ -192,7 +196,7 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
     reValidateMode: 'onChange',
     defaultValues: savedSession?.values ?? {
       firstName: '', lastName: '', email: '', country: '',
-      department: '', departmentOther: '', mainSoftware: '', yearsExperience: '', expectedRate: '', availability: '',
+      department: [], departmentOther: '', mainSoftware: '', yearsExperience: '', expectedRate: '', availability: '',
       reelLink: '', reelPassword: '', websiteUrl: '', otherLinks: '',
       source: '', sourceOther: '', message: '', privacyPolicy: false, honeypot: '',
     },
@@ -200,7 +204,7 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
 
   const watchedValues = watch();
   const messageValue = watchedValues.message ?? '';
-  const selectedDepartment = watchedValues.department;
+  const selectedDepartments = watchedValues.department ?? [];
 
   const isStepValid = stepSchemas[currentStep].safeParse(watchedValues).success;
 
@@ -304,15 +308,16 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ y: '-100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '-100%' }}
+          transition={{ duration: 0.5, ease: [0.45, 0, 0.55, 1] }}
           style={{
             position: 'fixed', inset: 0,
             background: 'var(--color-background)',
             zIndex: 100,
             overflowY: 'auto',
+            transformOrigin: 'center',
           }}
         >
           {/* Header */}
@@ -342,7 +347,7 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
             {!submitted && (
               <div style={{ marginBottom: 'var(--space-6)' }}>
                 <Callout>
-                  <p className="text-base">Please note that we currently only collaborate with freelancers. You must be officially registered as a freelancer or self-employed in your country of residence to apply.</p>
+                  <p className="text-s">Please note that we currently only collaborate with freelancers. You must be officially registered as a freelancer or self-employed in your country of residence to apply.</p>
                 </Callout>
               </div>
             )}
@@ -397,11 +402,21 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
 
                       {currentStep === 1 && (
                         <>
-                          <FormField label="Department" required error={fieldErrors.department}>
-                            <InputSelect registration={register('department')} placeholder="Select your department" options={DEPARTMENT_OPTIONS} error={!!fieldErrors.department} autoComplete="off" />
+                          <FormField label="Department(s)" required error={fieldErrors.department}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'repeat(7, auto)', gridAutoFlow: 'column', gap: 'var(--space-4)' }}>
+                              {DEPARTMENT_OPTIONS.map((opt) => (
+                                <InputCheckbox
+                                  key={opt.value}
+                                  registration={register('department')}
+                                  label={opt.label}
+                                  checked={selectedDepartments.includes(opt.value)}
+                                  value={opt.value}
+                                />
+                              ))}
+                            </div>
                           </FormField>
-                          {selectedDepartment === 'Other' && (
-                            <FormField label="Specify your department" error={fieldErrors.departmentOther}>
+                          {selectedDepartments.includes('Other') && (
+                            <FormField label="Specify your department" required error={fieldErrors.departmentOther}>
                               <InputText registration={register('departmentOther')} placeholder="Describe your area of work" error={!!fieldErrors.departmentOther} value={watch('departmentOther')} autoComplete="off" />
                             </FormField>
                           )}
@@ -415,7 +430,7 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
                             <InputText registration={register('expectedRate')} type="number" placeholder="e.g. 350" error={!!fieldErrors.expectedRate} value={watch('expectedRate')} autoComplete="off" />
                           </FormField>
                           <FormField label="Availability" required error={fieldErrors.availability}>
-                            <InputText registration={register('availability')} placeholder="e.g. Full-time, Part-time, Project-based..." error={!!fieldErrors.availability} value={watch('availability')} autoComplete="off" />
+                            <InputText registration={register('availability')} placeholder="Your availability" error={!!fieldErrors.availability} value={watch('availability')} autoComplete="off" />
                           </FormField>
                         </>
                       )}
@@ -423,16 +438,16 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
                       {currentStep === 2 && (
                         <>
                           <FormField label="Reel link" required error={errors.reelLink?.message ?? fieldErrors.reelLink}>
-                            <InputText registration={register('reelLink')} type="url" placeholder="https://vimeo.com/youreel" error={!!errors.reelLink || !!fieldErrors.reelLink} value={watch('reelLink')} autoComplete="off" />
+                            <InputText registration={register('reelLink')} type="url" placeholder="Your reel link" error={!!errors.reelLink || !!fieldErrors.reelLink} value={watch('reelLink')} autoComplete="off" />
                           </FormField>
                           <FormField label="Reel password" error={fieldErrors.reelPassword}>
-                            <InputText registration={register('reelPassword')} placeholder="Leave blank if not protected" error={!!fieldErrors.reelPassword} value={watch('reelPassword')} autoComplete="off" />
+                            <InputText registration={register('reelPassword')} placeholder="Your reel password" error={!!fieldErrors.reelPassword} value={watch('reelPassword')} autoComplete="off" />
                           </FormField>
                           <FormField label="Personal Website" error={errors.websiteUrl?.message ?? fieldErrors.websiteUrl}>
-                            <InputText registration={register('websiteUrl')} type="url" placeholder="https://yourwebsite.com" error={!!errors.websiteUrl || !!fieldErrors.websiteUrl} value={watch('websiteUrl')} autoComplete="url" />
+                            <InputText registration={register('websiteUrl')} type="url" placeholder="Your website" error={!!errors.websiteUrl || !!fieldErrors.websiteUrl} value={watch('websiteUrl')} autoComplete="url" />
                           </FormField>
-<FormField label="Other links" error={errors.otherLinks?.message ?? fieldErrors.otherLinks}>
-                            <InputText registration={register('otherLinks')} type="url" placeholder="https://linkedin.com/in/yourprofile" error={!!errors.otherLinks || !!fieldErrors.otherLinks} value={watch('otherLinks')} autoComplete="off" />
+<FormField label="Other link" error={errors.otherLinks?.message ?? fieldErrors.otherLinks}>
+                            <InputText registration={register('otherLinks')} type="url" placeholder="Your other link" error={!!errors.otherLinks || !!fieldErrors.otherLinks} value={watch('otherLinks')} autoComplete="off" />
                           </FormField>
                         </>
                       )}

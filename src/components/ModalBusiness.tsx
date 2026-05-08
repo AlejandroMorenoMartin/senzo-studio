@@ -104,6 +104,7 @@ const step2Schema = z.object({
 
 const step3Schema = z.object({
   projectCategory: z.string().min(1, 'Select a project category'),
+  projectCategoryOther: z.string().optional(),
   industry: z.string().optional(),
   budget: z.string().min(1, 'Select an estimated budget range'),
   targetDeadline: z.string().optional(),
@@ -135,6 +136,7 @@ const fullSchema = z.object({
   country: z.string().min(1, 'Select your country'),
   inquiryType: z.string().optional(),
   projectCategory: z.string().optional(),
+  projectCategoryOther: z.string().optional(),
   industry: z.string().optional(),
   budget: z.string().optional(),
   targetDeadline: z.string().optional(),
@@ -226,8 +228,9 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.type !== 'application/pdf') {
-      setFileError('Only PDF files are accepted.');
+    const ACCEPTED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!ACCEPTED_TYPES.includes(file.type)) {
+      setFileError('Only PDF, DOC and DOCX files are accepted.');
       e.target.value = '';
       return;
     }
@@ -262,7 +265,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
     defaultValues: savedSession?.values ?? {
       fullName: '', workEmail: '', company: '', companyWebsite: '', role: '', roleOther: '', country: '',
       inquiryType: '',
-      projectCategory: '', industry: '', budget: '', targetDeadline: '', targetDeadlineOther: '', startDate: '',
+      projectCategory: '', projectCategoryOther: '', industry: '', budget: '', targetDeadline: '', targetDeadlineOther: '', startDate: '',
       message: '', externalLinks: '', ndaRequested: false, source: '', sourceOther: '', privacyPolicy: false,
       honeypot: '',
     },
@@ -428,15 +431,16 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ y: '-100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '-100%' }}
+          transition={{ duration: 0.5, ease: [0.45, 0, 0.55, 1] }}
           style={{
             position: 'fixed', inset: 0,
             background: 'var(--color-background)',
             zIndex: 100,
             overflowY: 'auto',
+            transformOrigin: 'center',
           }}
         >
           {/* Header */}
@@ -514,7 +518,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                             <InputText registration={register('company')} placeholder="Your company or organization" error={!!errors.company} value={watch('company')} autoComplete="organization" />
                           </FormField>
                           <FormField label="Company Website" error={errors.companyWebsite?.message}>
-                            <InputText registration={register('companyWebsite')} type="url" placeholder="https://yourcompany.com" error={!!errors.companyWebsite} value={watch('companyWebsite')} autoComplete="url" />
+                            <InputText registration={register('companyWebsite')} type="url" placeholder="Your company website" error={!!errors.companyWebsite} value={watch('companyWebsite')} autoComplete="url" />
                           </FormField>
                           <FormField label="Role" required error={errors.role?.message}>
                             <InputSelect registration={register('role')} placeholder="Your role" options={ROLE_OPTIONS} error={!!errors.role} autoComplete="organization-title" />
@@ -544,6 +548,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                             label="Option A. I have a specific project to discuss (Step 3)."
                             error={!!fieldErrors.inquiryType}
                             value="specific"
+                            type="radio"
                           />
                           <InputCheckbox
                             registration={register('inquiryType')}
@@ -551,6 +556,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                             label="Option B. General inquiry / Partnership / Just saying hi (Step 4)."
                             error={!!fieldErrors.inquiryType}
                             value="general"
+                            type="radio"
                           />
                         </>
                       )}
@@ -561,6 +567,11 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                           <FormField label="Project Category" required error={errors.projectCategory?.message}>
                             <InputSelect registration={register('projectCategory')} placeholder="Your project category" options={CATEGORY_OPTIONS} error={!!errors.projectCategory} />
                           </FormField>
+                          {watch('projectCategory') === 'Other' && (
+                            <FormField label="Specify category" error={errors.projectCategoryOther?.message}>
+                              <InputText registration={register('projectCategoryOther')} placeholder="Describe your project type" error={!!errors.projectCategoryOther} value={watch('projectCategoryOther')} />
+                            </FormField>
+                          )}
                           <FormField label="Industry / Brand" error={errors.industry?.message}>
                             <InputText registration={register('industry')} placeholder="Your industry / brand" error={!!errors.industry} value={watch('industry')} />
                           </FormField>
@@ -584,10 +595,10 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                       {/* STEP 4 — Message */}
                       {currentStep === 3 && (
                         <>
-                          <FormField label="Additional Message" required error={errors.message?.message}>
+                          <FormField label="Your Message" required error={errors.message?.message}>
                             <InputTextarea
                               registration={register('message')}
-                              placeholder="Tell us about your project. Feel free to include links to briefs, references, or any relevant materials (Google Drive, Frame.io, WeTransfer, etc.)"
+                              placeholder="Tell us more about your project, vision, or anything you'd like us to know before we connect."
                               maxLength={3000}
                               watchValue={messageValue}
                               rows={7}
@@ -598,7 +609,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                           {/* File attachment */}
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                             <label className="text-s" style={{ color: 'var(--color-neutral-400)' }}>
-                              Attach Brief <span className="text-xs" style={{ color: 'var(--color-neutral-600)' }}>— PDF only, max 30 MB</span>
+                              Attach Brief <span className="text-xs" style={{ color: 'var(--color-neutral-600)' }}>— PDF, DOC or DOCX, max 30 MB</span>
                             </label>
                             {!attachedFile ? (
                               <label style={{
@@ -613,8 +624,8 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, color: 'var(--color-neutral-500)' }}>
                                   <path d="M7 1v8M4 4l3-3 3 3M1 10v1.5A1.5 1.5 0 002.5 13h9a1.5 1.5 0 001.5-1.5V10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                <span className="text-s" style={{ color: 'var(--color-neutral-500)' }}>Click to upload PDF</span>
-                                <input type="file" accept="application/pdf" onChange={handleFileChange} style={{ display: 'none' }} />
+                                <span className="text-s" style={{ color: 'var(--color-neutral-500)' }}>Click to upload PDF, DOC or DOCX</span>
+                                <input type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={handleFileChange} style={{ display: 'none' }} />
                               </label>
                             ) : (
                               <div style={{
@@ -643,7 +654,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                           </div>
 
                           <FormField label="Brief Link" error={errors.externalLinks?.message}>
-                            <InputText registration={register('externalLinks')} type="url" placeholder="https://drive.google.com/your-brief" error={!!errors.externalLinks} value={watch('externalLinks')} />
+                            <InputText registration={register('externalLinks')} type="url" placeholder="Your link" error={!!errors.externalLinks} value={watch('externalLinks')} />
                           </FormField>
                           <FormField label="How did you hear from us?" required error={errors.source?.message || fieldErrors.source}>
                             <InputSelect registration={register('source')} placeholder="Select one" options={SOURCE_OPTIONS} error={!!errors.source || !!fieldErrors.source} />

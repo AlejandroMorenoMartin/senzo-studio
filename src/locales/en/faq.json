@@ -2,24 +2,24 @@
   "sectionLabel": "FAQ'S",
   "items": [
     {
-      "q": "What services do you provide?",
-      "a": "We offer a full-service VFX and CGI pipeline, handling projects end-to-end or just the specific parts you need. Whether you require a single department or a finished commercial, we adapt to your production's scope."
+      "question": "What services do you provide?",
+      "answer": "We offer a full-service VFX and CGI pipeline, handling projects end-to-end or just the specific parts you need. Whether you require a single department or a finished commercial, we adapt to your production's scope."
     },
     {
-      "q": "Do you work on a fixed budget or a day rate basis?",
-      "a": "We adapt to your project's needs. We prioritize Fixed Project Pricing to provide financial certainty and clear milestones, but we also offer flexible Day Rate models for targeted tasks or internal production estimates."
+      "question": "Do you work on a fixed budget or a day rate basis?",
+      "answer": "We adapt to your project's needs. We prioritize Fixed Project Pricing to provide financial certainty and clear milestones, but we also offer flexible Day Rate models for targeted tasks or internal production estimates."
     },
     {
-      "q": "Do you offer outsourcing services or work through a remote workflow?",
-      "a": "We are fully flexible. We can work as a fully independent outsourcing partner or connect directly to your studio's infrastructure via secure remote workstations, seamlessly integrating into your internal workflow."
+      "question": "Do you offer outsourcing services or work through a remote workflow?",
+      "answer": "We are fully flexible. We can work as a fully independent outsourcing partner or connect directly to your studio's infrastructure via secure remote workstations, seamlessly integrating into your internal workflow."
     },
     {
-      "q": "How are final deliveries handled?",
-      "a": "We provide total flexibility: we can deliver high-quality final renders for direct integration, or optimized technical caches if you prefer to handle the lookdev and final render internally. Everything is tailored to your specific formats and pipeline requirements."
+      "question": "How are final deliveries handled?",
+      "answer": "We provide total flexibility: we can deliver high-quality final renders for direct integration, or optimized technical caches if you prefer to handle the lookdev and final render internally. Everything is tailored to your specific formats and pipeline requirements."
     },
     {
-      "q": "How do you handle security and NDAs?",
-      "a": "Security is our priority. We are accustomed to the strict confidentiality standards required for major international productions. We sign NDAs from the first contact and use secure protocols for all data transfers and communications."
+      "question": "How do you handle security and NDAs?",
+      "answer": "Security is our priority. We are accustomed to the strict confidentiality standards required for major international productions. We sign NDAs from the first contact and use secure protocols for all data transfers and communications."
     }
   ]
 }

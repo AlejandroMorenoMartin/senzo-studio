@@ -44,8 +44,6 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
     <footer id="footer" style={{ background: 'var(--color-background)', borderTop: 'var(--border)' }}>
       <div
         style={{
-          maxWidth: 'var(--max-width)',
-          margin: '0 auto',
           padding: 'var(--space-7) var(--space-6)',
           display: 'flex',
           alignItems: 'flex-start',
@@ -95,8 +93,6 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
       {/* Bottom bar */}
       <div
         style={{
-          maxWidth: 'var(--max-width)',
-          margin: '0 auto',
           padding: 'var(--space-5) var(--space-6)',
           borderTop: 'var(--border)',
           display: 'flex',

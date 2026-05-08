@@ -59,15 +59,17 @@ export default function Hero() {
         <source src={hero.videoSrc} type="video/mp4" />
       </video>
 
-      {/* Dark overlay */}
+
+
+      {/* Localized overlay — bottom-left text area only */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(6,0,0,0.5) 0%, rgba(6,0,0,0.3) 50%, rgba(6,0,0,0.75) 100%)',
+          background: 'radial-gradient(ellipse 60% 60% at 0% 100%, rgba(6,0,0,0.7) 0%, transparent 70%)',
+          pointerEvents: 'none',
         }}
       />
-
 
       {/* CTA — bottom left */}
       <motion.div

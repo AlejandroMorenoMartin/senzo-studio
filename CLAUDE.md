@@ -30,3 +30,4 @@ Un único breakpoint: **768px**. Mobile-first.
 
 @apps/senzo-studio/docs/design-references/
 @apps/senzo-studio/docs/pending.md
+@apps/senzo-studio/docs/done.md

@@ -133,7 +133,6 @@ html {
 
 body {
   background-color: var(--color-background);
-  background-image: var(--color-glow);
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -237,10 +236,70 @@ strong, b {
   padding: var(--section-padding);
 }
 
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-9) 1.5rem;
+}
+
 /* ── Borders ─────────────────────────────────── */
 .border-subtle {
   border: var(--border);
 }
+
+/* ── KITT scanner effect ─────────────────────── */
+@keyframes kitt-scan {
+  0%   { left: -400px; }
+  100% { left: 100%; }
+}
+
+.section-divider {
+  position: relative;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0.5px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.section-divider::before { top: 0; }
+.section-divider::after  { bottom: 0; }
+
+.section-divider::before .kitt,
+.section-divider::after .kitt {
+  display: none;
+}
+
+.section-divider::before {
+  overflow: hidden;
+}
+
+.section-divider::after {
+  overflow: hidden;
+}
+
+/* The moving glow — injected via a shared sibling trick using outline-based pseudo */
+.section-divider > .kitt-top,
+.section-divider > .kitt-bottom {
+  position: absolute;
+  left: 0;
+  width: 160px;
+  height: 0.5px;
+  background: linear-gradient(to right, transparent, var(--color-red-500), transparent);
+  pointer-events: none;
+  z-index: 1;
+  animation: kitt-scan 3s linear infinite;
+  filter: blur(1px);
+}
+
+.section-divider > .kitt-top    { top: 0; }
+.section-divider > .kitt-bottom { bottom: 0; }
 
 .border-strong {
   border: 0.5px solid var(--color-neutral-400);

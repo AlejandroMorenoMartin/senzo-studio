@@ -1,0 +1,9 @@
+END-TO-END OR JUST THE PARTS YOU NEED:
+
+- Tracking & Match-Move
+- Rotoscope, Keying & Paint-Prep
+- 3D Modeling & Texturing
+- 3D Animation
+- FX & CFX Simulations
+- Lighting & Render
+- Compositing

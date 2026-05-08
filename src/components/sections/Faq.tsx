@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionReveal from '../SectionReveal';
 import SectionLabel from '../SectionLabel';
+import KittLine from '../KittLine';
 import { faq } from '../../data/content';
 
 const IconChevron = ({ open }: { open: boolean }) => (
@@ -86,8 +87,8 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" style={{ background: 'var(--color-background)', borderTop: 'var(--border)', borderBottom: 'var(--border)', borderRadius: 0 }}>
-      <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', padding: 'var(--space-9) 1.5rem', display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
+    <section id="faq" style={{ background: 'var(--color-background)' }}>
+      <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
 
         <SectionReveal>
           <SectionLabel>FAQ'S</SectionLabel>

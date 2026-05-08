@@ -49,8 +49,6 @@ export default function Btn({ variant, as = 'button', href, active, borderless, 
   const handlers = {
     onMouseEnter: () => setHovered(true),
     onMouseLeave: () => setHovered(false),
-    onFocus: () => setHovered(true),
-    onBlur: () => setHovered(false),
   };
 
   if (variant === 'primary') {
@@ -105,7 +103,8 @@ export default function Btn({ variant, as = 'button', href, active, borderless, 
       border: borderless ? '0.5px solid transparent' : `0.5px solid ${disabled ? 'var(--color-neutral-900)' : hovered ? 'var(--color-neutral-50)' : 'var(--color-neutral-900)'}`,
       background: active ? 'var(--color-red-900)' : 'transparent',
       color: disabled ? 'var(--color-neutral-700)' : hovered ? 'var(--color-neutral-50)' : undefined,
-      fontWeight: hovered ? 700 : 400,
+      fontWeight: 400,
+      textShadow: hovered ? '0 0 0.5px currentColor' : 'none',
       opacity: disabled ? 0.4 : 1,
       cursor: disabled ? 'not-allowed' : 'pointer',
     };

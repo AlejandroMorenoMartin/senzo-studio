@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import SectionLabel from '../SectionLabel';
+import KittLine from '../KittLine';
 
 import Logo20 from '../../assets/clients/20.svg?react';
 import LogoDC from '../../assets/clients/dc.svg?react';
@@ -58,15 +59,13 @@ export default function Clients() {
   const doubled = [...CLIENTS, ...CLIENTS];
 
   return (
-    <section id="clients" style={{ background: 'var(--color-background)', borderTop: 'var(--border)', borderBottom: 'var(--border)', borderRadius: 0, paddingTop: 'var(--space-9)', paddingBottom: 'var(--space-9)' }}>
-      <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', paddingLeft: '1.5rem', paddingRight: '1.5rem', marginBottom: 'var(--space-7)' }}>
+    <section id="clients" style={{ background: 'var(--color-background)' }}>
+      <div className="section-inner" style={{ marginBottom: 'var(--space-7)' }}>
         <SectionLabel>Clients</SectionLabel>
       </div>
 
       <div
         style={{
-          maxWidth: 'var(--max-width)',
-          margin: '0 auto',
           overflow: 'hidden',
           maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',

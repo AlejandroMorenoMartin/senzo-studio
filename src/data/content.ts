@@ -331,7 +331,7 @@ export const footer = {
   creditUrl: 'https://alejandromorenomartin.com',
   socials: {
     vimeo:   { href: 'https://vimeo.com/user117104980' },
-    linkedin: { href: 'https://linkedin.com/company/senzostudio' },
+    linkedin: { href: 'https://www.linkedin.com/company/senzo-studio-studio/' },
     behance:  { href: 'https://behance.net/senzostudio' },
     clutch:   { href: 'https://clutch.co/profile/senzo-studio' },
   },
