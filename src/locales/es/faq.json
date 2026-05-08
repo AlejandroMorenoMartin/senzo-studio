@@ -1,0 +1,25 @@
+{
+  "sectionLabel": "PREGUNTAS",
+  "items": [
+    {
+      "question": "¿Qué servicios ofrecéis?",
+      "answer": "Ofrecemos un pipeline completo de VFX y CGI, gestionando proyectos de principio a fin o solo las partes específicas que necesites. Tanto si requieres un departamento concreto como un spot acabado, nos adaptamos al alcance de tu producción."
+    },
+    {
+      "question": "¿Trabajáis con presupuesto cerrado o por tarifa diaria?",
+      "answer": "Nos adaptamos a las necesidades de tu proyecto. Priorizamos la Tarificación por Proyecto Cerrado para ofrecer certeza económica e hitos claros, pero también ofrecemos modelos flexibles de Tarifa Diaria para tareas concretas o estimaciones internas de producción."
+    },
+    {
+      "question": "¿Ofrecéis servicios de outsourcing o trabajáis en remoto?",
+      "answer": "Somos completamente flexibles. Podemos actuar como partner de outsourcing totalmente independiente o conectarnos directamente a la infraestructura de tu estudio mediante estaciones de trabajo remotas seguras, integrándose a la perfección en tu flujo de trabajo interno."
+    },
+    {
+      "question": "¿Cómo se gestionan las entregas finales?",
+      "answer": "Ofrecemos total flexibilidad: podemos entregar renders finales de alta calidad listos para su integración directa, o cachés técnicas optimizadas si preferís gestionar internamente el lookdev y el render final. Todo se adapta a vuestros formatos y requisitos de pipeline específicos."
+    },
+    {
+      "question": "¿Cómo gestionáis la seguridad y los acuerdos de confidencialidad?",
+      "answer": "La seguridad es nuestra prioridad. Estamos acostumbrados a los estrictos estándares de confidencialidad requeridos en producciones internacionales de gran envergadura. Firmamos acuerdos de confidencialidad (NDA) desde el primer contacto y utilizamos protocolos seguros para todas las transferencias de datos y comunicaciones."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "sectionLabel": "Servicios",
+  "title": "QUÉ HACEMOS",
+  "subtitle": "De principio a fin o solo lo que necesitas.",
+  "services": {
+    "fx-simulations": {
+      "label": "FX SIMULATIONS",
+      "description": "Fuego, humo, fluidos, destrucción, partículas. Creamos los planos que no pueden rodarse en set — al nivel de un gran estudio, con la atención de un boutique."
+    },
+    "compositing": {
+      "label": "COMPOSITING",
+      "description": "Cada elemento en su lugar. Integramos 3D, matte paintings y plates prácticos en imágenes finales perfectas — nada parece añadido en postproducción."
+    },
+    "cgi": {
+      "label": "CGI PIPELINE",
+      "description": "Desde el modelado y texturizado hasta la animación, la iluminación y el render — cubrimos todo el pipeline 3D internamente y lo integramos en el tuyo."
+    }
+  },
+  "layerStack": {
+    "backgroundPlate": "BACKGROUND PLATE",
+    "mattePainting": "MATTE PAINTING",
+    "3dElements": "3D ELEMENTS",
+    "practicalFx": "PRACTICAL FX",
+    "finalComposite": "FINAL COMPOSITE"
+  },
+  "beforeAfter": {
+    "rawPlate": "RAW PLATE",
+    "fx": "FX"
+  },
+  "hotspots": {
+    "lighting": {
+      "label": "LIGHTING",
+      "note": "Multi-layer HDRI con relleno de rebote práctico"
+    },
+    "render": {
+      "label": "RENDER",
+      "note": "Path-traced con muestreo adaptativo a 4K"
+    },
+    "materials": {
+      "label": "MATERIALS",
+      "note": "Sombreado físicamente correcto con desplazamiento personalizado"
+    },
+    "motion": {
+      "label": "MOTION",
+      "note": "Animación secundaria guiada por simulación"
+    }
+  },
+  "chips": [
+    "FX & CFX Simulations",
+    "Lighting & Render",
+    "Compositing",
+    "Animación 3D",
+    "Modelado & Texturizado 3D",
+    "Tracking & Match-Move",
+    "Rotoscopia, Keying & Paint-Prep"
+  ]
+}

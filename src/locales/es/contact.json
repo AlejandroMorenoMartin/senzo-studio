@@ -1,0 +1,288 @@
+{
+  "sectionLabel": "Contacto",
+  "email": "info@senzostudio.com",
+  "emailTooltip": {
+    "clickToCopy": "Clic para copiar",
+    "copied": "¡Copiado!"
+  },
+  "letsTalk": "¡Hablemos!",
+  "options": {
+    "business": {
+      "title": "Consultas Comerciales",
+      "description": "Para estudios, productoras y agencias.",
+      "cta": "Contáctanos"
+    },
+    "freelancer": {
+      "title": "Solicitud de Freelancer",
+      "description": "Para profesionales independientes de VFX & CGI.",
+      "cta": "Solicitar"
+    }
+  },
+  "modalBusiness": {
+    "title": "Consultas Comerciales",
+    "intro": "¿Buscas VFX o CGI de alto nivel para tu próxima producción? Rellena el formulario y nuestro equipo se pondrá en contacto contigo en un día hábil.",
+    "steps": [
+      "Información de Contacto",
+      "Naturaleza de la Consulta",
+      "Especificaciones del Proyecto",
+      "Mensaje y Adjuntos"
+    ],
+    "stepTitles": [
+      "Información de Contacto",
+      "Naturaleza de la Consulta",
+      "Especificaciones del Proyecto",
+      "Mensaje y Adjuntos"
+    ],
+    "fields": {
+      "fullName": {
+        "label": "Nombre completo",
+        "placeholder": "Tu nombre"
+      },
+      "workEmail": {
+        "label": "Email profesional",
+        "placeholder": "Tu dirección de email @email.com"
+      },
+      "company": {
+        "label": "Empresa / Organización",
+        "placeholder": "Tu empresa u organización"
+      },
+      "companyWebsite": {
+        "label": "Sitio web de la empresa",
+        "placeholder": "El sitio web de tu empresa"
+      },
+      "role": {
+        "label": "Cargo",
+        "placeholder": "Tu cargo"
+      },
+      "roleOther": {
+        "label": "Especifica tu cargo",
+        "placeholder": "Describe tu cargo"
+      },
+      "country": {
+        "label": "País",
+        "placeholder": "Tu país"
+      },
+      "projectCategory": {
+        "label": "Categoría del proyecto",
+        "placeholder": "La categoría de tu proyecto"
+      },
+      "projectCategoryOther": {
+        "label": "Especifica la categoría",
+        "placeholder": "Describe el tipo de proyecto"
+      },
+      "industry": {
+        "label": "Sector / Marca",
+        "placeholder": "Tu sector / marca"
+      },
+      "budget": {
+        "label": "Presupuesto estimado (EUR)",
+        "placeholder": "Tu presupuesto estimado (EUR)"
+      },
+      "targetDeadline": {
+        "label": "Plazo previsto",
+        "placeholder": "Tu plazo previsto"
+      },
+      "targetDeadlineOther": {
+        "label": "Especifica la fecha"
+      },
+      "startDate": {
+        "label": "Fecha de inicio estimada",
+        "placeholder": "Tu fecha de inicio estimada"
+      },
+      "message": {
+        "label": "Tu mensaje",
+        "placeholder": "Cuéntanos más sobre tu proyecto, tu visión o cualquier detalle que quieras que conozcamos antes de conectar."
+      },
+      "attachBrief": {
+        "label": "Adjuntar Brief",
+        "hint": "— PDF, DOC o DOCX, máx. 30 MB",
+        "uploadCta": "Clic para subir PDF, DOC o DOCX"
+      },
+      "externalLinks": {
+        "label": "Enlace al Brief",
+        "placeholder": "Tu enlace"
+      },
+      "source": {
+        "label": "¿Cómo nos has conocido?",
+        "placeholder": "Selecciona una opción"
+      },
+      "sourceOther": {
+        "label": "Por favor, especifica",
+        "placeholder": "Cuéntanos cómo nos encontraste"
+      },
+      "ndaRequested": {
+        "label": "Acuerdo de Confidencialidad — Me gustaría hablar de un Acuerdo de No Divulgación (NDA) antes de compartir los detalles del proyecto."
+      },
+      "privacyPolicy": {
+        "label": "Acepto la",
+        "linkLabel": "Política de privacidad"
+      }
+    },
+    "inquiryOptions": {
+      "specific": "Opción A. Tengo un proyecto concreto que comentar (Paso 3).",
+      "general": "Opción B. Consulta general / Colaboración / Solo saludar (Paso 4)."
+    },
+    "errors": {
+      "fullName": "Introduce tu nombre completo",
+      "workEmail": "Introduce tu email profesional",
+      "workEmailInvalid": "Introduce una dirección de email válida (p. ej. nombre@empresa.com)",
+      "company": "Introduce el nombre de tu empresa u organización",
+      "companyWebsite": "Introduce una URL válida (p. ej. https://empresa.com)",
+      "role": "Selecciona tu cargo",
+      "country": "Selecciona tu país",
+      "inquiryType": "Selecciona una de las opciones anteriores",
+      "projectCategory": "Selecciona una categoría de proyecto",
+      "budget": "Selecciona un rango de presupuesto estimado",
+      "targetDeadlineOther": "La fecha debe ser futura",
+      "startDate": "Selecciona una fecha de inicio estimada",
+      "message": "Escribe una breve descripción de tu proyecto o consulta",
+      "externalLinks": "Introduce una URL https válida",
+      "source": "Cuéntanos cómo nos has encontrado",
+      "privacyPolicy": "Debes aceptar la Política de privacidad para continuar",
+      "fileType": "Solo se aceptan archivos PDF, DOC y DOCX.",
+      "fileSize": "El archivo supera el límite de 30 MB.",
+      "submit400": "Algunos campos no son válidos. Por favor, revisa tus respuestas e inténtalo de nuevo.",
+      "submit413": "El archivo adjunto es demasiado grande. Por favor, reduce el tamaño del archivo e inténtalo de nuevo.",
+      "submit429": "Demasiadas solicitudes. Por favor, espera unos minutos e inténtalo de nuevo.",
+      "submit500": "El servidor ha encontrado un error. Por favor, inténtalo de nuevo en unos minutos o contáctanos directamente en info@senzostudio.com.",
+      "submitGeneric": "El envío ha fallado. Por favor, inténtalo de nuevo o contáctanos en info@senzostudio.com.",
+      "networkError": "Sin conexión a internet. Por favor, comprueba tu red e inténtalo de nuevo.",
+      "unexpectedError": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo o contáctanos en info@senzostudio.com."
+    },
+    "success": "Gracias por contactar con Senzo Studio. Hemos registrado tu consulta y, si procede, el acuerdo de no divulgación (NDA). Nuestro equipo revisará los detalles y se pondrá en contacto contigo en un día hábil."
+  },
+  "modalFreelancer": {
+    "title": "Solicitud de Freelancer",
+    "intro": "Únete a nuestro roster de talento y sé considerado para futuras producciones. Rellena el formulario — nuestro equipo revisa todas las solicitudes.",
+    "callout": "Ten en cuenta que actualmente solo colaboramos con freelancers. Debes estar oficialmente registrado como autónomo o trabajador por cuenta propia en tu país de residencia para poder solicitarlo.",
+    "steps": [
+      "Información Personal",
+      "Perfil Profesional",
+      "Portfolio y enlaces",
+      "Detalles Finales"
+    ],
+    "stepTitles": [
+      "Información Personal",
+      "Perfil Profesional",
+      "Portfolio y enlaces",
+      "Detalles Finales"
+    ],
+    "fields": {
+      "firstName": {
+        "label": "Nombre",
+        "placeholder": "Tu nombre"
+      },
+      "lastName": {
+        "label": "Apellidos",
+        "placeholder": "Tus apellidos"
+      },
+      "email": {
+        "label": "Dirección de email",
+        "placeholder": "Tu dirección de email @email.com"
+      },
+      "country": {
+        "label": "País de residencia",
+        "placeholder": "Tu país"
+      },
+      "department": {
+        "label": "Departamento(s)"
+      },
+      "departmentOther": {
+        "label": "Especifica tu departamento",
+        "placeholder": "Describe tu área de trabajo"
+      },
+      "mainSoftware": {
+        "label": "Software principal",
+        "placeholder": "Tu(s) software(s)"
+      },
+      "yearsExperience": {
+        "label": "Años de experiencia",
+        "placeholder": "Tus años de experiencia"
+      },
+      "expectedRate": {
+        "label": "Tarifa diaria (EUR)",
+        "placeholder": "p. ej. 350"
+      },
+      "availability": {
+        "label": "Disponibilidad",
+        "placeholder": "Tu disponibilidad"
+      },
+      "reelLink": {
+        "label": "Enlace al reel",
+        "placeholder": "Tu enlace al reel"
+      },
+      "reelPassword": {
+        "label": "Contraseña del reel",
+        "placeholder": "La contraseña de tu reel"
+      },
+      "websiteUrl": {
+        "label": "Sitio web personal",
+        "placeholder": "Tu sitio web"
+      },
+      "otherLinks": {
+        "label": "Otro enlace",
+        "placeholder": "Tu otro enlace"
+      },
+      "source": {
+        "label": "¿Cómo nos has conocido?",
+        "placeholder": "Selecciona una opción"
+      },
+      "sourceOther": {
+        "label": "Por favor, especifica",
+        "placeholder": "Cuéntanos cómo nos encontraste"
+      },
+      "message": {
+        "label": "Mensaje adicional",
+        "placeholder": "Tu mensaje adicional"
+      },
+      "privacyPolicy": {
+        "label": "Acepto la",
+        "linkLabel": "Política de privacidad"
+      }
+    },
+    "errors": {
+      "firstName": "Introduce tu nombre",
+      "lastName": "Introduce tus apellidos",
+      "email": "Introduce tu dirección de email",
+      "emailInvalid": "Introduce una dirección de email válida (p. ej. nombre@email.com)",
+      "country": "Selecciona tu país",
+      "department": "Selecciona al menos un departamento",
+      "departmentOther": "Por favor, especifica tu departamento",
+      "mainSoftware": "Indica tu software principal (p. ej. Houdini, Nuke, Maya)",
+      "yearsExperience": "Introduce tus años de experiencia",
+      "expectedRate": "Introduce tu tarifa diaria o por hora esperada",
+      "availability": "Selecciona tu disponibilidad",
+      "reelLink": "Introduce la URL de tu reel",
+      "reelLinkInvalid": "Introduce una URL https válida (p. ej. https://vimeo.com/tureel)",
+      "httpsUrl": "Introduce una URL https válida",
+      "source": "Cuéntanos cómo nos has encontrado",
+      "privacyPolicy": "Debes aceptar la Política de privacidad para continuar",
+      "submitGeneric": "Algo ha salido mal. Por favor, inténtalo de nuevo."
+    },
+    "success": "Gracias por tu interés en unirte a Senzo Studio. Hemos recibido correctamente tu perfil y portfolio. Nuestro equipo de producción revisará tus materiales y se pondrá en contacto contigo directamente cuando tu perfil y disponibilidad se ajusten a nuestras necesidades de producción."
+  },
+  "modalPrivacy": {
+    "title": "Política de privacidad",
+    "sections": {
+      "dataController": {
+        "title": "Responsable del tratamiento",
+        "body": "Senzo Studio es el único responsable del tratamiento de los datos personales recogidos a través de este sitio web."
+      },
+      "purposeOfProcessing": {
+        "title": "Finalidad del tratamiento",
+        "items": [
+          "Solicitud de Freelancer: Para evaluar tu perfil profesional, portfolio y disponibilidad con el fin de incorporarte a nuestro roster de talento y contactarte para futuras producciones.",
+          "Consultas Comerciales: Para gestionar tu solicitud de proyecto, tramitar Acuerdos de No Divulgación (NDA) y mantener la comunicación comercial pertinente."
+        ]
+      },
+      "privacyAndStorage": {
+        "title": "Privacidad y almacenamiento",
+        "body": "Tus datos son estrictamente de uso interno. No vendemos, alquilamos ni compartimos tu información con terceros. Los datos y enlaces proporcionados se almacenan en nuestros sistemas de gestión internos bajo protocolos seguros."
+      },
+      "yourRights": {
+        "title": "Tus derechos",
+        "body": "Puedes solicitar el acceso, la modificación o la eliminación permanente de tus datos y materiales en cualquier momento. Para ejercer estos derechos, contáctanos en:"
+      }
+    }
+  }
+}

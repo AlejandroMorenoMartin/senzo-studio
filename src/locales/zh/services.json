@@ -1,0 +1,57 @@
+{
+  "sectionLabel": "服务",
+  "title": "我们的业务",
+  "subtitle": "全流程服务，或仅提供您所需的部分。",
+  "services": {
+    "fx-simulations": {
+      "label": "FX SIMULATIONS",
+      "description": "火焰、烟雾、流体、破坏、粒子。我们打造片场无法完成的镜头——具备大型机构的技术水准，兼具精品工作室的细致专注。"
+    },
+    "compositing": {
+      "label": "COMPOSITING",
+      "description": "每个元素各就其位。我们将 3D、matte painting 与实拍素材整合为无缝最终画面——不留任何后期添加的痕迹。"
+    },
+    "cgi": {
+      "label": "CGI PIPELINE",
+      "description": "从建模与贴图到动画、灯光和渲染，我们在内部承接完整的 3D pipeline，并无缝接入您的制作流程。"
+    }
+  },
+  "layerStack": {
+    "backgroundPlate": "BACKGROUND PLATE",
+    "mattePainting": "MATTE PAINTING",
+    "3dElements": "3D ELEMENTS",
+    "practicalFx": "PRACTICAL FX",
+    "finalComposite": "FINAL COMPOSITE"
+  },
+  "beforeAfter": {
+    "rawPlate": "RAW PLATE",
+    "fx": "FX"
+  },
+  "hotspots": {
+    "lighting": {
+      "label": "LIGHTING",
+      "note": "多层 HDRI 配合实拍反弹补光"
+    },
+    "render": {
+      "label": "RENDER",
+      "note": "路径追踪，自适应采样，输出 4K"
+    },
+    "materials": {
+      "label": "MATERIALS",
+      "note": "基于物理的着色，配合自定义置换贴图"
+    },
+    "motion": {
+      "label": "MOTION",
+      "note": "模拟驱动的二级动画"
+    }
+  },
+  "chips": [
+    "FX & CFX Simulations",
+    "Lighting & Render",
+    "Compositing",
+    "3D 动画",
+    "3D 建模与贴图",
+    "Tracking & Match-Move",
+    "Rotoscope、Keying & Paint-Prep"
+  ]
+}

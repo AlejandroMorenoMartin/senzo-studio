@@ -1,0 +1,20 @@
+{
+  "sectionLabel": "Nosotros",
+  "intro": "Dos especialistas. Una obsesión compartida por el oficio.",
+  "body": "Senzo Studio fue fundado en 2020 por Rubén y Sergio. Tras un camino de esfuerzo, aprendizaje y mejora constante, el estudio se ha consolidado como un <bold>líder internacional</bold> en efectos visuales, colaborando con algunas de las empresas más destacadas de la industria. Hoy seguimos creciendo con la mirada puesta en el futuro y con la ilusión de ampliar nuestro equipo para afrontar nuevos retos.",
+  "crew": {
+    "sergio": {
+      "role": "CEO, VFX Artist & Supervisor",
+      "bio": "Sergio lidera el área de FX y simulaciones en cada proyecto. Con una sólida visión creativa, impulsa la innovación y soluciones visuales únicas — aportando la ambición técnica que define la identidad y el trabajo de Senzo."
+    },
+    "ruben": {
+      "role": "CEO, VFX Artist & Supervisor",
+      "bio": "Rubén aporta más de 10 años de experiencia en simulaciones complejas. Su precisión técnica y atención al detalle garantizan resultados visuales de alta calidad en todos los formatos — desde largometrajes hasta publicidad de alto impacto."
+    }
+  },
+  "labels": {
+    "speciality": "Especialidad",
+    "watchReel": "Ver Reel",
+    "linkedin": "LinkedIn"
+  }
+}

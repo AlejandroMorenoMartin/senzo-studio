@@ -1,0 +1,44 @@
+{
+  "sectionLabel": "Trabajos",
+  "filters": {
+    "all": "Todos",
+    "film": "Cine",
+    "advertising": "Publicidad",
+    "tvSeries": "Series de TV"
+  },
+  "modal": {
+    "year": "Año",
+    "format": "Formato",
+    "client": "Cliente",
+    "description": "Descripción"
+  },
+  "projects": {
+    "lion-king": {
+      "description": "Este proyecto forma parte de nuestra trayectoria profesional previa a la fundación de SENZO. Durante nuestra etapa en MPC LONDON, desarrollamos configuraciones técnicas para FX de primer nivel mundial. Esto incluyó el desarrollo de <bold>lluvia procedural</bold>, brasas y sistemas atmosféricos. También realizamos simulaciones de polvo para varios planos de las secuencias de estampida animal. Un proyecto que refleja nuestras raíces en la <bold>producción cinematográfica fotorrealista de alto nivel</bold>."
+    },
+    "godzilla": {
+      "description": "Este proyecto forma parte de nuestra herencia artística anterior a SENZO. Durante nuestra etapa en MPC LONDON, fuimos responsables de la ejecución técnica de masivas <bold>simulaciones de multitudes</bold>. Esto incluyó tanto unidades humanas como soldados de infantería y flotas de vehículos, incluyendo aeronaves y helicópteros. Garantizamos movimientos e interacciones realistas dentro de escenas de acción de alta tensión. Una obra maestra en la gestión de <bold>FX cinematográficos</bold> para películas de criaturas a gran escala."
+    },
+    "pirates": {
+      "description": "Un hito clave en la trayectoria de nuestros fundadores hacia la creación de SENZO, durante su etapa en MPC LONDON. Desarrollamos el efecto de partículas especializado para el diseño de personaje decadente de Salazar. Nuestro equipo también se encargó de avanzadas <bold>simulaciones de fluidos</bold>, incluyendo agua y espuma, y creamos dinámicas estelas de humo para potenciar la atmósfera sobrenatural del film. Un ejemplo de <bold>FX de personaje</bold> de alto nivel e integración ambiental para Disney."
+    },
+    "lays": {
+      "description": "En colaboración con MATHEMATIC, gestionamos los completos <bold>efectos de nieve e invierno</bold>. Creamos las estelas de hielo para los patines de Jimmy Fallon y los sistemas de nieve cayendo. Nuestro trabajo incluyó la iluminación de los renos y las casas navideñas. También simulamos la dinámica de las batallas de bolas de nieve y varias capas de nieve cubriendo numerosos objetos de la secuencia. Entregando <bold>estándares visuales premium</bold> para campañas publicitarias globales de alto perfil."
+    },
+    "pepsi": {
+      "description": "En colaboración con SAUVAGE TV, desarrollamos las características <bold>simulaciones de fuego</bold>. Creamos las dinámicas estelas de fuego siguiendo a iconos como Ronaldinho y Messi. Nuestro trabajo incluyó la ejecución técnica del rostro de fuego y sus transiciones. Garantizamos que los FX de fuego transmitieran potencia e integración dentro del montaje de ritmo rápido. <bold>Efectos visuales de alto impacto</bold> diseñados para una de las marcas más reconocidas del mundo."
+    },
+    "kombucha": {
+      "description": "En colaboración con NOZON, desarrollamos toda la <bold>configuración 3D procedural</bold> desde cero. Construimos una herramienta personalizada para generar y controlar el crecimiento orgánico de las plantas. Esto permitió una dirección artística total sobre el timing, las variaciones y el flujo del follaje. El proyecto involucró complejas simulaciones de hierba, enredaderas y secuencias de florecimiento. Un ejemplo perfecto de cómo combinamos herramientas técnicas con <bold>dirección creativa</bold>."
+    },
+    "motherland": {
+      "description": "En colaboración con FOLKS, fuimos responsables de una amplia variedad de <bold>FX sobrenaturales</bold>. Nuestras tareas incluyeron la creación de tornados, explosiones y simulaciones de sangre realistas. También gestionamos complejos sistemas de bandadas de murciélagos y partículas de escombros dinámicas. El proyecto requirió un alto nivel de versatilidad para manejar diversos elementos mágicos. Experiencia técnica aplicada a la <bold>narrativa televisiva</bold> de alto nivel y a la construcción de mundos."
+    },
+    "umbrella": {
+      "description": "En colaboración con FOLKS, gestionamos varios <bold>efectos prácticos</bold> de alto impacto. Nuestro equipo fue responsable de la simulación técnica de lanzallamas realistas. También nos encargamos de la compleja rotura de cristales y la destrucción de objetos a lo largo de las escenas. El trabajo incluyó el desarrollo de sistemas dinámicos de humo y escombros atmosféricos. <bold>La ejecución de Senzo</bold> para una de las series de superhéroes más populares y estilizadas de Netflix."
+    },
+    "avatar": {
+      "description": "En colaboración con Netflix, lideramos la ejecución técnica de los complejos <bold>FX de control elemental</bold>. Nuestro equipo desarrolló avanzadas simulaciones de fluidos para el control del agua, y sistemas de humo y aire de alta velocidad para las maniobras de control del aire. También gestionamos los FX de criatura y el grooming de Appa, garantizando dinámicas de pelo fotorrealistas durante el vuelo a gran altitud. El proyecto demostró nuestra capacidad para integrar entornos procedurales con acción de personaje de alto riesgo. Un pináculo de la <bold>simulación elemental</bold> y la ejecución de criaturas para un fenómeno global de streaming."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "sectionLabel": "Услуги",
+  "title": "ЧТО МЫ ДЕЛАЕМ",
+  "subtitle": "От начала до конца или только нужные части.",
+  "services": {
+    "fx-simulations": {
+      "label": "FX SIMULATIONS",
+      "description": "Огонь, дым, жидкости, разрушения, частицы. Мы создаём кадры, невозможные на съёмочной площадке — на уровне крупной студии, с вниманием к деталям бутика."
+    },
+    "compositing": {
+      "label": "COMPOSITING",
+      "description": "Каждый элемент на своём месте. Мы интегрируем 3D, matte painting и практические съёмки в бесшовные финальные изображения — ничто не выглядит добавленным в постпродакшн."
+    },
+    "cgi": {
+      "label": "CGI PIPELINE",
+      "description": "От моделирования и текстурирования до анимации, освещения и рендеринга — мы полностью ведём 3D-пайплайн in-house и интегрируем его в ваш."
+    }
+  },
+  "layerStack": {
+    "backgroundPlate": "BACKGROUND PLATE",
+    "mattePainting": "MATTE PAINTING",
+    "3dElements": "3D ELEMENTS",
+    "practicalFx": "PRACTICAL FX",
+    "finalComposite": "FINAL COMPOSITE"
+  },
+  "beforeAfter": {
+    "rawPlate": "RAW PLATE",
+    "fx": "FX"
+  },
+  "hotspots": {
+    "lighting": {
+      "label": "LIGHTING",
+      "note": "Многослойный HDRI с практическим отражённым заполняющим светом"
+    },
+    "render": {
+      "label": "RENDER",
+      "note": "Path-traced с адаптивной выборкой в разрешении 4K"
+    },
+    "materials": {
+      "label": "MATERIALS",
+      "note": "Физически корректное затенение с кастомным дисплейсментом"
+    },
+    "motion": {
+      "label": "MOTION",
+      "note": "Вторичная анимация, управляемая симуляцией"
+    }
+  },
+  "chips": [
+    "FX & CFX Simulations",
+    "Lighting & Render",
+    "Compositing",
+    "3D-анимация",
+    "3D-моделирование и текстурирование",
+    "Tracking & Match-Move",
+    "Ротоскопинг, Keying & Paint-Prep"
+  ]
+}

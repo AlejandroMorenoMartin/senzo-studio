@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "work": "Работы",
+    "services": "Услуги",
+    "about": "О нас",
+    "faq": "Вопросы",
+    "clients": "Клиенты",
+    "contact": "Контакт"
+  },
+  "footer": {
+    "tagline": "High-End VFX · CGI",
+    "privacyPolicy": "Политика конфиденциальности",
+    "allRightsReserved": "Все права защищены",
+    "by": "Автор",
+    "credit": "Alejandro Moreno"
+  },
+  "buttons": {
+    "watchReel": "Смотреть Reel",
+    "close": "Закрыть",
+    "apply": "Подать заявку",
+    "contactUs": "Связаться с нами",
+    "send": "Отправить",
+    "back": "Назад",
+    "next": "Далее",
+    "submit": "Отправить",
+    "sending": "Отправка...",
+    "accept": "Принять"
+  },
+  "overlays": {
+    "fps": "FPS: 24.00",
+    "codec": "CODEC: RAW",
+    "rec": "REC ●"
+  }
+}

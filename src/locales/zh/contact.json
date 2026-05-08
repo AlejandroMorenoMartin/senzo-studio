@@ -1,0 +1,288 @@
+{
+  "sectionLabel": "联系我们",
+  "email": "info@senzostudio.com",
+  "emailTooltip": {
+    "clickToCopy": "点击复制",
+    "copied": "已复制！"
+  },
+  "letsTalk": "欢迎联系！",
+  "options": {
+    "business": {
+      "title": "商务咨询",
+      "description": "适用于影视公司、制作公司及广告代理商。",
+      "cta": "联系我们"
+    },
+    "freelancer": {
+      "title": "自由职业者申请",
+      "description": "适用于独立 VFX & CGI 专业人士。",
+      "cta": "申请"
+    }
+  },
+  "modalBusiness": {
+    "title": "商务咨询",
+    "intro": "正在为您的下一个项目寻找高端 VFX 或 CGI 服务？请填写以下表单，我们的团队将在一个工作日内与您取得联系。",
+    "steps": [
+      "联系信息",
+      "咨询性质",
+      "项目详情",
+      "留言与附件"
+    ],
+    "stepTitles": [
+      "联系信息",
+      "咨询性质",
+      "项目详情",
+      "留言与附件"
+    ],
+    "fields": {
+      "fullName": {
+        "label": "姓名",
+        "placeholder": "您的姓名"
+      },
+      "workEmail": {
+        "label": "工作邮箱",
+        "placeholder": "您的邮箱地址 @email.com"
+      },
+      "company": {
+        "label": "公司 / 机构",
+        "placeholder": "您的公司或机构名称"
+      },
+      "companyWebsite": {
+        "label": "公司网站",
+        "placeholder": "您的公司网站"
+      },
+      "role": {
+        "label": "职位",
+        "placeholder": "您的职位"
+      },
+      "roleOther": {
+        "label": "请说明您的职位",
+        "placeholder": "描述您的职位"
+      },
+      "country": {
+        "label": "国家/地区",
+        "placeholder": "您所在的国家/地区"
+      },
+      "projectCategory": {
+        "label": "项目类别",
+        "placeholder": "您的项目类别"
+      },
+      "projectCategoryOther": {
+        "label": "请说明类别",
+        "placeholder": "描述您的项目类型"
+      },
+      "industry": {
+        "label": "行业 / 品牌",
+        "placeholder": "您的行业 / 品牌"
+      },
+      "budget": {
+        "label": "预估预算（EUR）",
+        "placeholder": "您的预估预算（EUR）"
+      },
+      "targetDeadline": {
+        "label": "目标截止日期",
+        "placeholder": "您的目标截止日期"
+      },
+      "targetDeadlineOther": {
+        "label": "请指定日期"
+      },
+      "startDate": {
+        "label": "预估开始日期",
+        "placeholder": "您的预估开始日期"
+      },
+      "message": {
+        "label": "您的留言",
+        "placeholder": "请向我们介绍您的项目、创作构想，或任何在沟通前希望我们了解的内容。"
+      },
+      "attachBrief": {
+        "label": "上传 Brief",
+        "hint": "— PDF、DOC 或 DOCX，最大 30 MB",
+        "uploadCta": "点击上传 PDF、DOC 或 DOCX"
+      },
+      "externalLinks": {
+        "label": "Brief 链接",
+        "placeholder": "您的链接"
+      },
+      "source": {
+        "label": "您是如何了解到我们的？",
+        "placeholder": "请选择"
+      },
+      "sourceOther": {
+        "label": "请说明",
+        "placeholder": "告诉我们您是如何找到我们的"
+      },
+      "ndaRequested": {
+        "label": "NDA 需求 — 在共享项目详情之前，我希望先讨论一份保密协议（NDA）。"
+      },
+      "privacyPolicy": {
+        "label": "我同意",
+        "linkLabel": "隐私政策"
+      }
+    },
+    "inquiryOptions": {
+      "specific": "选项 A. 我有具体项目希望洽谈（第 3 步）。",
+      "general": "选项 B. 一般咨询 / 合作洽谈 / 打个招呼（第 4 步）。"
+    },
+    "errors": {
+      "fullName": "请输入您的姓名",
+      "workEmail": "请输入您的工作邮箱",
+      "workEmailInvalid": "请输入有效的邮箱地址（例如 name@company.com）",
+      "company": "请输入您的公司或机构名称",
+      "companyWebsite": "请输入有效的 URL（例如 https://company.com）",
+      "role": "请选择您的职位",
+      "country": "请选择您所在的国家/地区",
+      "inquiryType": "请从上方选择一个选项",
+      "projectCategory": "请选择项目类别",
+      "budget": "请选择预估预算范围",
+      "targetDeadlineOther": "日期必须为未来日期",
+      "startDate": "请选择预估开始日期",
+      "message": "请简要描述您的项目或咨询内容",
+      "externalLinks": "请输入有效的 https URL",
+      "source": "请告知我们您是如何找到我们的",
+      "privacyPolicy": "您必须接受隐私政策方可继续",
+      "fileType": "仅接受 PDF、DOC 和 DOCX 格式文件。",
+      "fileSize": "文件超过 30 MB 限制。",
+      "submit400": "部分字段无效，请检查您的填写内容后重试。",
+      "submit413": "附件文件过大，请缩小文件体积后重试。",
+      "submit429": "请求过于频繁，请稍等几分钟后再试。",
+      "submit500": "服务器发生错误，请稍后重试，或直接通过 info@senzostudio.com 联系我们。",
+      "submitGeneric": "提交失败，请重试或发送邮件至 info@senzostudio.com。",
+      "networkError": "无网络连接，请检查您的网络后重试。",
+      "unexpectedError": "发生意外错误，请重试或联系我们 info@senzostudio.com。"
+    },
+    "success": "感谢您联系 Senzo Studio。我们已收到您的咨询，如有需要，亦已登记保密协议（NDA）请求。我们的团队将审阅相关详情，并在一个工作日内与您取得联系。"
+  },
+  "modalFreelancer": {
+    "title": "自由职业者申请",
+    "intro": "加入我们的人才库，获得参与未来项目的机会。请填写表单——我们的团队会审核所有申请。",
+    "callout": "请注意，我们目前仅与自由职业者合作。您必须在居住国正式注册为自由职业者或个体经营者，方可提交申请。",
+    "steps": [
+      "个人信息",
+      "职业档案",
+      "作品集与链接",
+      "最终详情"
+    ],
+    "stepTitles": [
+      "个人信息",
+      "职业档案",
+      "作品集与链接",
+      "最终详情"
+    ],
+    "fields": {
+      "firstName": {
+        "label": "名",
+        "placeholder": "您的名"
+      },
+      "lastName": {
+        "label": "姓",
+        "placeholder": "您的姓"
+      },
+      "email": {
+        "label": "邮箱地址",
+        "placeholder": "您的邮箱地址 @email.com"
+      },
+      "country": {
+        "label": "居住国家/地区",
+        "placeholder": "您所在的国家/地区"
+      },
+      "department": {
+        "label": "部门"
+      },
+      "departmentOther": {
+        "label": "请说明您的部门",
+        "placeholder": "描述您的工作领域"
+      },
+      "mainSoftware": {
+        "label": "主要软件",
+        "placeholder": "您使用的软件"
+      },
+      "yearsExperience": {
+        "label": "从业年限",
+        "placeholder": "您的从业年限"
+      },
+      "expectedRate": {
+        "label": "日费（EUR）",
+        "placeholder": "例如 350"
+      },
+      "availability": {
+        "label": "可用档期",
+        "placeholder": "您的可用档期"
+      },
+      "reelLink": {
+        "label": "Reel 链接",
+        "placeholder": "您的 Reel 链接"
+      },
+      "reelPassword": {
+        "label": "Reel 密码",
+        "placeholder": "您的 Reel 密码"
+      },
+      "websiteUrl": {
+        "label": "个人网站",
+        "placeholder": "您的网站"
+      },
+      "otherLinks": {
+        "label": "其他链接",
+        "placeholder": "您的其他链接"
+      },
+      "source": {
+        "label": "您是如何了解到我们的？",
+        "placeholder": "请选择"
+      },
+      "sourceOther": {
+        "label": "请说明",
+        "placeholder": "告诉我们您是如何找到我们的"
+      },
+      "message": {
+        "label": "补充留言",
+        "placeholder": "您的补充留言"
+      },
+      "privacyPolicy": {
+        "label": "我同意",
+        "linkLabel": "隐私政策"
+      }
+    },
+    "errors": {
+      "firstName": "请输入您的名",
+      "lastName": "请输入您的姓",
+      "email": "请输入您的邮箱地址",
+      "emailInvalid": "请输入有效的邮箱地址（例如 name@email.com）",
+      "country": "请选择您所在的国家/地区",
+      "department": "请至少选择一个部门",
+      "departmentOther": "请说明您的部门",
+      "mainSoftware": "请列出您的主要软件（例如 Houdini、Nuke、Maya）",
+      "yearsExperience": "请输入您的从业年限",
+      "expectedRate": "请输入您的预期日费或时薪",
+      "availability": "请选择您的可用档期",
+      "reelLink": "请输入您的 Reel 链接",
+      "reelLinkInvalid": "请输入有效的 https URL（例如 https://vimeo.com/yourreel）",
+      "httpsUrl": "请输入有效的 https URL",
+      "source": "请告知我们您是如何找到我们的",
+      "privacyPolicy": "您必须接受隐私政策方可继续",
+      "submitGeneric": "出现错误，请重试。"
+    },
+    "success": "感谢您有意加入 Senzo Studio。我们已成功收到您的个人档案及作品集。我们的制作团队将审核您的资料，当您的档案与可用档期符合我们的制作需求时，将直接与您联系。"
+  },
+  "modalPrivacy": {
+    "title": "隐私政策",
+    "sections": {
+      "dataController": {
+        "title": "数据控制方",
+        "body": "Senzo Studio 是负责处理通过本网站收集的个人数据的唯一数据控制方。"
+      },
+      "purposeOfProcessing": {
+        "title": "处理目的",
+        "items": [
+          "自由职业者申请：用于评估您的职业档案、作品集及可用档期，以将您纳入我们的人才库，并在未来项目中与您取得联系。",
+          "商务咨询：用于管理您的项目需求、处理保密协议（NDA），并维持相关商务沟通。"
+        ]
+      },
+      "privacyAndStorage": {
+        "title": "隐私与存储",
+        "body": "您的数据仅供内部使用。我们不会向第三方出售、出租或共享您的信息。所提供的数据和链接在安全协议下存储于我们的内部管理系统中。"
+      },
+      "yourRights": {
+        "title": "您的权利",
+        "body": "您可随时申请访问、修改或永久删除您的数据和资料。如需行使这些权利，请通过以下方式联系我们："
+      }
+    }
+  }
+}
