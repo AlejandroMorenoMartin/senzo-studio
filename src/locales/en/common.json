@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "work": "Work",
+    "services": "Services",
+    "about": "About",
+    "faq": "FAQ's",
+    "clients": "Clients",
+    "contact": "Contact"
+  },
+  "footer": {
+    "tagline": "High-End VFX · CGI",
+    "privacyPolicy": "Privacy Policy",
+    "allRightsReserved": "All rights reserved",
+    "by": "By",
+    "credit": "Alejandro Moreno"
+  },
+  "buttons": {
+    "watchReel": "Watch Reel",
+    "close": "Close",
+    "apply": "Apply",
+    "contactUs": "Contact us",
+    "send": "Send",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "accept": "Accept"
+  },
+  "overlays": {
+    "fps": "FPS: 24.00",
+    "codec": "CODEC: RAW",
+    "rec": "REC ●"
+  }
+}

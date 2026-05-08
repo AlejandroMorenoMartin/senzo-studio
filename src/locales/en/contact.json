@@ -1,0 +1,287 @@
+{
+  "sectionLabel": "Contact",
+  "emailTooltip": {
+    "clickToCopy": "Click to copy",
+    "copied": "Copied!"
+  },
+  "letsTalk": "Let's Talk!",
+  "options": {
+    "business": {
+      "title": "Business Inquiries",
+      "description": "For studios, production companies and agencies.",
+      "cta": "Contact us"
+    },
+    "freelancer": {
+      "title": "Freelancer Application",
+      "description": "For independent VFX & CGI professionals.",
+      "cta": "Apply"
+    }
+  },
+  "modalBusiness": {
+    "title": "Business Inquiries",
+    "intro": "Looking for high-end VFX or CGI for your next production? Fill out the form below, and our team will get back to you within one business day.",
+    "steps": [
+      "Contact Information",
+      "Nature of inquiry",
+      "Project Specifications",
+      "Message & Attachments"
+    ],
+    "stepTitles": [
+      "Contact Information",
+      "Nature of Inquiry",
+      "Project Specifications",
+      "Message & Attachments"
+    ],
+    "fields": {
+      "fullName": {
+        "label": "Full name",
+        "placeholder": "Your name"
+      },
+      "workEmail": {
+        "label": "Work email",
+        "placeholder": "Your email address @email.com"
+      },
+      "company": {
+        "label": "Company / Organization",
+        "placeholder": "Your company or organization"
+      },
+      "companyWebsite": {
+        "label": "Company Website",
+        "placeholder": "Your company website"
+      },
+      "role": {
+        "label": "Role",
+        "placeholder": "Your role"
+      },
+      "roleOther": {
+        "label": "Specify your role",
+        "placeholder": "Describe your role"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Your country"
+      },
+      "projectCategory": {
+        "label": "Project Category",
+        "placeholder": "Your project category"
+      },
+      "projectCategoryOther": {
+        "label": "Specify category",
+        "placeholder": "Describe your project type"
+      },
+      "industry": {
+        "label": "Industry / Brand",
+        "placeholder": "Your industry / brand"
+      },
+      "budget": {
+        "label": "Estimated Budget (EUR)",
+        "placeholder": "Your estimated budget (EUR)"
+      },
+      "targetDeadline": {
+        "label": "Target Deadline",
+        "placeholder": "Your target deadline"
+      },
+      "targetDeadlineOther": {
+        "label": "Specify date"
+      },
+      "startDate": {
+        "label": "Estimated Start Date",
+        "placeholder": "Your estimated start date"
+      },
+      "message": {
+        "label": "Your Message",
+        "placeholder": "Tell us more about your project, vision, or anything you'd like us to know before we connect."
+      },
+      "attachBrief": {
+        "label": "Attach Brief",
+        "hint": "— PDF, DOC or DOCX, max 30 MB",
+        "uploadCta": "Click to upload PDF, DOC or DOCX"
+      },
+      "externalLinks": {
+        "label": "Brief Link",
+        "placeholder": "Your link"
+      },
+      "source": {
+        "label": "How did you hear from us?",
+        "placeholder": "Select one"
+      },
+      "sourceOther": {
+        "label": "Please specify",
+        "placeholder": "Tell us how you found us"
+      },
+      "ndaRequested": {
+        "label": "NDA Requirement — I'd like to discuss a Non-Disclosure Agreement before sharing project details."
+      },
+      "privacyPolicy": {
+        "label": "I agree to the",
+        "linkLabel": "Privacy Policy"
+      }
+    },
+    "inquiryOptions": {
+      "specific": "Option A. I have a specific project to discuss (Step 3).",
+      "general": "Option B. General inquiry / Partnership / Just saying hi (Step 4)."
+    },
+    "errors": {
+      "fullName": "Enter your full name",
+      "workEmail": "Enter your work email",
+      "workEmailInvalid": "Enter a valid email address (e.g. name@company.com)",
+      "company": "Enter your company or organization name",
+      "companyWebsite": "Enter a valid URL (e.g. https://company.com)",
+      "role": "Select your role",
+      "country": "Select your country",
+      "inquiryType": "Select one of the options above",
+      "projectCategory": "Select a project category",
+      "budget": "Select an estimated budget range",
+      "targetDeadlineOther": "The date must be in the future",
+      "startDate": "Select an estimated start date",
+      "message": "Write a brief description of your project or inquiry",
+      "externalLinks": "Enter a valid https URL",
+      "source": "Let us know how you found us",
+      "privacyPolicy": "You must accept the Privacy Policy to continue",
+      "fileType": "Only PDF, DOC and DOCX files are accepted.",
+      "fileSize": "File exceeds the 30 MB limit.",
+      "submit400": "Some fields are invalid. Please review your answers and try again.",
+      "submit413": "The attached file is too large. Please reduce the file size and try again.",
+      "submit429": "Too many requests. Please wait a few minutes and try again.",
+      "submit500": "The server encountered an error. Please try again in a few minutes or contact us directly at info@senzostudio.com.",
+      "submitGeneric": "Submission failed. Please try again or contact us at info@senzostudio.com.",
+      "networkError": "No internet connection. Please check your network and try again.",
+      "unexpectedError": "An unexpected error occurred. Please try again or contact us at info@senzostudio.com."
+    },
+    "success": "Thank you for contacting Senzo Studio. We have registered your inquiry and, if applicable, the non-disclosure agreement (NDA). Our team will review the details and contact you within one business day."
+  },
+  "modalFreelancer": {
+    "title": "Freelancer Applications",
+    "intro": "Join our talent roster and be considered for future productions. Fill out the form — our team reviews all applications.",
+    "callout": "Please note that we currently only collaborate with freelancers. You must be officially registered as a freelancer or self-employed in your country of residence to apply.",
+    "steps": [
+      "Personal information",
+      "Professional Profile",
+      "Portfolio & Links",
+      "Final Details"
+    ],
+    "stepTitles": [
+      "Personal Information",
+      "Professional Profile",
+      "Portfolio & Links",
+      "Final Details"
+    ],
+    "fields": {
+      "firstName": {
+        "label": "First name",
+        "placeholder": "Your name"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Your last name"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "Your email address @email.com"
+      },
+      "country": {
+        "label": "Country of residence",
+        "placeholder": "Your country"
+      },
+      "department": {
+        "label": "Department(s)"
+      },
+      "departmentOther": {
+        "label": "Specify your department",
+        "placeholder": "Describe your area of work"
+      },
+      "mainSoftware": {
+        "label": "Main Software(s)",
+        "placeholder": "Your software(s)"
+      },
+      "yearsExperience": {
+        "label": "Years of experience",
+        "placeholder": "Your years of experience"
+      },
+      "expectedRate": {
+        "label": "Daily Rate (EUR)",
+        "placeholder": "e.g. 350"
+      },
+      "availability": {
+        "label": "Availability",
+        "placeholder": "Your availability"
+      },
+      "reelLink": {
+        "label": "Reel link",
+        "placeholder": "Your reel link"
+      },
+      "reelPassword": {
+        "label": "Reel password",
+        "placeholder": "Your reel password"
+      },
+      "websiteUrl": {
+        "label": "Personal Website",
+        "placeholder": "Your website"
+      },
+      "otherLinks": {
+        "label": "Other link",
+        "placeholder": "Your other link"
+      },
+      "source": {
+        "label": "How did you hear from us?",
+        "placeholder": "Select one"
+      },
+      "sourceOther": {
+        "label": "Please specify",
+        "placeholder": "Tell us how you found us"
+      },
+      "message": {
+        "label": "Additional Message",
+        "placeholder": "Your additional message"
+      },
+      "privacyPolicy": {
+        "label": "I agree to the",
+        "linkLabel": "Privacy Policy"
+      }
+    },
+    "errors": {
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name",
+      "email": "Enter your email address",
+      "emailInvalid": "Enter a valid email address (e.g. name@email.com)",
+      "country": "Select your country",
+      "department": "Select at least one department",
+      "departmentOther": "Please specify your department",
+      "mainSoftware": "List your main software (e.g. Houdini, Nuke, Maya)",
+      "yearsExperience": "Enter your years of experience",
+      "expectedRate": "Enter your expected daily or hourly rate",
+      "availability": "Select your availability",
+      "reelLink": "Enter your reel URL",
+      "reelLinkInvalid": "Enter a valid https URL (e.g. https://vimeo.com/youreel)",
+      "httpsUrl": "Enter a valid https URL",
+      "source": "Let us know how you found us",
+      "privacyPolicy": "You must accept the Privacy Policy to continue",
+      "submitGeneric": "Something went wrong. Please try again."
+    },
+    "success": "Thank you for your interest in joining Senzo Studio. We have received your profile and portfolio successfully. Our production team will review your materials and contact you directly when your profile and availability align with our production needs."
+  },
+  "modalPrivacy": {
+    "title": "Privacy Policy",
+    "sections": {
+      "dataController": {
+        "title": "Data Controller",
+        "body": "Senzo Studio is the sole data controller responsible for the processing of personal data collected through this website."
+      },
+      "purposeOfProcessing": {
+        "title": "Purpose of Processing",
+        "items": [
+          "Freelancer Application: To evaluate your professional profile, portfolio, and availability to join our talent roster and contact you for future productions.",
+          "Business Inquiries: To manage your project request, process Non-Disclosure Agreements (NDAs), and maintain relevant commercial communication."
+        ]
+      },
+      "privacyAndStorage": {
+        "title": "Privacy and Storage",
+        "body": "Your data is strictly for internal use. We do not sell, rent, or share your information with third parties. The data and links provided are stored in our internal management systems under secure protocols."
+      },
+      "yourRights": {
+        "title": "Your Rights",
+        "body": "You can request access to, modification, or permanent deletion of your data and materials at any time. To exercise these rights, please contact us at:"
+      }
+    }
+  }
+}

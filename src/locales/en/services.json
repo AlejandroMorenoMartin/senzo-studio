@@ -1,0 +1,57 @@
+{
+  "sectionLabel": "Services",
+  "title": "WHAT WE DO",
+  "subtitle": "End-to-end or just the parts you need.",
+  "services": {
+    "fx-simulations": {
+      "label": "FX SIMULATIONS",
+      "description": "Fire, smoke, fluid, destruction, particles. We build the shots that can't be done on set — at the level of a major facility, with the attention of a boutique."
+    },
+    "compositing": {
+      "label": "COMPOSITING",
+      "description": "Every element in its place. We integrate 3D, matte paintings, and practical plates into seamless final images — nothing looks like it was added in post."
+    },
+    "cgi": {
+      "label": "CGI PIPELINE",
+      "description": "From modeling and texturing to animation, lighting, and render — we cover the full 3D pipeline in-house, and integrate into yours."
+    }
+  },
+  "layerStack": {
+    "backgroundPlate": "BACKGROUND PLATE",
+    "mattePainting": "MATTE PAINTING",
+    "3dElements": "3D ELEMENTS",
+    "practicalFx": "PRACTICAL FX",
+    "finalComposite": "FINAL COMPOSITE"
+  },
+  "beforeAfter": {
+    "rawPlate": "RAW PLATE",
+    "fx": "FX"
+  },
+  "hotspots": {
+    "lighting": {
+      "label": "LIGHTING",
+      "note": "Multi-layer HDRI with practical bounce fill"
+    },
+    "render": {
+      "label": "RENDER",
+      "note": "Path-traced with adaptive sampling at 4K"
+    },
+    "materials": {
+      "label": "MATERIALS",
+      "note": "Physically-based shading with custom displacement"
+    },
+    "motion": {
+      "label": "MOTION",
+      "note": "Simulation-driven secondary animation"
+    }
+  },
+  "chips": [
+    "FX & CFX Simulations",
+    "Lighting & Render",
+    "Compositing",
+    "3D Animation",
+    "3D Modeling & Texturing",
+    "Tracking & Match-Move",
+    "Rotoscope, Keying & Paint-Prep"
+  ]
+}
