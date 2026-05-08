@@ -4,18 +4,31 @@ import SectionReveal from '../SectionReveal';
 import SectionLabel from '../SectionLabel';
 import { faq } from '../../data/content';
 
-function FaqItem({ q, a }: { q: string; a: string; index?: number }) {
-  const [open, setOpen] = useState(false);
+const IconChevron = ({ open }: { open: boolean }) => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    aria-hidden="true"
+    style={{
+      flexShrink: 0,
+      transition: 'transform var(--transition-hover)',
+      transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+      color: 'var(--color-neutral-600)',
+    }}
+  >
+    <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
       style={{
-        background: open
-          ? 'var(--color-red-950)'
-          : hovered
-          ? 'rgba(255,255,255,0.015)'
-          : 'transparent',
+        background: hovered ? 'rgba(255,255,255,0.015)' : 'transparent',
         borderBottom: 'var(--border)',
         transition: 'background var(--transition-hover)',
       }}
@@ -23,7 +36,7 @@ function FaqItem({ q, a }: { q: string; a: string; index?: number }) {
       onMouseLeave={() => setHovered(false)}
     >
       <button
-        onClick={() => setOpen(!open)}
+        onClick={onToggle}
         style={{
           width: '100%',
           background: 'none',
@@ -40,22 +53,7 @@ function FaqItem({ q, a }: { q: string; a: string; index?: number }) {
         <p className="text-l" style={{ color: 'var(--color-neutral-200)', fontWeight: 400 }}>
           {q}
         </p>
-        <span
-          style={{
-            color: open ? 'var(--color-accent)' : 'var(--color-neutral-600)',
-            flexShrink: 0,
-            transition: `color var(--transition-hover), transform var(--transition-hover)`,
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 'var(--space-6)',
-            height: 'var(--space-6)',
-            fontSize: 'var(--space-6)',
-            transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
-          }}
-        >
-          +
-        </span>
+        <IconChevron open={open} />
       </button>
 
       <AnimatePresence initial={false}>
@@ -85,9 +83,11 @@ function FaqItem({ q, a }: { q: string; a: string; index?: number }) {
 }
 
 export default function Faq() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
-    <section id="faq" style={{ background: 'var(--color-background)' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
+    <section id="faq" style={{ background: 'var(--color-background)', borderTop: 'var(--border)', borderBottom: 'var(--border)', borderRadius: 0 }}>
+      <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', padding: 'var(--space-9) 1.5rem', display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
 
         <SectionReveal>
           <SectionLabel>FAQ'S</SectionLabel>
@@ -96,7 +96,12 @@ export default function Faq() {
         <div style={{ border: 'var(--border)', borderBottom: 'none' }}>
           {faq.map((item, i) => (
             <SectionReveal key={i}>
-              <FaqItem q={item.q} a={item.a} index={i} />
+              <FaqItem
+                q={item.q}
+                a={item.a}
+                open={openIndex === i}
+                onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+              />
             </SectionReveal>
           ))}
         </div>

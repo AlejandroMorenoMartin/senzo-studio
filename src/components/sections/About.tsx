@@ -39,8 +39,8 @@ function WaveformSvg() {
 
 export default function About() {
   return (
-    <section id="about" style={{ background: 'var(--color-background)' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
+    <section id="about" style={{ background: 'var(--color-background)', borderTop: 'var(--border)', borderBottom: 'var(--border)', borderRadius: 0 }}>
+      <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', padding: 'var(--space-9) 1.5rem', display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
         <SectionLabel>About</SectionLabel>
 
         <p
@@ -72,7 +72,11 @@ export default function About() {
                     {member.name}
                   </p>
                   <p className="text-s" style={{ color: 'var(--color-neutral-500)' }}>
-                    {member.role}
+                    {member.role.split('FX').map((part, i, arr) =>
+                      i < arr.length - 1
+                        ? <span key={i}>{part}<span style={{ color: 'var(--color-red-500)' }}>FX</span></span>
+                        : <span key={i}>{part}</span>
+                    )}
                   </p>
                 </div>
 

@@ -12,6 +12,7 @@ interface InputSelectProps {
   error?: boolean;
   disabled?: boolean;
   registration: UseFormRegisterReturn;
+  autoComplete?: string;
 }
 
 const ChevronDown = () => (
@@ -20,7 +21,7 @@ const ChevronDown = () => (
   </svg>
 );
 
-export default function InputSelect({ placeholder, options, error, disabled, registration }: InputSelectProps) {
+export default function InputSelect({ placeholder, options, error, disabled, registration, autoComplete }: InputSelectProps) {
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -37,6 +38,7 @@ export default function InputSelect({ placeholder, options, error, disabled, reg
       <select
         {...registration}
         disabled={disabled}
+        autoComplete={autoComplete}
         onFocus={() => setFocused(true)}
         onBlur={(e) => { setFocused(false); registration.onBlur(e); }}
         onMouseEnter={() => setHovered(true)}

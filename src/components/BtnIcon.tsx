@@ -16,9 +16,7 @@ export default function BtnIcon({ as = 'a', href, label, variant = 'default', st
     padding: '6px',
     boxSizing: 'border-box',
     background: 'transparent',
-    border: variant === 'outline'
-      ? `0.25px solid ${hovered ? 'var(--color-neutral-400)' : 'var(--color-neutral-50)'}`
-      : 'none',
+    border: 'none',
     borderRadius: 'var(--radius)',
     color: hovered ? 'var(--color-red-500)' : 'var(--color-neutral-50)',
     transition: 'background var(--transition-hover), color var(--transition-hover), border-color var(--transition-hover)',

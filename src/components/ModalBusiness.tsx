@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
+import { useForm, Controller, type Control } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import BtnIcon from './BtnIcon';
@@ -28,6 +29,8 @@ const ROLE_OPTIONS = [
   { value: 'Marketing Manager', label: 'Marketing Manager' },
   { value: 'Brand Manager', label: 'Brand Manager' },
   { value: 'Agency', label: 'Agency' },
+  { value: 'Representative', label: 'Representative' },
+  { value: 'Studio', label: 'Studio' },
   { value: 'Other', label: 'Other' },
 ];
 
@@ -43,19 +46,21 @@ const CATEGORY_OPTIONS = [
 ];
 
 const BUDGET_OPTIONS = [
-  { value: 'Under $10K', label: 'Under $10K' },
-  { value: '$10K – $50K', label: '$10K – $50K' },
-  { value: '$50K – $150K', label: '$50K – $150K' },
-  { value: '$150K – $500K', label: '$150K – $500K' },
-  { value: '$500K+', label: '$500K+' },
-  { value: 'TBD', label: 'TBD' },
+  { value: '€0 – €10K', label: '€0 – €10K' },
+  { value: '€10K – €30K', label: '€10K – €30K' },
+  { value: '€30K – €50K', label: '€30K – €50K' },
+  { value: 'Over €50K', label: 'Over €50K' },
 ];
 
-const CALL_TIME_OPTIONS = [
-  { value: 'Early Morning (8–10h)', label: 'Early Morning (8–10h)' },
-  { value: 'Morning (10–13h)', label: 'Morning (10–13h)' },
-  { value: 'Afternoon (14–17h)', label: 'Afternoon (14–17h)' },
-  { value: 'Late Afternoon (17–19h)', label: 'Late Afternoon (17–19h)' },
+
+const SOURCE_OPTIONS = [
+  { value: 'LinkedIn', label: 'LinkedIn' },
+  { value: 'Vimeo', label: 'Vimeo' },
+  { value: 'Clutch', label: 'Clutch' },
+  { value: 'Behance', label: 'Behance' },
+  { value: 'Instagram', label: 'Instagram' },
+  { value: 'Industry Friend', label: 'Industry Friend' },
+  { value: 'Other', label: 'Other' },
 ];
 
 const DEADLINE_OPTIONS = [
@@ -65,15 +70,21 @@ const DEADLINE_OPTIONS = [
   { value: '3-6 months', label: '3-6 months' },
   { value: '6+ months', label: '6+ months' },
   { value: 'Flexible', label: 'Flexible' },
+  { value: 'Other', label: 'Other' },
 ];
 
 const START_DATE_OPTIONS = [
   { value: 'Immediately', label: 'Immediately' },
-  { value: 'Within 2 weeks', label: 'Within 2 weeks' },
-  { value: 'Within a month', label: 'Within a month' },
-  { value: '1-3 months', label: '1-3 months' },
-  { value: 'TBD', label: 'TBD' },
+  { value: '1 week', label: '1 week' },
+  { value: '2 weeks', label: '2 weeks' },
+  { value: '3 weeks', label: '3 weeks' },
+  { value: '1 month', label: '1 month' },
+  { value: '2 months', label: '2 months' },
+  { value: '3 months', label: '3 months' },
+  { value: '+3 months', label: '+3 months' },
 ];
+
+const urlValidation = z.string().optional().refine((v) => !v || /^https?:\/\/.+\..+/.test(v), 'Enter a valid URL (e.g. https://company.com)');
 
 const step1Schema = z.object({
   fullName: z.string().min(1, 'Enter your full name'),
@@ -81,7 +92,9 @@ const step1Schema = z.object({
     .min(1, 'Enter your work email')
     .email('Enter a valid email address (e.g. name@company.com)'),
   company: z.string().min(1, 'Enter your company or organization name'),
+  companyWebsite: urlValidation,
   role: z.string().min(1, 'Select your role'),
+  roleOther: z.string().optional(),
   country: z.string().min(1, 'Select your country'),
 });
 
@@ -91,42 +104,56 @@ const step2Schema = z.object({
 
 const step3Schema = z.object({
   projectCategory: z.string().min(1, 'Select a project category'),
-  industry: z.string().min(1, 'Enter your industry or brand name'),
+  industry: z.string().optional(),
   budget: z.string().min(1, 'Select an estimated budget range'),
   targetDeadline: z.string().optional(),
+  targetDeadlineOther: z.string().optional().refine((v) => {
+    if (!v) return true;
+    return new Date(v) > new Date();
+  }, 'The date must be in the future'),
   startDate: z.string().min(1, 'Select an estimated start date'),
 });
 
 const step4Schema = z.object({
   message: z.string().min(1, 'Write a brief description of your project or inquiry'),
-  externalLinks: z.string().optional(),
+  externalLinks: z.string().optional().refine((v) => !v || /^https:\/\/.+\..+/.test(v), 'Enter a valid https URL'),
   ndaRequested: z.boolean().optional(),
+  source: z.string().min(1, 'Let us know how you found us'),
+  sourceOther: z.string().optional(),
   privacyPolicy: z.boolean().refine((v) => v === true, 'You must accept the Privacy Policy to continue'),
 });
 
 const stepSchemas = [step1Schema, step2Schema, step3Schema, step4Schema];
 
-type FieldErrors = Record<string, string>;
+const fullSchema = z.object({
+  fullName: z.string().min(1, 'Enter your full name'),
+  workEmail: z.string().min(1, 'Enter your work email').email('Enter a valid email address (e.g. name@company.com)'),
+  company: z.string().min(1, 'Enter your company or organization name'),
+  companyWebsite: urlValidation,
+  role: z.string().min(1, 'Select your role'),
+  roleOther: z.string().optional(),
+  country: z.string().min(1, 'Select your country'),
+  inquiryType: z.string().optional(),
+  projectCategory: z.string().optional(),
+  industry: z.string().optional(),
+  budget: z.string().optional(),
+  targetDeadline: z.string().optional(),
+  targetDeadlineOther: z.string().optional().refine((v) => {
+    if (!v) return true;
+    return new Date(v) > new Date();
+  }, 'The date must be in the future'),
+  startDate: z.string().optional(),
+  message: z.string().optional(),
+  externalLinks: z.string().optional().refine((v) => !v || /^https:\/\/.+\..+/.test(v), 'Enter a valid https URL'),
+  ndaRequested: z.boolean().optional(),
+  source: z.string().optional(),
+  sourceOther: z.string().optional(),
+  privacyPolicy: z.boolean().optional(),
+  honeypot: z.string().optional(),
+});
 
-interface FormValues {
-  fullName: string;
-  workEmail: string;
-  company: string;
-  role: string;
-  country: string;
-  inquiryType: string;
-  projectCategory: string;
-  industry: string;
-  budget: string;
-  targetDeadline: string;
-  startDate: string;
-  message: string;
-  externalLinks: string;
-  preferredCallTime: string;
-  ndaRequested: boolean;
-  privacyPolicy: boolean;
-  honeypot: string;
-}
+type FieldErrors = Record<string, string>;
+type FormValues = z.infer<typeof fullSchema>;
 
 const stepVariants = {
   enter: { opacity: 0, y: 16 },
@@ -136,6 +163,55 @@ const stepVariants = {
 
 const stepTitles = ['Contact Information', 'Nature of Inquiry', 'Project Specifications', 'Message & Attachments'];
 
+function PrivacyCheckbox({ control, error, onPrivacyClick }: {
+  control: Control<FormValues>;
+  error: boolean;
+  onPrivacyClick: () => void;
+}) {
+  return (
+    <Controller
+      name="privacyPolicy"
+      control={control}
+      render={({ field }) => {
+        const checked = !!field.value;
+        return (
+          <label style={{ display: 'inline-flex', alignItems: 'flex-start', gap: 'var(--space-4)', cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={(e) => field.onChange(e.target.checked)}
+              onBlur={field.onBlur}
+              name={field.name}
+              ref={field.ref}
+              style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
+            />
+            <span style={{
+              flexShrink: 0, width: '16px', height: '16px', marginTop: '2px',
+              border: `0.5px solid ${error ? 'var(--color-input-error)' : 'var(--color-input-border)'}`,
+              borderRadius: 'var(--radius)',
+              background: checked ? 'var(--color-green)' : 'var(--color-input-bg)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'background var(--transition-hover), border-color var(--transition-hover)',
+            }}>
+              {checked && (
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M1.5 5l2.5 2.5 4.5-5" stroke="#060000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              )}
+            </span>
+            <span className="text-base" style={{ color: error ? 'var(--color-input-error)' : 'var(--color-neutral-400)', lineHeight: 1.5 }}>
+              I agree to the{' '}
+              <button type="button" onClick={onPrivacyClick} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px', font: 'inherit' }}>
+                Privacy Policy
+              </button>
+            </span>
+          </label>
+        );
+      }}
+    />
+  );
+}
+
 export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: ModalBusinessProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -144,13 +220,50 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [attachedFile, setAttachedFile] = useState<{ name: string; base64: string } | null>(null);
+  const [fileError, setFileError] = useState('');
 
-  const { register, watch, reset, getValues } = useForm<FormValues>({
-    defaultValues: {
-      fullName: '', workEmail: '', company: '', role: '', country: '',
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.type !== 'application/pdf') {
+      setFileError('Only PDF files are accepted.');
+      e.target.value = '';
+      return;
+    }
+    if (file.size > 30 * 1024 * 1024) {
+      setFileError('File exceeds the 30 MB limit.');
+      e.target.value = '';
+      return;
+    }
+    setFileError('');
+    const reader = new FileReader();
+    reader.onload = () => {
+      setAttachedFile({ name: file.name, base64: reader.result as string });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleFileRemove() {
+    setAttachedFile(null);
+    setFileError('');
+  }
+
+  const SESSION_KEY = 'senzo_business_form';
+
+  const savedSession = useRef((() => {
+    try { return JSON.parse(sessionStorage.getItem(SESSION_KEY) ?? 'null'); } catch { return null; }
+  })()).current;
+
+  const { register, watch, reset, getValues, control, formState: { errors } } = useForm<FormValues>({
+    resolver: zodResolver(fullSchema),
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
+    defaultValues: savedSession?.values ?? {
+      fullName: '', workEmail: '', company: '', companyWebsite: '', role: '', roleOther: '', country: '',
       inquiryType: '',
-      projectCategory: '', industry: '', budget: '', targetDeadline: '', startDate: '',
-      message: '', externalLinks: '', preferredCallTime: '', ndaRequested: false, privacyPolicy: false,
+      projectCategory: '', industry: '', budget: '', targetDeadline: '', targetDeadlineOther: '', startDate: '',
+      message: '', externalLinks: '', ndaRequested: false, source: '', sourceOther: '', privacyPolicy: false,
       honeypot: '',
     },
   });
@@ -162,6 +275,35 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
   const ndaChecked = watchedValues.ndaRequested;
   const isGeneralInquiry = inquiryType === 'general';
   const isStepValid = stepSchemas[currentStep].safeParse(watchedValues).success;
+
+  useEffect(() => {
+    if (privacyChecked && fieldErrors.privacyPolicy) {
+      setFieldErrors((prev) => { const next = { ...prev }; delete next.privacyPolicy; return next; });
+    }
+  }, [privacyChecked]);
+
+  // Restore step and file from session on first open
+  useEffect(() => {
+    if (!isOpen || !savedSession) return;
+    if (savedSession.step) setCurrentStep(savedSession.step);
+    if (savedSession.completedSteps) setCompletedSteps(savedSession.completedSteps);
+    if (savedSession.skippedSteps) setSkippedSteps(savedSession.skippedSteps);
+    if (savedSession.attachedFile) setAttachedFile(savedSession.attachedFile);
+  }, [isOpen]);
+
+  // Persist form state to sessionStorage on every change
+  useEffect(() => {
+    const sub = watch((values) => {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+        values,
+        step: currentStep,
+        completedSteps,
+        skippedSteps,
+        attachedFile,
+      }));
+    });
+    return () => sub.unsubscribe();
+  }, [watch, currentStep, completedSteps, skippedSteps, attachedFile]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -183,6 +325,8 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
       setFieldErrors({});
       setSubmitted(false);
       setSubmitError('');
+      setAttachedFile(null);
+      setFileError('');
       reset();
     }, 300);
   }
@@ -224,26 +368,57 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
 
   async function handleSubmitForm() {
     const values = getValues();
-    const result = step4Schema.safeParse(values);
-    if (!result.success) {
+
+    // Validate step 4 fields first
+    const step4Result = step4Schema.safeParse(values);
+    if (!step4Result.success) {
       const errs: FieldErrors = {};
-      result.error.issues.forEach((e) => { if (e.path[0]) errs[String(e.path[0])] = e.message; });
+      step4Result.error.issues.forEach((e) => { if (e.path[0]) errs[String(e.path[0])] = e.message; });
       setFieldErrors(errs);
       return;
     }
+
+    // Guard: honeypot
     if (values.honeypot) return;
+
     setIsSubmitting(true);
     setSubmitError('');
     try {
       const res = await fetch('/api/submit-business', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, ...(attachedFile ? { attachedFile } : {}) }),
       });
-      if (!res.ok) throw new Error('error');
+
+      if (!res.ok) {
+        let serverMessage = '';
+        try {
+          const body = await res.json();
+          serverMessage = body?.error ?? body?.message ?? '';
+        } catch { /* non-JSON response */ }
+
+        if (res.status === 400) {
+          setSubmitError(serverMessage || 'Some fields are invalid. Please review your answers and try again.');
+        } else if (res.status === 413) {
+          setSubmitError('The attached file is too large. Please reduce the file size and try again.');
+        } else if (res.status === 429) {
+          setSubmitError('Too many requests. Please wait a few minutes and try again.');
+        } else if (res.status >= 500) {
+          setSubmitError('The server encountered an error. Please try again in a few minutes or contact us directly at info@senzostudio.com.');
+        } else {
+          setSubmitError(serverMessage || 'Submission failed. Please try again or contact us at info@senzostudio.com.');
+        }
+        return;
+      }
+
+      sessionStorage.removeItem(SESSION_KEY);
       setSubmitted(true);
-    } catch {
-      setSubmitError('Something went wrong. Please try again.');
+    } catch (err) {
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        setSubmitError('No internet connection. Please check your network and try again.');
+      } else {
+        setSubmitError('An unexpected error occurred. Please try again or contact us at info@senzostudio.com.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -316,7 +491,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                     {/* Honeypot */}
                     <input {...register('honeypot')} type="text" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
 
-                    <h3 className="text-xl" style={{
+                    <h3 className="text-l" style={{
                       letterSpacing: 'var(--letter-spacing-wide)', textTransform: 'uppercase',
                       marginBottom: 'var(--space-7)',
                       borderBottom: 'var(--border)', paddingBottom: 'var(--space-4)', borderRadius: 0,
@@ -329,20 +504,28 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                       {/* STEP 1 — Contact */}
                       {currentStep === 0 && (
                         <>
-                          <FormField label="Full name" required error={fieldErrors.fullName}>
-                            <InputText registration={register('fullName')} placeholder="Your name" error={!!fieldErrors.fullName} value={watch('fullName')} />
+                          <FormField label="Full name" required error={errors.fullName?.message}>
+                            <InputText registration={register('fullName')} placeholder="Your name" error={!!errors.fullName} value={watch('fullName')} autoComplete="name" />
                           </FormField>
-                          <FormField label="Work email" required error={fieldErrors.workEmail}>
-                            <InputText registration={register('workEmail')} type="email" placeholder="Your email address @email.com" error={!!fieldErrors.workEmail} value={watch('workEmail')} />
+                          <FormField label="Work email" required error={errors.workEmail?.message}>
+                            <InputText registration={register('workEmail')} type="email" placeholder="Your email address @email.com" error={!!errors.workEmail} value={watch('workEmail')} autoComplete="email" />
                           </FormField>
-                          <FormField label="Company / Organization" required error={fieldErrors.company}>
-                            <InputText registration={register('company')} placeholder="Your company or organization" error={!!fieldErrors.company} value={watch('company')} />
+                          <FormField label="Company / Organization" required error={errors.company?.message}>
+                            <InputText registration={register('company')} placeholder="Your company or organization" error={!!errors.company} value={watch('company')} autoComplete="organization" />
                           </FormField>
-                          <FormField label="Role" required error={fieldErrors.role}>
-                            <InputSelect registration={register('role')} placeholder="Your role" options={ROLE_OPTIONS} error={!!fieldErrors.role} />
+                          <FormField label="Company Website" error={errors.companyWebsite?.message}>
+                            <InputText registration={register('companyWebsite')} type="url" placeholder="https://yourcompany.com" error={!!errors.companyWebsite} value={watch('companyWebsite')} autoComplete="url" />
                           </FormField>
-                          <FormField label="Country" required error={fieldErrors.country}>
-                            <InputSelect registration={register('country')} placeholder="Your country" options={COUNTRY_OPTIONS} error={!!fieldErrors.country} />
+                          <FormField label="Role" required error={errors.role?.message}>
+                            <InputSelect registration={register('role')} placeholder="Your role" options={ROLE_OPTIONS} error={!!errors.role} autoComplete="organization-title" />
+                          </FormField>
+                          {watch('role') === 'Other' && (
+                            <FormField label="Specify your role" error={errors.roleOther?.message}>
+                              <InputText registration={register('roleOther')} placeholder="Describe your role" error={!!errors.roleOther} value={watch('roleOther')} autoComplete="organization-title" />
+                            </FormField>
+                          )}
+                          <FormField label="Country" required error={errors.country?.message}>
+                            <InputSelect registration={register('country')} placeholder="Your country" options={COUNTRY_OPTIONS} error={!!errors.country} autoComplete="country-name" />
                           </FormField>
                         </>
                       )}
@@ -375,20 +558,25 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                       {/* STEP 3 — Project specs */}
                       {currentStep === 2 && (
                         <>
-                          <FormField label="Project Category" required error={fieldErrors.projectCategory}>
-                            <InputSelect registration={register('projectCategory')} placeholder="Your project category" options={CATEGORY_OPTIONS} error={!!fieldErrors.projectCategory} />
+                          <FormField label="Project Category" required error={errors.projectCategory?.message}>
+                            <InputSelect registration={register('projectCategory')} placeholder="Your project category" options={CATEGORY_OPTIONS} error={!!errors.projectCategory} />
                           </FormField>
-                          <FormField label="Industry / Brand" required error={fieldErrors.industry}>
-                            <InputText registration={register('industry')} placeholder="Your industry / brand" error={!!fieldErrors.industry} value={watch('industry')} />
+                          <FormField label="Industry / Brand" error={errors.industry?.message}>
+                            <InputText registration={register('industry')} placeholder="Your industry / brand" error={!!errors.industry} value={watch('industry')} />
                           </FormField>
-                          <FormField label="Estimated Budget (USD)" required error={fieldErrors.budget}>
-                            <InputSelect registration={register('budget')} placeholder="Your estimated budget (USD)" options={BUDGET_OPTIONS} error={!!fieldErrors.budget} />
+                          <FormField label="Estimated Budget (EUR)" required error={errors.budget?.message}>
+                            <InputSelect registration={register('budget')} placeholder="Your estimated budget (EUR)" options={BUDGET_OPTIONS} error={!!errors.budget} />
                           </FormField>
-                          <FormField label="Target Deadline" error={fieldErrors.targetDeadline}>
-                            <InputSelect registration={register('targetDeadline')} placeholder="Your target deadline" options={DEADLINE_OPTIONS} error={!!fieldErrors.targetDeadline} />
+                          <FormField label="Target Deadline" error={errors.targetDeadline?.message}>
+                            <InputSelect registration={register('targetDeadline')} placeholder="Your target deadline" options={DEADLINE_OPTIONS} error={!!errors.targetDeadline} />
                           </FormField>
-                          <FormField label="Estimated Start Date" required error={fieldErrors.startDate}>
-                            <InputSelect registration={register('startDate')} placeholder="Your estimated start date" options={START_DATE_OPTIONS} error={!!fieldErrors.startDate} />
+                          {watch('targetDeadline') === 'Other' && (
+                            <FormField label="Specify date" error={errors.targetDeadlineOther?.message}>
+                              <InputText registration={register('targetDeadlineOther')} type="date" error={!!errors.targetDeadlineOther} value={watch('targetDeadlineOther')} />
+                            </FormField>
+                          )}
+                          <FormField label="Estimated Start Date" required error={errors.startDate?.message}>
+                            <InputSelect registration={register('startDate')} placeholder="Your estimated start date" options={START_DATE_OPTIONS} error={!!errors.startDate} />
                           </FormField>
                         </>
                       )}
@@ -396,41 +584,89 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                       {/* STEP 4 — Message */}
                       {currentStep === 3 && (
                         <>
-                          <FormField label="Additional Message" required error={fieldErrors.message}>
+                          <FormField label="Additional Message" required error={errors.message?.message}>
                             <InputTextarea
                               registration={register('message')}
                               placeholder="Tell us about your project. Feel free to include links to briefs, references, or any relevant materials (Google Drive, Frame.io, WeTransfer, etc.)"
                               maxLength={3000}
                               watchValue={messageValue}
                               rows={7}
-                              error={!!fieldErrors.message}
+                              error={!!errors.message}
                             />
                           </FormField>
-                          <FormField label="Preferred time to be contacted" error={fieldErrors.preferredCallTime}>
-                            <InputSelect registration={register('preferredCallTime')} placeholder="Select a time slot" options={CALL_TIME_OPTIONS} error={!!fieldErrors.preferredCallTime} />
+
+                          {/* File attachment */}
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+                            <label className="text-s" style={{ color: 'var(--color-neutral-400)' }}>
+                              Attach Brief <span className="text-xs" style={{ color: 'var(--color-neutral-600)' }}>— PDF only, max 30 MB</span>
+                            </label>
+                            {!attachedFile ? (
+                              <label style={{
+                                display: 'flex', alignItems: 'center', gap: 'var(--space-3)',
+                                background: 'var(--color-input-bg)',
+                                border: `0.5px dashed ${fileError ? 'var(--color-input-error)' : 'var(--color-input-border)'}`,
+                                borderRadius: 'var(--radius)',
+                                padding: 'var(--space-4) var(--space-5)',
+                                cursor: 'pointer',
+                                transition: 'border-color var(--transition-hover)',
+                              }}>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, color: 'var(--color-neutral-500)' }}>
+                                  <path d="M7 1v8M4 4l3-3 3 3M1 10v1.5A1.5 1.5 0 002.5 13h9a1.5 1.5 0 001.5-1.5V10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                                <span className="text-s" style={{ color: 'var(--color-neutral-500)' }}>Click to upload PDF</span>
+                                <input type="file" accept="application/pdf" onChange={handleFileChange} style={{ display: 'none' }} />
+                              </label>
+                            ) : (
+                              <div style={{
+                                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                background: 'var(--color-input-bg)',
+                                border: '0.5px solid var(--color-input-border)',
+                                borderRadius: 'var(--radius)',
+                                padding: 'var(--space-4) var(--space-5)',
+                                gap: 'var(--space-3)',
+                              }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', overflow: 'hidden' }}>
+                                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, color: 'var(--color-red-500)' }}>
+                                    <rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.25"/>
+                                    <path d="M4 5h6M4 7.5h6M4 10h4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
+                                  </svg>
+                                  <span className="text-s" style={{ color: 'var(--color-neutral-300)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{attachedFile.name}</span>
+                                </div>
+                                <button type="button" onClick={handleFileRemove} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'var(--color-neutral-500)', flexShrink: 0, lineHeight: 1 }}>
+                                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                                    <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                                  </svg>
+                                </button>
+                              </div>
+                            )}
+                            {fileError && <p className="text-xs" style={{ color: 'var(--color-input-error)' }}>{fileError}</p>}
+                          </div>
+
+                          <FormField label="Brief Link" error={errors.externalLinks?.message}>
+                            <InputText registration={register('externalLinks')} type="url" placeholder="https://drive.google.com/your-brief" error={!!errors.externalLinks} value={watch('externalLinks')} />
                           </FormField>
+                          <FormField label="How did you hear from us?" required error={errors.source?.message || fieldErrors.source}>
+                            <InputSelect registration={register('source')} placeholder="Select one" options={SOURCE_OPTIONS} error={!!errors.source || !!fieldErrors.source} />
+                          </FormField>
+                          {watch('source') === 'Other' && (
+                            <FormField label="Please specify" error={errors.sourceOther?.message}>
+                              <InputText registration={register('sourceOther')} placeholder="Tell us how you found us" error={!!errors.sourceOther} value={watch('sourceOther')} />
+                            </FormField>
+                          )}
                           <InputCheckbox
                             registration={register('ndaRequested')}
                             checked={!!ndaChecked}
                             label="NDA Requirement — I'd like to discuss a Non-Disclosure Agreement before sharing project details."
                           />
-                          <FormField label="External Links / Brief" error={fieldErrors.externalLinks}>
-                            <InputText registration={register('externalLinks')} placeholder="Paste links to Google Drive, Frame.io, WeTransfer, etc." error={!!fieldErrors.externalLinks} value={watch('externalLinks')} />
-                          </FormField>
-                          <InputCheckbox
-                            registration={register('privacyPolicy')}
-                            checked={!!privacyChecked}
+                          <PrivacyCheckbox
+                            control={control}
                             error={!!fieldErrors.privacyPolicy}
-                            label={
-                              <>I agree to the{' '}
-                                <button type="button" onClick={onPrivacyClick} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px', font: 'inherit' }}>
-                                  Privacy Policy
-                                </button>
-                              </>
-                            }
+                            onPrivacyClick={onPrivacyClick}
                           />
                           {fieldErrors.privacyPolicy && (
-                            <p className="text-xs" style={{ color: 'var(--color-input-error)' }}>{fieldErrors.privacyPolicy}</p>
+                            <p className="text-xs" style={{ color: 'var(--color-input-error)' }}>
+                              {fieldErrors.privacyPolicy}
+                            </p>
                           )}
                         </>
                       )}

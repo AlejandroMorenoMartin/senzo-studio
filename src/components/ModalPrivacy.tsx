@@ -24,24 +24,20 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ y: '100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '100%' }}
+          transition={{ duration: 0.5, ease: [0.45, 0, 0.55, 1] }}
           onClick={onClose}
           style={{
             position: 'fixed',
             inset: 0,
             background: 'var(--color-background)',
             overflowY: 'auto',
-            zIndex: 100,
+            zIndex: 200,
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 24 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          <div
             onClick={(e) => e.stopPropagation()}
             className="modal-content"
             style={{
@@ -64,7 +60,7 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-xl" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Data Controller</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Data Controller</p>
                 </div>
                 <p className="text-base" style={{ lineHeight: 1.7 }}>
                   Senzo Studio is the sole data controller responsible for the processing of personal data collected through this website.
@@ -73,7 +69,7 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-xl" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Purpose of Processing</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Purpose of Processing</p>
                 </div>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', paddingLeft: 'var(--space-5)' }}>
                   <li className="text-base" style={{ lineHeight: 1.7, listStyleType: 'disc' }}>
@@ -87,7 +83,7 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-xl" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Privacy and Storage</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Privacy and Storage</p>
                 </div>
                 <p className="text-base" style={{ lineHeight: 1.7 }}>
                   Your data is strictly for internal use. We do not sell, rent, or share your information with third parties. The data and links provided are stored in our internal management systems under secure protocols.
@@ -96,7 +92,7 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-xl" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Your Rights</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Your Rights</p>
                 </div>
                 <p className="text-base" style={{ lineHeight: 1.7 }}>
                   You can request access to, modification, or permanent deletion of your data and materials at any time. To exercise these rights, please contact us at:{' '}
@@ -114,7 +110,7 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
               </div>
 
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

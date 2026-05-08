@@ -41,8 +41,8 @@ function ClientLogo({ name, href, Logo }: { name: string; href: string; Logo: Re
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
-        width: '240px',
-        height: '96px',
+        width: 'clamp(120px, 30vw, 240px)',
+        height: 'clamp(48px, 12vw, 96px)',
         color: hovered ? 'var(--color-accent)' : 'var(--color-neutral-400)',
         transition: 'color var(--transition-hover)',
         textDecoration: 'none',
@@ -58,13 +58,15 @@ export default function Clients() {
   const doubled = [...CLIENTS, ...CLIENTS];
 
   return (
-    <section id="clients">
-      <div style={{ marginBottom: 'var(--space-7)' }}>
+    <section id="clients" style={{ background: 'var(--color-background)', borderTop: 'var(--border)', borderBottom: 'var(--border)', borderRadius: 0, paddingTop: 'var(--space-9)', paddingBottom: 'var(--space-9)' }}>
+      <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', paddingLeft: '1.5rem', paddingRight: '1.5rem', marginBottom: 'var(--space-7)' }}>
         <SectionLabel>Clients</SectionLabel>
       </div>
 
       <div
         style={{
+          maxWidth: 'var(--max-width)',
+          margin: '0 auto',
           overflow: 'hidden',
           maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
@@ -75,7 +77,7 @@ export default function Clients() {
         <div
           style={{
             display: 'flex',
-            gap: 'var(--space-5)',
+            gap: 'clamp(var(--space-4), 3vw, var(--space-7))',
             width: 'max-content',
             animation: 'scroll-infinite 48s linear infinite',
             animationPlayState: paused ? 'paused' : 'running',

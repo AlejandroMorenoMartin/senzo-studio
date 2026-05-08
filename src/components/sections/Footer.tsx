@@ -36,7 +36,9 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
   const year = new Date().getFullYear();
   const [privacyHovered, setPrivacyHovered] = useState(false);
 
-  const taglineParts = footer.tagline.split(footer.accentWord);
+  const fxIndex = footer.tagline.indexOf(footer.accentWord);
+  const taglineBefore = footer.tagline.slice(0, fxIndex);
+  const taglineAfter = footer.tagline.slice(fxIndex + footer.accentWord.length);
 
   return (
     <footer id="footer" style={{ background: 'var(--color-background)', borderTop: 'var(--border)' }}>
@@ -67,9 +69,9 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
             Senzo Studio
           </p>
           <p className="text-s" style={{ color: 'var(--color-neutral-400)' }}>
-            {taglineParts[0]}
+            {taglineBefore}
             <span style={{ color: 'var(--color-accent)' }}>{footer.accentWord}</span>
-            {taglineParts[1]}
+            {taglineAfter}
           </p>
         </div>
 

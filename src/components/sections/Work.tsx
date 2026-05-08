@@ -103,8 +103,8 @@ export default function Work() {
   }, [lightboxIndex, closeModal, prev, next]);
 
   return (
-    <section id="work">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
+    <section id="work" style={{ background: 'var(--color-background)', borderTop: 'var(--border)', borderBottom: 'var(--border)', borderRadius: 0 }}>
+      <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', padding: 'var(--space-9) 1.5rem', display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
 
         <SectionReveal>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>

@@ -21,14 +21,7 @@ export default function App() {
     <main>
       <Navbar />
       <div id="hero"><Hero /></div>
-      <div style={{
-        maxWidth: 'var(--max-width)',
-        margin: '0 auto',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 'var(--space-9)',
-        padding: 'var(--space-9) 1.5rem var(--space-9)',
-      }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
         <div id="work"><Work /></div>
         <div id="services"><Services /></div>
         <div id="about"><About /></div>
@@ -46,12 +39,12 @@ export default function App() {
       <ModalFreelancer
         isOpen={freelancerOpen}
         onClose={() => setFreelancerOpen(false)}
-        onPrivacyClick={() => { setFreelancerOpen(false); setPrivacyOpen(true); }}
+        onPrivacyClick={() => setPrivacyOpen(true)}
       />
       <ModalBusiness
         isOpen={businessOpen}
         onClose={() => setBusinessOpen(false)}
-        onPrivacyClick={() => { setBusinessOpen(false); setPrivacyOpen(true); }}
+        onPrivacyClick={() => setPrivacyOpen(true)}
       />
     </main>
   );

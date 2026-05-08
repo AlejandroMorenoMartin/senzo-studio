@@ -41,7 +41,7 @@ export default function ModalVimeo({ url, isOpen, onClose }: ModalVimeoProps) {
         >
           {/* Close */}
           <div style={{ position: 'absolute', top: 'var(--space-6)', right: 'var(--space-6)' }} onClick={(e) => e.stopPropagation()}>
-            <BtnIcon as="button" label="Cerrar" onClick={onClose}>
+            <BtnIcon as="button" variant="outline" label="Cerrar" onClick={onClose}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>

@@ -3,11 +3,12 @@ import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface InputTextProps {
   placeholder?: string;
-  type?: 'text' | 'email' | 'url' | 'number' | 'password';
+  type?: 'text' | 'email' | 'url' | 'number' | 'password' | 'date';
   error?: boolean;
   disabled?: boolean;
   registration: UseFormRegisterReturn;
   value?: string;
+  autoComplete?: string;
 }
 
 export default function InputText({
@@ -17,6 +18,7 @@ export default function InputText({
   disabled,
   registration,
   value,
+  autoComplete,
 }: InputTextProps) {
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -35,6 +37,7 @@ export default function InputText({
       type={type}
       placeholder={placeholder}
       disabled={disabled}
+      autoComplete={autoComplete}
       onFocus={() => setFocused(true)}
       onBlur={(e) => { setFocused(false); registration.onBlur(e); }}
       onMouseEnter={() => setHovered(true)}

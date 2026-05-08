@@ -17,7 +17,7 @@ export default function Hero() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
+        height: 'var(--hero-height)',
         overflow: 'hidden',
         background: 'var(--color-background)',
         display: 'flex',
@@ -95,15 +95,16 @@ export default function Hero() {
               color: 'var(--color-neutral-50)',
               textTransform: 'uppercase',
               lineHeight: 1,
+              WebkitTextStroke: '1px var(--color-red-500)',
             }}
           >
             Senzo Studio
           </p>
           <p className="text-xl" style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            {hero.tagline}
+            High-End V<span style={{ color: 'var(--color-red-500)' }}>FX</span> · CGI
           </p>
           <p className="text-base" style={{ maxWidth: '36rem', lineHeight: 1.6 }}>
-            {hero.description}
+            We are a Madrid-based full-service V<span style={{ color: 'var(--color-red-500)' }}>FX</span> & CGI boutique with a core specialization in high-end <span style={{ color: 'var(--color-red-500)' }}>FX</span> and simulations. We deliver comprehensive visual solutions across Feature Films, Advertising, TV Series, and Animation.
           </p>
         </div>
 

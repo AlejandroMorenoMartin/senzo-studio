@@ -58,8 +58,9 @@ export default function Btn({ variant, as = 'button', href, active, borderless, 
       ...base,
       padding: 'var(--space-3) var(--space-6)',
       borderRadius: 'var(--radius)',
-      background: hovered ? 'var(--color-red-400)' : 'var(--color-red-500)',
+      background: hovered ? 'var(--color-red-300)' : 'var(--color-red-500)',
       color: 'var(--color-red-950)',
+      fontWeight: 700,
     };
 
     if (as === 'a') {
@@ -104,6 +105,7 @@ export default function Btn({ variant, as = 'button', href, active, borderless, 
       border: borderless ? '0.5px solid transparent' : `0.5px solid ${disabled ? 'var(--color-neutral-900)' : hovered ? 'var(--color-neutral-50)' : 'var(--color-neutral-900)'}`,
       background: active ? 'var(--color-red-900)' : 'transparent',
       color: disabled ? 'var(--color-neutral-700)' : hovered ? 'var(--color-neutral-50)' : undefined,
+      fontWeight: hovered ? 700 : 400,
       opacity: disabled ? 0.4 : 1,
       cursor: disabled ? 'not-allowed' : 'pointer',
     };

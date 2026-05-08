@@ -81,8 +81,12 @@
   --color-text:    var(--color-neutral-300);
   --color-muted:   var(--color-neutral-600);
   --color-accent:  var(--color-red-500);
+  --color-glow: linear-gradient(to right, transparent, rgba(112, 4, 30, 0.6) calc(50% - 480px), rgba(112, 4, 30, 0.6) calc(50% + 480px), transparent);
 
   --border: 0.5px solid var(--color-border);
+
+  --hero-height: 100vh;
+  --hero-height: 100dvh;
 
   --space-1:  0.125rem;
   --space-2:  0.25rem;
@@ -105,7 +109,7 @@
   --gap-crop-mark: 1.5rem;
 
   --letter-spacing-brand: 0.08em;
-  --letter-spacing-wide: 0.1em;
+  --letter-spacing-wide: 0.05em;
   --letter-spacing-wider: 0.12em;
 
   --font-size-filter: 0.625rem;
@@ -129,8 +133,7 @@ html {
 
 body {
   background-color: var(--color-background);
-  background-image:
-    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255, 10, 68, 0.04) 0%, transparent 70%);
+  background-image: var(--color-glow);
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -349,7 +352,8 @@ strong, b {
 }
 
 /* ── Navbar & Footer — square edges ─────────────── */
-nav, footer { --radius: 0; }
+footer { --radius: 0; }
+
 
 /* ── Modal padding — responsive ─────────────────── */
 .modal-content {
@@ -360,6 +364,7 @@ nav, footer { --radius: 0; }
     padding: var(--space-8);
   }
 }
+
 
 /* ── Clients — infinite scroll ───────────────── */
 @keyframes scroll-infinite {

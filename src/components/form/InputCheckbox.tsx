@@ -6,7 +6,7 @@ interface InputCheckboxProps {
   error?: boolean;
   disabled?: boolean;
   registration: UseFormRegisterReturn;
-  checked?: boolean;
+  checked: boolean;
   value?: string;
 }
 
@@ -36,6 +36,10 @@ export default function InputCheckbox({ label, error, disabled, registration, ch
         type={value !== undefined ? 'radio' : 'checkbox'}
         disabled={disabled}
         value={value}
+        checked={checked}
+        onChange={(e) => {
+          registration.onChange(e);
+        }}
         style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
       />
       <span style={{

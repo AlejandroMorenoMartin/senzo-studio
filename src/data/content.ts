@@ -1,8 +1,8 @@
 export const hero = {
-  videoSrc: '/video/introWeb_SenzoStudio.mp4',
-  reelUrl: 'https://vimeo.com/senzostudio',
-  ctaLabel: 'PLAY REEL',
-  tagline: 'High-End VFX · CGI & FX Simulations',
+  videoSrc: '/video/introWeb_SenzoStudio_v2.mp4',
+  reelUrl: 'https://vimeo.com/842452894',
+  ctaLabel: 'WATCH REEL',
+  tagline: 'High-End VFX · CGI',
   description: 'We are a Madrid-based full-service VFX & CGI boutique with a core specialization in high-end FX and simulations. We deliver comprehensive visual solutions across Feature Films, Advertising, TV Series, and Animation.',
   overlays: {
     fps: 'FPS: 24.00',
@@ -213,16 +213,15 @@ export const services: Service[] = [
 
 export const servicesSection = {
   title: 'WHAT WE DO',
-  description: 'End-to-end VFX & CGI — from raw plate to final pixel. We cover every stage of the pipeline in-house, and integrate cleanly into yours.',
+  description: 'End-to-end or just the parts you need.',
   chips: [
-    'Tracking & Matchmove',
-    'Rotoscope, Keying & Paint-Prep',
-    'Match-Move',
-    '3D Modeling & Texturing',
-    '3D Animation',
     'FX & CFX Simulations',
     'Lighting & Render',
     'Compositing',
+    '3D Animation',
+    '3D Modeling & Texturing',
+    'Tracking & Match-Move',
+    'Rotoscope, Keying & Paint-Prep',
   ],
 };
 
@@ -308,31 +307,30 @@ export const faq = [
 ];
 
 export const contact = {
-  email: 'hello@senzostudio.com',
+  email: 'info@senzostudio.com',
   options: [
     {
       id: 'business',
       title: 'Business Inquiries',
-      description: 'For productions looking for world-class VFX, CGI & FX simulations.',
+      description: 'For studios, production companies and agencies.',
       cta: 'Contact us',
     },
     {
       id: 'freelancer',
       title: 'Freelancer Application',
-      description: 'For registered freelancers and self-employed artists looking to collaborate.',
+      description: 'For independent VFX & CGI professionals.',
       cta: 'Apply',
     },
   ],
 };
 
 export const footer = {
-  tagline: 'High-End VFX, CGI & FX Simulations.',
-  accentWord: 'VFX',
-  email: 'hello@senzostudio.com',
+  tagline: 'High-End VFX · CGI',
+  accentWord: 'FX',
   credit: 'Alejandro Moreno',
   creditUrl: 'https://alejandromorenomartin.com',
   socials: {
-    vimeo:   { href: 'https://vimeo.com/senzostudio' },
+    vimeo:   { href: 'https://vimeo.com/user117104980' },
     linkedin: { href: 'https://linkedin.com/company/senzostudio' },
     behance:  { href: 'https://behance.net/senzostudio' },
     clutch:   { href: 'https://clutch.co/profile/senzo-studio' },
