@@ -411,8 +411,8 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
                           <FormField label="Years of experience" required error={fieldErrors.yearsExperience}>
                             <InputText registration={register('yearsExperience')} type="number" placeholder="Your years of experience" error={!!fieldErrors.yearsExperience} value={watch('yearsExperience')} autoComplete="off" />
                           </FormField>
-                          <FormField label="Hourly Rate (EUR)" required error={fieldErrors.expectedRate}>
-                            <InputText registration={register('expectedRate')} type="number" placeholder="e.g. 45" error={!!fieldErrors.expectedRate} value={watch('expectedRate')} autoComplete="off" />
+                          <FormField label="Daily Rate (EUR)" required error={fieldErrors.expectedRate}>
+                            <InputText registration={register('expectedRate')} type="number" placeholder="e.g. 350" error={!!fieldErrors.expectedRate} value={watch('expectedRate')} autoComplete="off" />
                           </FormField>
                           <FormField label="Availability" required error={fieldErrors.availability}>
                             <InputText registration={register('availability')} placeholder="e.g. Full-time, Part-time, Project-based..." error={!!fieldErrors.availability} value={watch('availability')} autoComplete="off" />
