@@ -23,7 +23,10 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [hoveredCode, setHoveredCode] = useState<string | null>(null);
+  const [focusVisible, setFocusVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const listboxRef = useRef<HTMLDivElement>(null);
 
   const currentLang = i18n.language.split('-')[0].toLowerCase();
   const activeCode = LANGUAGES.some((l) => l.code === currentLang) ? currentLang : 'en';
@@ -42,6 +45,30 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
     void i18n.changeLanguage(code);
     localStorage.setItem('i18n_lang', code);
     setOpen(false);
+    buttonRef.current?.focus();
+  }
+
+  function handleKeyDownButton(e: React.KeyboardEvent<HTMLButtonElement>) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setOpen((v) => !v);
+    } else if (e.key === 'Escape') {
+      if (open) {
+        e.preventDefault();
+        setOpen(false);
+      }
+    }
+  }
+
+  function handleKeyDownOption(e: React.KeyboardEvent<HTMLDivElement>, code: string) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleSelect(code);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setOpen(false);
+      buttonRef.current?.focus();
+    }
   }
 
   const triggerStyle: React.CSSProperties = {
@@ -53,7 +80,8 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
     textDecoration: 'none',
-    outline: 'none',
+    outline: focusVisible ? '2px solid var(--color-accent)' : 'none',
+    outlineOffset: focusVisible ? '2px' : '0px',
     padding: 'var(--space-2) var(--space-3)',
     borderRadius: 'var(--radius)',
     border: borderless
@@ -86,12 +114,18 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
       style={{ position: 'relative', display: 'inline-block' }}
     >
       <button
+        ref={buttonRef}
         type="button"
+        tabIndex={0}
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-controls="lang-listbox"
         onClick={() => setOpen((v) => !v)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onKeyDown={handleKeyDownButton}
+        onFocus={() => setFocusVisible(true)}
+        onBlur={() => setFocusVisible(false)}
         style={triggerStyle}
       >
         {activeCode.toUpperCase()}
@@ -99,7 +133,9 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
 
       <AnimatePresence>
         {open && (
-          <motion.ul
+          <motion.div
+            ref={listboxRef}
+            id="lang-listbox"
             role="listbox"
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
@@ -112,13 +148,15 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
               const isHovered = hoveredCode === code;
 
               return (
-                <li
+                <div
                   key={code}
                   role="option"
+                  tabIndex={0}
                   aria-selected={isActive}
                   onClick={() => handleSelect(code)}
                   onMouseEnter={() => setHoveredCode(code)}
                   onMouseLeave={() => setHoveredCode(null)}
+                  onKeyDown={(e) => handleKeyDownOption(e, code)}
                   style={{
                     padding: 'var(--space-2) var(--space-4)',
                     cursor: 'pointer',
@@ -142,10 +180,10 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
                     {isActive ? '✓' : ''}
                   </span>
                   {label}
-                </li>
+                </div>
               );
             })}
-          </motion.ul>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
