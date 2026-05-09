@@ -7,6 +7,7 @@ interface Option {
 }
 
 interface InputSelectProps {
+  id?: string;
   placeholder?: string;
   options: Option[];
   error?: boolean;
@@ -21,7 +22,7 @@ const ChevronDown = () => (
   </svg>
 );
 
-export default function InputSelect({ placeholder, options, error, disabled, registration, autoComplete }: InputSelectProps) {
+export default function InputSelect({ id, placeholder, options, error, disabled, registration, autoComplete }: InputSelectProps) {
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -37,6 +38,7 @@ export default function InputSelect({ placeholder, options, error, disabled, reg
     <div style={{ position: 'relative' }}>
       <select
         {...registration}
+        id={id}
         disabled={disabled}
         autoComplete={autoComplete}
         onFocus={() => setFocused(true)}

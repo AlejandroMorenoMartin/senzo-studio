@@ -44,7 +44,7 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
   const taglineAfter = fxIndex >= 0 ? tagline.slice(fxIndex + 2) : '';
 
   return (
-    <footer id="footer" style={{ background: 'var(--color-background)', borderTop: 'var(--border)' }}>
+    <footer id="footer" style={{ borderTop: 'var(--border)' }}>
       <div
         style={{
           padding: 'var(--space-7) var(--space-6)',

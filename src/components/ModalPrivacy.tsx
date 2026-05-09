@@ -11,7 +11,10 @@ interface ModalPrivacyProps {
 
 export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
   const { t } = useTranslation(['contact', 'common']);
-  const sections = t('contact:modalPrivacy.sections', { returnObjects: true }) as Record<string, { title: string; body?: string; items?: string[] }>;
+  const sectionsRaw = t('contact:modalPrivacy.sections', { returnObjects: true });
+  const sections = (sectionsRaw && typeof sectionsRaw === 'object' && !Array.isArray(sectionsRaw)
+    ? sectionsRaw
+    : {}) as Record<string, { title: string; body?: string; items?: string[] }>;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -28,6 +31,9 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Privacy Policy"
           initial={{ y: '100%' }}
           animate={{ y: 0 }}
           exit={{ y: '100%' }}

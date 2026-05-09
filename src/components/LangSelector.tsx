@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 interface LangSelectorProps {
   borderless?: boolean;
+  inline?: boolean;
 }
 
 interface LangOption {
@@ -18,12 +19,11 @@ const LANGUAGES: LangOption[] = [
   { code: 'ru', label: 'Русский' },
 ];
 
-export default function LangSelector({ borderless = false }: LangSelectorProps) {
+export default function LangSelector({ borderless = false, inline = false }: LangSelectorProps) {
   const { i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [hoveredCode, setHoveredCode] = useState<string | null>(null);
-  const [focusVisible, setFocusVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const listboxRef = useRef<HTMLDivElement>(null);
@@ -44,6 +44,7 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
   function handleSelect(code: string) {
     void i18n.changeLanguage(code);
     localStorage.setItem('i18n_lang', code);
+    document.documentElement.lang = code;
     setOpen(false);
     buttonRef.current?.focus();
   }
@@ -80,8 +81,8 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
     textDecoration: 'none',
-    outline: focusVisible ? '2px solid var(--color-accent)' : 'none',
-    outlineOffset: focusVisible ? '2px' : '0px',
+    outline: 'none',
+    outlineOffset: '0px',
     padding: 'var(--space-2) var(--space-3)',
     borderRadius: 'var(--radius)',
     border: borderless
@@ -96,7 +97,7 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
 
   const dropdownStyle: React.CSSProperties = {
     position: 'absolute',
-    top: '100%',
+    top: '150%',
     right: 0,
     marginTop: 'var(--space-1)',
     background: 'rgba(6,0,0,0.96)',
@@ -107,6 +108,38 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
     zIndex: 100,
     overflow: 'hidden',
   };
+
+  if (inline) {
+    return (
+      <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+        {LANGUAGES.map(({ code, label }) => {
+          const isActive = code === activeCode;
+          return (
+            <button
+              key={code}
+              type="button"
+              onClick={() => handleSelect(code)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 'var(--space-2) var(--space-3)',
+                fontFamily: 'var(--font-body)',
+                fontWeight: 400,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: isActive ? 'var(--color-accent)' : 'var(--color-neutral-500)',
+                transition: 'color var(--transition-hover)',
+                outline: 'none',
+              }}
+            >
+              {label}
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -124,8 +157,6 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onKeyDown={handleKeyDownButton}
-        onFocus={() => setFocusVisible(true)}
-        onBlur={() => setFocusVisible(false)}
         style={triggerStyle}
       >
         {activeCode.toUpperCase()}
@@ -158,7 +189,7 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
                   onMouseLeave={() => setHoveredCode(null)}
                   onKeyDown={(e) => handleKeyDownOption(e, code)}
                   style={{
-                    padding: 'var(--space-2) var(--space-4)',
+                    padding: 'var(--space-4)',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -176,9 +207,6 @@ export default function LangSelector({ borderless = false }: LangSelectorProps) 
                     transition: 'background var(--transition-hover), color var(--transition-hover)',
                   }}
                 >
-                  <span style={{ width: '0.75rem', display: 'inline-block' }}>
-                    {isActive ? '✓' : ''}
-                  </span>
                   {label}
                 </div>
               );

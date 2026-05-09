@@ -4,7 +4,7 @@ type BtnIconProps =
   | { as?: 'a'; href: string; label: string; variant?: 'default' | 'outline'; style?: React.CSSProperties; children: React.ReactNode; onClick?: never }
   | { as: 'button'; href?: never; label: string; variant?: 'default' | 'outline'; style?: React.CSSProperties; children: React.ReactNode; onClick?: () => void };
 
-export default function BtnIcon({ as = 'a', href, label, variant = 'default', style: styleProp, onClick, children }: BtnIconProps) {
+export default function BtnIcon({ as = 'a', href, label, style: styleProp, onClick, children }: BtnIconProps) {
   const [hovered, setHovered] = useState(false);
 
   const style: React.CSSProperties = {

@@ -180,8 +180,10 @@ function PrivacyCheckbox({ control, error, onPrivacyClick }: {
 
 export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: ModalFreelancerProps) {
   const { t } = useTranslation(['contact', 'common']);
-  const STEPS = t('contact:modalFreelancer.steps', { returnObjects: true }) as string[];
-  const stepTitles = t('contact:modalFreelancer.stepTitles', { returnObjects: true }) as string[];
+  const stepsRaw = t('contact:modalFreelancer.steps', { returnObjects: true });
+  const STEPS: string[] = Array.isArray(stepsRaw) ? stepsRaw : [];
+  const stepTitlesRaw = t('contact:modalFreelancer.stepTitles', { returnObjects: true });
+  const stepTitles: string[] = Array.isArray(stepTitlesRaw) ? stepTitlesRaw : [];
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -235,13 +237,13 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
   useEffect(() => {
     if (!isOpen) return;
     document.body.style.overflow = 'hidden';
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') handleClose(); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', onKey);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   function handleClose() {
     onClose();
@@ -299,11 +301,36 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
-      if (!res.ok) throw new Error('error');
+
+      if (!res.ok) {
+        let serverMessage = '';
+        try {
+          const body = await res.json();
+          serverMessage = body?.error ?? body?.message ?? '';
+        } catch { /* non-JSON response */ }
+
+        if (res.status === 400) {
+          setSubmitError(serverMessage || t('contact:modalFreelancer.errors.submit400'));
+        } else if (res.status === 413) {
+          setSubmitError(t('contact:modalFreelancer.errors.submit413'));
+        } else if (res.status === 429) {
+          setSubmitError(t('contact:modalFreelancer.errors.submit429'));
+        } else if (res.status >= 500) {
+          setSubmitError(t('contact:modalFreelancer.errors.submit500'));
+        } else {
+          setSubmitError(serverMessage || t('contact:modalFreelancer.errors.submitGeneric'));
+        }
+        return;
+      }
+
       sessionStorage.removeItem(SESSION_KEY);
       setSubmitted(true);
-    } catch {
-      setSubmitError(t('contact:modalFreelancer.errors.submitGeneric'));
+    } catch (err) {
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        setSubmitError(t('contact:modalFreelancer.errors.networkError'));
+      } else {
+        setSubmitError(t('contact:modalFreelancer.errors.unexpectedError'));
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -313,6 +340,9 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-freelancer-title"
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}
           exit={{ y: '-100%' }}
@@ -337,7 +367,7 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
             }}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-5)', marginBottom: 'var(--space-6)' }}>
-              <h2 className="title-l">{t('contact:modalFreelancer.title')}</h2>
+              <h2 id="modal-freelancer-title" className="title-l">{t('contact:modalFreelancer.title')}</h2>
               <BtnIcon as="button" variant="outline" label={t('common:buttons.close')} onClick={handleClose} style={{ flexShrink: 0 }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>

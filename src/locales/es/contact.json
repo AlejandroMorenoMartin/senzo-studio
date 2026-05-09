@@ -257,7 +257,13 @@
       "httpsUrl": "Introduce una URL https válida",
       "source": "Cuéntanos cómo nos has encontrado",
       "privacyPolicy": "Debes aceptar la Política de privacidad para continuar",
-      "submitGeneric": "Algo ha salido mal. Por favor, inténtalo de nuevo."
+      "submitGeneric": "Algo ha salido mal. Por favor, inténtalo de nuevo.",
+      "submit400": "Algunos datos no son correctos. Por favor, revisa tus respuestas.",
+      "submit413": "El archivo adjunto es demasiado grande. Usa un archivo de menos de 30 MB.",
+      "submit429": "Demasiadas solicitudes. Por favor, espera un momento e inténtalo de nuevo.",
+      "submit500": "Error del servidor. Por favor, inténtalo más tarde.",
+      "networkError": "Sin conexión a internet. Por favor, comprueba tu red.",
+      "unexpectedError": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo."
     },
     "success": "Gracias por tu interés en unirte a Senzo Studio. Hemos recibido correctamente tu perfil y portfolio. Nuestro equipo de producción revisará tus materiales y se pondrá en contacto contigo directamente cuando tu perfil y disponibilidad se ajusten a nuestras necesidades de producción."
   },

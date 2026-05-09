@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface InputTextProps {
+  id?: string;
   placeholder?: string;
   type?: 'text' | 'email' | 'url' | 'number' | 'password' | 'date';
   error?: boolean;
@@ -12,6 +13,7 @@ interface InputTextProps {
 }
 
 export default function InputText({
+  id,
   placeholder,
   type = 'text',
   error,
@@ -34,6 +36,7 @@ export default function InputText({
   return (
     <input
       {...registration}
+      id={id}
       type={type}
       placeholder={placeholder}
       disabled={disabled}

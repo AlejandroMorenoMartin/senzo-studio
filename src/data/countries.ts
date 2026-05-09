@@ -21,6 +21,6 @@ const ISO_CODES = [
 const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
 export const COUNTRY_OPTIONS = ISO_CODES
-  .map((code) => ({ value: code, label: regionNames.of(code) ?? code }))
+  .map((code) => ({ label: regionNames.of(code) ?? code }))
   .sort((a, b) => a.label.localeCompare(b.label))
-  .map(({ value, label }) => ({ value: label, label }));
+  .map(({ label }) => ({ value: label, label }));

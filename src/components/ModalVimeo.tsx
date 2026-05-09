@@ -24,6 +24,9 @@ export default function ModalVimeo({ url, isOpen, onClose }: ModalVimeoProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Reel video"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

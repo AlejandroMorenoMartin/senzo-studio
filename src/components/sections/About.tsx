@@ -2,7 +2,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
 import BtnIcon from '../BtnIcon';
-import KittLine from '../KittLine';
 import { about } from '../../data/content';
 
 const IconLinkedin = () => (
@@ -43,7 +42,7 @@ export default function About() {
   const { t } = useTranslation('about');
 
   return (
-    <section id="about" style={{ background: 'var(--color-background)' }}>
+    <section id="about">
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
         <SectionLabel>{t('about:sectionLabel')}</SectionLabel>
 

@@ -257,7 +257,13 @@
       "httpsUrl": "Enter a valid https URL",
       "source": "Let us know how you found us",
       "privacyPolicy": "You must accept the Privacy Policy to continue",
-      "submitGeneric": "Something went wrong. Please try again."
+      "submitGeneric": "Something went wrong. Please try again.",
+      "submit400": "Some information is incorrect. Please review your answers.",
+      "submit413": "The file attached is too large. Please use a file under 30 MB.",
+      "submit429": "Too many requests. Please wait a moment and try again.",
+      "submit500": "Server error. Please try again later.",
+      "networkError": "No internet connection. Please check your network.",
+      "unexpectedError": "An unexpected error occurred. Please try again."
     },
     "success": "Thank you for your interest in joining Senzo Studio. We have received your profile and portfolio successfully. Our production team will review your materials and contact you directly when your profile and availability align with our production needs."
   },

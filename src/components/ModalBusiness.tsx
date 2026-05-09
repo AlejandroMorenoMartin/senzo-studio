@@ -218,8 +218,10 @@ function PrivacyCheckbox({ control, error, onPrivacyClick }: {
 
 export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: ModalBusinessProps) {
   const { t } = useTranslation(['contact', 'common']);
-  const STEPS = t('contact:modalBusiness.steps', { returnObjects: true }) as string[];
-  const stepTitles = t('contact:modalBusiness.stepTitles', { returnObjects: true }) as string[];
+  const stepsRaw = t('contact:modalBusiness.steps', { returnObjects: true });
+  const STEPS: string[] = Array.isArray(stepsRaw) ? stepsRaw : [];
+  const stepTitlesRaw = t('contact:modalBusiness.stepTitles', { returnObjects: true });
+  const stepTitles: string[] = Array.isArray(stepTitlesRaw) ? stepTitlesRaw : [];
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [skippedSteps, setSkippedSteps] = useState<number[]>([]);
@@ -247,7 +249,8 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
     setFileError('');
     const reader = new FileReader();
     reader.onload = () => {
-      setAttachedFile({ name: file.name, base64: reader.result as string });
+      if (typeof reader.result !== 'string') return;
+      setAttachedFile({ name: file.name, base64: reader.result });
     };
     reader.readAsDataURL(file);
   }
@@ -316,13 +319,13 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
   useEffect(() => {
     if (!isOpen) return;
     document.body.style.overflow = 'hidden';
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') handleClose(); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', onKey);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   function handleClose() {
     onClose();
@@ -436,6 +439,9 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-business-title"
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}
           exit={{ y: '-100%' }}
@@ -460,7 +466,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
             }}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-5)', marginBottom: 'var(--space-6)' }}>
-              <h2 className="title-l">{t('contact:modalBusiness.title')}</h2>
+              <h2 id="modal-business-title" className="title-l">{t('contact:modalBusiness.title')}</h2>
               <BtnIcon as="button" variant="outline" label={t('common:buttons.close')} onClick={handleClose} style={{ flexShrink: 0 }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>

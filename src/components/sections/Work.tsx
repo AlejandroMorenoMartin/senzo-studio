@@ -5,7 +5,6 @@ import SectionReveal from '../SectionReveal';
 import Btn from '../Btn';
 import BtnIcon from '../BtnIcon';
 import SectionLabel from '../SectionLabel';
-import KittLine from '../KittLine';
 import { useHover } from '../../hooks/useHover';
 import { work, WORK_TAGS } from '../../data/content';
 import type { WorkTag } from '../../data/content';
@@ -22,10 +21,12 @@ function WorkCard({ src, title, onClick }: WorkCardProps) {
   const { hovered, onMouseEnter, onMouseLeave } = useHover();
 
   return (
-    <div
+    <button
+      type="button"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
+      aria-label={title}
       style={{
         cursor: 'pointer',
         position: 'relative',
@@ -33,6 +34,10 @@ function WorkCard({ src, title, onClick }: WorkCardProps) {
         overflow: 'hidden',
         borderRadius: 'var(--radius)',
         background: 'var(--color-surface)',
+        border: 'none',
+        padding: 0,
+        width: '100%',
+        display: 'block',
       }}
     >
       {/* Image */}
@@ -70,7 +75,7 @@ function WorkCard({ src, title, onClick }: WorkCardProps) {
       >
         <p className="text-l">{title}</p>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -113,7 +118,7 @@ export default function Work() {
   }, [lightboxIndex, closeModal, prev, next]);
 
   return (
-    <section id="work" style={{ background: 'var(--color-background)' }}>
+    <section id="work">
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
 
         <SectionReveal>

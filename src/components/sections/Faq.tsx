@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import SectionReveal from '../SectionReveal';
 import SectionLabel from '../SectionLabel';
-import KittLine from '../KittLine';
 
 const IconChevron = ({ open }: { open: boolean }) => (
   <svg
@@ -89,7 +88,7 @@ export default function Faq() {
   const items = t('faq:items', { returnObjects: true }) as Array<{ question: string; answer: string }>;
 
   return (
-    <section id="faq" style={{ background: 'var(--color-background)' }}>
+    <section id="faq">
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
 
         <SectionReveal>

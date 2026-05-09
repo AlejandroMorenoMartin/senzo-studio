@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import Btn from './Btn';
@@ -19,6 +19,7 @@ export default function Navbar() {
   const [active, setActive] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const lockedActive = useRef<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -45,6 +46,7 @@ export default function Navbar() {
     const TRACKED = ['hero', 'work', 'services', 'about', 'faq', 'clients', 'footer'];
 
     function updateActive() {
+      if (lockedActive.current !== null) return;
       const middle = window.innerHeight * 0.4;
       let current = 'hero';
       for (const id of TRACKED) {
@@ -65,9 +67,14 @@ export default function Navbar() {
     const target = id === 'contact' ? 'footer' : id;
     const el = document.getElementById(target);
     if (!el) return;
-    const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--space-8')) * 16;
+    const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--space-2')) * 16;
     const top = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
+    if (id === 'contact') {
+      lockedActive.current = 'contact';
+      setActive('contact');
+      setTimeout(() => { lockedActive.current = null; }, 1500);
+    }
     setMenuOpen(false);
   }
 
@@ -112,8 +119,8 @@ export default function Navbar() {
 
         {/* Desktop links */}
         {!isMobile && (
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+            <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               {NAV_LINKS.map((link) => (
                 <Btn
                   key={link.href}
@@ -126,7 +133,6 @@ export default function Navbar() {
                 </Btn>
               ))}
             </div>
-            <div style={{ width: '0.5px', height: '1rem', background: 'var(--color-neutral-800)', margin: '0 var(--space-2)' }} />
             <LangSelector borderless={!scrolled} />
           </div>
         )}
@@ -187,28 +193,31 @@ export default function Navbar() {
               borderTop: 'var(--border)',
             }}
           >
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollTo(link.href)}
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  textAlign: 'left',
-                  padding: 'var(--space-4) 0',
-                  borderBottom: 'var(--border)',
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '1.5rem',
-                  letterSpacing: 'var(--letter-spacing-brand)',
-                  textTransform: 'uppercase',
-                  color: active === link.href ? 'var(--color-accent)' : 'var(--color-neutral-50)',
-                  transition: 'color var(--transition-hover)',
-                }}
-              >
-                {t(link.labelKey)}
-              </button>
-            ))}
-            <div style={{ borderTop: 'var(--border)', marginTop: 'var(--space-4)', paddingTop: 'var(--space-4)' }}>
-              <LangSelector />
+            <div style={{ flex: 1 }}>
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.href}
+                  onClick={() => scrollTo(link.href)}
+                  style={{
+                    display: 'block', width: '100%',
+                    background: 'none', border: 'none', borderRadius: 0, cursor: 'pointer',
+                    textAlign: 'left',
+                    padding: 'var(--space-4) 0',
+                    borderBottom: 'var(--border)',
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: '1.5rem',
+                    letterSpacing: 'var(--letter-spacing-brand)',
+                    textTransform: 'uppercase',
+                    color: active === link.href ? 'var(--color-accent)' : 'var(--color-neutral-50)',
+                    transition: 'color var(--transition-hover)',
+                  }}
+                >
+                  {t(link.labelKey)}
+                </button>
+              ))}
+            </div>
+            <div style={{ paddingBottom: 'var(--space-2)' }}>
+              <LangSelector inline />
             </div>
           </motion.div>
         )}

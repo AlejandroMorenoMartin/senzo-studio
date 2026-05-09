@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
-import KittLine from '../KittLine';
 import { contact } from '../../data/content';
 
 interface ContactProps {
@@ -111,7 +110,7 @@ export default function Contact({ onBusinessClick, onFreelancerClick }: ContactP
   const { t } = useTranslation('contact');
 
   return (
-    <section id="contact" style={{ background: 'var(--color-background)' }}>
+    <section id="contact">
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
         <SectionLabel>{t('contact:sectionLabel')}</SectionLabel>
 

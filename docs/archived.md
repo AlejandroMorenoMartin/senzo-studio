@@ -6,6 +6,9 @@ No son tareas completadas — para eso está `done.md`.
 <!-- Formato: - [-] ~~**Descripción**~~ `[ALTA|MEDIA|BAJA]` — _entrada: YYYY-MM-DD · archivada: YYYY-MM-DD_ -->
 <!-- Motivo: > por qué se descartó -->
 
+- [-] ~~**Estrategia de assets estáticos — imágenes y vídeos fuera del repo git**~~ `[ALTA]` — _entrada: 2026-05-09 · archivada: 2026-05-09_
+  > No se justifica: vídeo actual pesa 14 MB (dentro de límites de Vercel), ya está en historial, extraerlo requeriría reescribir commits. Reevaluar si el repo supera los 400 MB o si el cliente actualiza vídeos frecuentemente.
+
 - [-] ~~**Sustituir placeholders por assets reales**~~ `[ALTA]` — _entrada: 2026-05-06 · archivada: 2026-05-08_
   > Vídeo hero, thumbnails, before/after.
 - [-] ~~**Actualizar URL del reel de Vimeo**~~ `[ALTA]` — _entrada: 2026-05-06 · archivada: 2026-05-08_

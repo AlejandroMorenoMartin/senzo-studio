@@ -21,12 +21,23 @@ export default function Hero() {
         width: '100%',
         height: 'var(--hero-height)',
         overflow: 'hidden',
-        background: 'var(--color-background)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
+      {/* Top gradient — ensures navbar legibility over video */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0,
+          height: '32rem',
+          background: 'linear-gradient(to bottom, rgba(6,0,0,0.6) 0%, transparent 12.5%)',
+          zIndex: 2,
+          pointerEvents: 'none',
+        }}
+      />
+
       {/* Cover while video loads */}
       <div
         style={{
@@ -48,6 +59,7 @@ export default function Hero() {
         loop
         playsInline
         preload="auto"
+        aria-hidden="true"
         onPlaying={() => setVideoReady(true)}
         style={{
           position: 'absolute',
@@ -90,7 +102,7 @@ export default function Hero() {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <p
+          <h1
             style={{
               fontFamily: 'var(--font-heading)',
               fontSize: 'clamp(2rem, 5vw, 4rem)',
@@ -100,10 +112,11 @@ export default function Hero() {
               textTransform: 'uppercase',
               lineHeight: 1,
               WebkitTextStroke: '1px var(--color-red-500)',
+              margin: 0,
             }}
           >
             Senzo Studio
-          </p>
+          </h1>
           <p className="text-xl" style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             High-End V<span style={{ color: 'var(--color-red-500)' }}>FX</span> · CGI
           </p>

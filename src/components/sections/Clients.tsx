@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SectionLabel from '../SectionLabel';
-import KittLine from '../KittLine';
 
 import Logo20 from '../../assets/clients/20.svg?react';
 import LogoDC from '../../assets/clients/dc.svg?react';
@@ -61,32 +60,33 @@ export default function Clients() {
   const doubled = [...CLIENTS, ...CLIENTS];
 
   return (
-    <section id="clients" style={{ background: 'var(--color-background)' }}>
-      <div className="section-inner" style={{ marginBottom: 'var(--space-7)' }}>
+    <section id="clients">
+      <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)', paddingBottom: 0 }}>
         <SectionLabel>{t('common:nav.clients')}</SectionLabel>
-      </div>
 
-      <div
-        style={{
-          overflow: 'hidden',
-          maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
-        }}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
         <div
           style={{
-            display: 'flex',
-            gap: 'clamp(var(--space-4), 3vw, var(--space-7))',
-            width: 'max-content',
-            animation: 'scroll-infinite 48s linear infinite',
-            animationPlayState: paused ? 'paused' : 'running',
+            overflow: 'hidden',
+            margin: '0 -1.5rem',
+            maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
           }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
         >
-          {doubled.map((client, i) => (
-            <ClientLogo key={`${client.id}-${i}`} name={client.name} href={client.href} Logo={client.Logo} />
-          ))}
+          <div
+            style={{
+              display: 'flex',
+              gap: 'clamp(var(--space-4), 3vw, var(--space-7))',
+              width: 'max-content',
+              animation: 'scroll-infinite 48s linear infinite',
+              animationPlayState: paused ? 'paused' : 'running',
+            }}
+          >
+            {doubled.map((client, i) => (
+              <ClientLogo key={`${client.id}-${i}`} name={client.name} href={client.href} Logo={client.Logo} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

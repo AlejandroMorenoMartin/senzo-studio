@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface InputTextareaProps {
+  id?: string;
   placeholder?: string;
   maxLength?: number;
   error?: boolean;
@@ -12,6 +13,7 @@ interface InputTextareaProps {
 }
 
 export default function InputTextarea({
+  id,
   placeholder,
   maxLength,
   error,
@@ -35,6 +37,7 @@ export default function InputTextarea({
     <div style={{ position: 'relative' }}>
       <textarea
         {...registration}
+        id={id}
         placeholder={placeholder}
         maxLength={maxLength}
         disabled={disabled}

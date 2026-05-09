@@ -10,7 +10,7 @@ export default function Statement() {
   );
 
   return (
-    <section style={{ background: 'var(--color-background)' }}>
+    <section>
       <div>
 
         {/* Slate header */}

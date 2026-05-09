@@ -1,5 +1,5 @@
 export const hero = {
-  videoSrc: '/video/introWeb_SenzoStudio_v2.mp4',
+  videoSrc: '/video/introWeb_SenzoStudio.mp4',
   reelUrl: 'https://vimeo.com/842452894',
   ctaLabel: 'WATCH REEL',
   tagline: 'High-End VFX · CGI',

@@ -177,7 +177,7 @@ strong, b {
   font-family: var(--font-heading);
   font-size: 3rem;
   font-weight: 800;
-  line-height: auto;
+  line-height: 1.2;
   color: var(--color-neutral-50);
 }
 
@@ -185,7 +185,7 @@ strong, b {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 400;
-  line-height: auto;
+  line-height: 1.2;
   color: var(--color-neutral-100);
 }
 
@@ -193,7 +193,7 @@ strong, b {
   font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 600;
-  line-height: auto;
+  line-height: 1.2;
   color: var(--color-neutral-200);
 }
 
@@ -201,7 +201,7 @@ strong, b {
   font-family: var(--font-body);
   font-size: 1.25rem;
   font-weight: 500;
-  line-height: auto;
+  line-height: 1.2;
   color: var(--color-neutral-300);
 }
 
@@ -209,7 +209,7 @@ strong, b {
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 400;
-  line-height: auto;
+  line-height: 1.2;
   color: var(--color-neutral-400);
 }
 
@@ -217,7 +217,7 @@ strong, b {
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 400;
-  line-height: auto;
+  line-height: 1.2;
   color: var(--color-neutral-500);
 }
 
@@ -225,7 +225,7 @@ strong, b {
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 300;
-  line-height: auto;
+  line-height: 1.2;
   color: var(--color-neutral-600);
 }
 

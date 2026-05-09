@@ -1,14 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import SectionReveal from '../SectionReveal';
 import SectionLabel from '../SectionLabel';
-import KittLine from '../KittLine';
 
 export default function Services() {
   const { t } = useTranslation('services');
-  const chips = t('services:chips', { returnObjects: true }) as string[];
+  const chipsRaw = t('services:chips', { returnObjects: true });
+  const chips: string[] = Array.isArray(chipsRaw) ? chipsRaw : [];
 
   return (
-    <section style={{ background: 'var(--color-background)' }}>
+    <section id="services">
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
 
         <SectionReveal>

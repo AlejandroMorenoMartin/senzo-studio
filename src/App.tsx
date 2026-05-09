@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
+import SplashScreen from './components/SplashScreen';
+import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/sections/Hero';
 import Work from './components/sections/Work';
 import Services from './components/sections/Services';
@@ -18,6 +20,9 @@ export default function App() {
   const [businessOpen, setBusinessOpen] = useState(false);
 
   return (
+    <>
+    <SplashScreen />
+    <ScrollToTop />
     <main>
       <Navbar />
       <div id="hero"><Hero /></div>
@@ -47,5 +52,6 @@ export default function App() {
         onPrivacyClick={() => setPrivacyOpen(true)}
       />
     </main>
+    </>
   );
 }
