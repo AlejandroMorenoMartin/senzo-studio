@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import Btn from './Btn';
+import LangSelector from './LangSelector';
 
 const NAV_LINKS = [
-  { label: 'Work',     href: 'work' },
-  { label: 'Services', href: 'services' },
-  { label: 'About',    href: 'about' },
-  { label: "FAQ's",    href: 'faq' },
-  { label: 'Clients',  href: 'clients' },
-  { label: 'Contact',  href: 'contact' },
+  { labelKey: 'nav.work',     href: 'work' },
+  { labelKey: 'nav.services', href: 'services' },
+  { labelKey: 'nav.about',    href: 'about' },
+  { labelKey: 'nav.faq',      href: 'faq' },
+  { labelKey: 'nav.clients',  href: 'clients' },
+  { labelKey: 'nav.contact',  href: 'contact' },
 ];
 
 export default function Navbar() {
+  const { t } = useTranslation('common');
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -109,18 +112,22 @@ export default function Navbar() {
 
         {/* Desktop links */}
         {!isMobile && (
-          <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
-            {NAV_LINKS.map((link) => (
-              <Btn
-                key={link.href}
-                variant="secondary"
-                active={active === link.href}
-                borderless={!scrolled}
-                onClick={() => scrollTo(link.href)}
-              >
-                {link.label}
-              </Btn>
-            ))}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
+              {NAV_LINKS.map((link) => (
+                <Btn
+                  key={link.href}
+                  variant="secondary"
+                  active={active === link.href}
+                  borderless={!scrolled}
+                  onClick={() => scrollTo(link.href)}
+                >
+                  {t(link.labelKey)}
+                </Btn>
+              ))}
+            </div>
+            <div style={{ width: '0.5px', height: '1rem', background: 'var(--color-neutral-800)', margin: '0 var(--space-2)' }} />
+            <LangSelector borderless={!scrolled} />
           </div>
         )}
 
@@ -197,9 +204,12 @@ export default function Navbar() {
                   transition: 'color var(--transition-hover)',
                 }}
               >
-                {link.label}
+                {t(link.labelKey)}
               </button>
             ))}
+            <div style={{ borderTop: 'var(--border)', marginTop: 'var(--space-4)', paddingTop: 'var(--space-4)' }}>
+              <LangSelector />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
