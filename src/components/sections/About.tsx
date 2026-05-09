@@ -1,3 +1,4 @@
+import { Trans, useTranslation } from 'react-i18next';
 import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
 import BtnIcon from '../BtnIcon';
@@ -39,16 +40,22 @@ function WaveformSvg() {
 }
 
 export default function About() {
+  const { t } = useTranslation('about');
+
   return (
     <section id="about" style={{ background: 'var(--color-background)' }}>
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
-        <SectionLabel>About</SectionLabel>
+        <SectionLabel>{t('about:sectionLabel')}</SectionLabel>
 
         <p
           className="text-base"
           style={{ color: 'var(--color-neutral-400)', lineHeight: 1.7 }}
-          dangerouslySetInnerHTML={{ __html: about.body }}
-        />
+        >
+          <Trans
+            i18nKey="about:body"
+            components={{ bold: <strong /> }}
+          />
+        </p>
 
         <div className="crew-grid">
           {about.crew.map((member) => (
@@ -73,7 +80,7 @@ export default function About() {
                     {member.name}
                   </p>
                   <p className="text-s" style={{ color: 'var(--color-neutral-500)' }}>
-                    {member.role.split('FX').map((part, i, arr) =>
+                    {t(`about:crew.${member.id}.role`).split('FX').map((part: string, i: number, arr: string[]) =>
                       i < arr.length - 1
                         ? <span key={i}>{part}<span style={{ color: 'var(--color-red-500)' }}>FX</span></span>
                         : <span key={i}>{part}</span>
@@ -82,11 +89,11 @@ export default function About() {
                 </div>
 
                 <p className="text-base" style={{ color: 'var(--color-neutral-400)', lineHeight: 1.6 }}>
-                  {member.bio}
+                  {t(`about:crew.${member.id}.bio`)}
                 </p>
 
                 <div>
-                  <Btn variant="primary" as="a" href={member.reel}>Watch Reel</Btn>
+                  <Btn variant="primary" as="a" href={member.reel}>{t('about:labels.watchReel')}</Btn>
                 </div>
 
                 <BtnIcon

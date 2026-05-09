@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import SectionReveal from '../SectionReveal';
 import SectionLabel from '../SectionLabel';
 import KittLine from '../KittLine';
-import { faq } from '../../data/content';
 
 const IconChevron = ({ open }: { open: boolean }) => (
   <svg
@@ -84,22 +84,24 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 }
 
 export default function Faq() {
+  const { t } = useTranslation('faq');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const items = t('faq:items', { returnObjects: true }) as Array<{ question: string; answer: string }>;
 
   return (
     <section id="faq" style={{ background: 'var(--color-background)' }}>
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
 
         <SectionReveal>
-          <SectionLabel>FAQ'S</SectionLabel>
+          <SectionLabel>{t('faq:sectionLabel')}</SectionLabel>
         </SectionReveal>
 
         <div style={{ border: 'var(--border)', borderBottom: 'none' }}>
-          {faq.map((item, i) => (
+          {items.map((item, i) => (
             <SectionReveal key={i}>
               <FaqItem
-                q={item.q}
-                a={item.a}
+                q={item.question}
+                a={item.answer}
                 open={openIndex === i}
                 onToggle={() => setOpenIndex(openIndex === i ? null : i)}
               />

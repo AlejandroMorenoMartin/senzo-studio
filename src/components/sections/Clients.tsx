@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SectionLabel from '../SectionLabel';
 import KittLine from '../KittLine';
 
@@ -55,13 +56,14 @@ function ClientLogo({ name, href, Logo }: { name: string; href: string; Logo: Re
 }
 
 export default function Clients() {
+  const { t } = useTranslation('common');
   const [paused, setPaused] = useState(false);
   const doubled = [...CLIENTS, ...CLIENTS];
 
   return (
     <section id="clients" style={{ background: 'var(--color-background)' }}>
       <div className="section-inner" style={{ marginBottom: 'var(--space-7)' }}>
-        <SectionLabel>Clients</SectionLabel>
+        <SectionLabel>{t('common:nav.clients')}</SectionLabel>
       </div>
 
       <div

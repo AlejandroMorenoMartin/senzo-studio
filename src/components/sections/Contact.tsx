@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
 import KittLine from '../KittLine';
@@ -38,6 +39,7 @@ function ContactCard({ title, description, cta, onClick }: {
 }
 
 function EmailHero() {
+  const { t } = useTranslation('contact');
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -48,12 +50,12 @@ function EmailHero() {
     });
   }
 
-  const tooltipLabel = copied ? 'Copied!' : 'Click to copy';
+  const tooltipLabel = copied ? t('contact:emailTooltip.copied') : t('contact:emailTooltip.clickToCopy');
 
   return (
     <div style={{ textAlign: 'center', padding: 'var(--space-7) 0' }}>
       <p className="text-s" style={{ fontSize: '1.75rem', color: 'var(--color-neutral-600)', marginBottom: 'var(--space-4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-        Let's Talk!
+        {t('contact:letsTalk')}
       </p>
 
       <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -106,10 +108,12 @@ function EmailHero() {
 }
 
 export default function Contact({ onBusinessClick, onFreelancerClick }: ContactProps) {
+  const { t } = useTranslation('contact');
+
   return (
     <section id="contact" style={{ background: 'var(--color-background)' }}>
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
-        <SectionLabel>Contact</SectionLabel>
+        <SectionLabel>{t('contact:sectionLabel')}</SectionLabel>
 
         <EmailHero />
 
@@ -117,9 +121,9 @@ export default function Contact({ onBusinessClick, onFreelancerClick }: ContactP
           {contact.options.map((option) => (
             <ContactCard
               key={option.id}
-              title={option.title}
-              description={option.description}
-              cta={option.cta}
+              title={t(`contact:options.${option.id}.title`)}
+              description={t(`contact:options.${option.id}.description`)}
+              cta={t(`contact:options.${option.id}.cta`)}
               onClick={option.id === 'business' ? onBusinessClick : onFreelancerClick}
             />
           ))}

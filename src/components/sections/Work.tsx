@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Trans, useTranslation } from 'react-i18next';
 import SectionReveal from '../SectionReveal';
 import Btn from '../Btn';
 import BtnIcon from '../BtnIcon';
@@ -10,7 +11,6 @@ import { work, WORK_TAGS } from '../../data/content';
 import type { WorkTag } from '../../data/content';
 
 type Filter = 'All' | WorkTag;
-const FILTERS: Filter[] = ['All', ...WORK_TAGS];
 
 interface WorkCardProps {
   src: string;
@@ -75,6 +75,15 @@ function WorkCard({ src, title, onClick }: WorkCardProps) {
 }
 
 export default function Work() {
+  const { t } = useTranslation('work');
+  const FILTERS: Filter[] = ['All', ...WORK_TAGS];
+  const filterLabels: Record<Filter, string> = {
+    All: t('work:filters.all'),
+    Film: t('work:filters.film'),
+    Advertising: t('work:filters.advertising'),
+    'TV Series': t('work:filters.tvSeries'),
+  };
+
   const [activeFilter, setActiveFilter] = useState<Filter>('All');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -109,7 +118,7 @@ export default function Work() {
 
         <SectionReveal>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
-            <SectionLabel>Work</SectionLabel>
+            <SectionLabel>{t('work:sectionLabel')}</SectionLabel>
             <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
               {FILTERS.map((f) => (
                 <Btn
@@ -119,7 +128,7 @@ export default function Work() {
                   active={f === activeFilter}
                   onClick={() => setActiveFilter(f)}
                 >
-                  {f}
+                  {filterLabels[f]}
                 </Btn>
               ))}
             </div>
@@ -219,7 +228,12 @@ export default function Work() {
               {/* Texto */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                 <p className="text-l">{work[lightboxIndex].subtitle ? `${work[lightboxIndex].title} – ${work[lightboxIndex].subtitle}` : work[lightboxIndex].title}</p>
-                <p className="text-base" dangerouslySetInnerHTML={{ __html: work[lightboxIndex].description }} />
+                <p className="text-base" style={{ lineHeight: 1.6 }}>
+                  <Trans
+                    i18nKey={`work:projects.${work[lightboxIndex].id}.description`}
+                    components={{ bold: <strong /> }}
+                  />
+                </p>
               </div>
             </div>
           </motion.div>

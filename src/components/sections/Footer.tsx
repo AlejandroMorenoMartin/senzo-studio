@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import BtnIcon from '../BtnIcon';
 import LinkExternal from '../LinkExternal';
 import { footer } from '../../data/content';
@@ -33,12 +34,14 @@ interface FooterProps {
 }
 
 export default function Footer({ onPrivacyClick }: FooterProps) {
+  const { t } = useTranslation('common');
   const year = new Date().getFullYear();
   const [privacyHovered, setPrivacyHovered] = useState(false);
 
-  const fxIndex = footer.tagline.indexOf(footer.accentWord);
-  const taglineBefore = footer.tagline.slice(0, fxIndex);
-  const taglineAfter = footer.tagline.slice(fxIndex + footer.accentWord.length);
+  const tagline = t('common:footer.tagline');
+  const fxIndex = tagline.indexOf('FX');
+  const taglineBefore = fxIndex >= 0 ? tagline.slice(0, fxIndex) : tagline;
+  const taglineAfter = fxIndex >= 0 ? tagline.slice(fxIndex + 2) : '';
 
   return (
     <footer id="footer" style={{ background: 'var(--color-background)', borderTop: 'var(--border)' }}>
@@ -68,7 +71,7 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
           </p>
           <p className="text-s" style={{ color: 'var(--color-neutral-400)' }}>
             {taglineBefore}
-            <span style={{ color: 'var(--color-accent)' }}>{footer.accentWord}</span>
+            {fxIndex >= 0 && <span style={{ color: 'var(--color-accent)' }}>FX</span>}
             {taglineAfter}
           </p>
         </div>
@@ -103,7 +106,7 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
         }}
       >
         <p className="text-xs" style={{ color: 'var(--color-neutral-700)' }}>
-          © {year} Senzo Studio · All rights reserved ·{' '}
+          © {year} Senzo Studio · {t('common:footer.allRightsReserved')} ·{' '}
           <button
             onClick={onPrivacyClick}
             onMouseEnter={() => setPrivacyHovered(true)}
@@ -120,11 +123,11 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
               transition: 'color var(--transition-hover)',
             }}
           >
-            Privacy Policy
+            {t('common:footer.privacyPolicy')}
           </button>
-          {' '}· By{' '}
+          {' '}· {t('common:footer.by')}{' '}
           <LinkExternal href={footer.creditUrl}>
-            {footer.credit}
+            {t('common:footer.credit')}
           </LinkExternal>
         </p>
       </div>

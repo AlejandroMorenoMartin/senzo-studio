@@ -1,13 +1,45 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+// EN
+import enCommon from '../locales/en/common.json';
+import enHero from '../locales/en/hero.json';
+import enWork from '../locales/en/work.json';
+import enServices from '../locales/en/services.json';
+import enAbout from '../locales/en/about.json';
+import enFaq from '../locales/en/faq.json';
+import enContact from '../locales/en/contact.json';
+
+// ES
+import esCommon from '../locales/es/common.json';
+import esHero from '../locales/es/hero.json';
+import esWork from '../locales/es/work.json';
+import esServices from '../locales/es/services.json';
+import esAbout from '../locales/es/about.json';
+import esFaq from '../locales/es/faq.json';
+import esContact from '../locales/es/contact.json';
+
+// ZH
+import zhCommon from '../locales/zh/common.json';
+import zhHero from '../locales/zh/hero.json';
+import zhWork from '../locales/zh/work.json';
+import zhServices from '../locales/zh/services.json';
+import zhAbout from '../locales/zh/about.json';
+import zhFaq from '../locales/zh/faq.json';
+import zhContact from '../locales/zh/contact.json';
+
+// RU
+import ruCommon from '../locales/ru/common.json';
+import ruHero from '../locales/ru/hero.json';
+import ruWork from '../locales/ru/work.json';
+import ruServices from '../locales/ru/services.json';
+import ruAbout from '../locales/ru/about.json';
+import ruFaq from '../locales/ru/faq.json';
+import ruContact from '../locales/ru/contact.json';
+
 // Define supported languages
 const SUPPORTED_LANGUAGES = ['en', 'es', 'zh', 'ru'] as const;
 type LanguageCode = (typeof SUPPORTED_LANGUAGES)[number];
-
-// Define namespace names
-const NAMESPACES = ['common', 'hero', 'work', 'services', 'about', 'faq', 'contact'] as const;
-type NamespaceName = (typeof NAMESPACES)[number];
 
 // Helper to get stored language or default to 'en'
 const getStoredLanguage = (): LanguageCode => {
@@ -22,20 +54,6 @@ const getStoredLanguage = (): LanguageCode => {
   return 'en';
 };
 
-// Initialize resources object with empty namespaces for each language
-const createResources = (): Record<LanguageCode, Record<NamespaceName, Record<string, unknown>>> => {
-  const resources = {} as Record<LanguageCode, Record<NamespaceName, Record<string, unknown>>>;
-
-  SUPPORTED_LANGUAGES.forEach((lang) => {
-    resources[lang] = {} as Record<NamespaceName, Record<string, unknown>>;
-    NAMESPACES.forEach((ns) => {
-      resources[lang][ns] = {};
-    });
-  });
-
-  return resources;
-};
-
 // Initialize i18next as a singleton
 void i18next
   .use(initReactI18next)
@@ -43,8 +61,45 @@ void i18next
     lng: getStoredLanguage(),
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: NAMESPACES as unknown as string[],
-    resources: createResources(),
+    ns: ['common', 'hero', 'work', 'services', 'about', 'faq', 'contact'],
+    resources: {
+      en: {
+        common: enCommon,
+        hero: enHero,
+        work: enWork,
+        services: enServices,
+        about: enAbout,
+        faq: enFaq,
+        contact: enContact,
+      },
+      es: {
+        common: esCommon,
+        hero: esHero,
+        work: esWork,
+        services: esServices,
+        about: esAbout,
+        faq: esFaq,
+        contact: esContact,
+      },
+      zh: {
+        common: zhCommon,
+        hero: zhHero,
+        work: zhWork,
+        services: zhServices,
+        about: zhAbout,
+        faq: zhFaq,
+        contact: zhContact,
+      },
+      ru: {
+        common: ruCommon,
+        hero: ruHero,
+        work: ruWork,
+        services: ruServices,
+        about: ruAbout,
+        faq: ruFaq,
+        contact: ruContact,
+      },
+    },
     interpolation: {
       escapeValue: false,
     },

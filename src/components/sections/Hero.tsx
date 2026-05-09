@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import ModalVimeo from '../ModalVimeo';
 import Btn from '../Btn';
 import { hero } from '../../data/content';
@@ -10,6 +11,7 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [reelOpen, setReelOpen] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+  const { t } = useTranslation(['hero', 'common']);
 
   return (
     <section
@@ -106,12 +108,12 @@ export default function Hero() {
             High-End V<span style={{ color: 'var(--color-red-500)' }}>FX</span> · CGI
           </p>
           <p className="text-base" style={{ maxWidth: '36rem', lineHeight: 1.6 }}>
-            We are a Madrid-based full-service V<span style={{ color: 'var(--color-red-500)' }}>FX</span> & CGI boutique with a core specialization in high-end <span style={{ color: 'var(--color-red-500)' }}>FX</span> and simulations. We deliver comprehensive visual solutions across Feature Films, Advertising, TV Series, and Animation.
+            {t('hero:description')}
           </p>
         </div>
 
         <Btn variant="primary" onClick={() => setReelOpen(true)}>
-          {hero.ctaLabel}
+          {t('hero:ctaLabel')}
         </Btn>
       </motion.div>
 

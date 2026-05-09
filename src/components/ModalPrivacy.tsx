@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import BtnIcon from './BtnIcon';
 import Btn from './Btn';
 
@@ -9,6 +10,9 @@ interface ModalPrivacyProps {
 }
 
 export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
+  const { t } = useTranslation(['contact', 'common']);
+  const sections = t('contact:modalPrivacy.sections', { returnObjects: true }) as Record<string, { title: string; body?: string; items?: string[] }>;
+
   useEffect(() => {
     if (!isOpen) return;
     document.body.style.overflow = 'hidden';
@@ -47,8 +51,8 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
           >
             {/* Top bar — title + close */}
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-5)', marginBottom: 'var(--space-8)' }}>
-              <h2 className="title-l">Privacy Policy</h2>
-              <BtnIcon as="button" variant="outline" label="Close" onClick={onClose} style={{ flexShrink: 0 }}>
+              <h2 className="title-l">{t('contact:modalPrivacy.title')}</h2>
+              <BtnIcon as="button" variant="outline" label={t('common:buttons.close')} onClick={onClose} style={{ flexShrink: 0 }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -60,42 +64,41 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Data Controller</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>{sections.dataController?.title}</p>
                 </div>
                 <p className="text-base" style={{ lineHeight: 1.7 }}>
-                  Senzo Studio is the sole data controller responsible for the processing of personal data collected through this website.
+                  {sections.dataController?.body}
                 </p>
               </section>
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Purpose of Processing</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>{sections.purposeOfProcessing?.title}</p>
                 </div>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', paddingLeft: 'var(--space-5)' }}>
-                  <li className="text-base" style={{ lineHeight: 1.7, listStyleType: 'disc' }}>
-                    Freelancer Application: To evaluate your professional profile, portfolio, and availability to join our talent roster and contact you for future productions.
-                  </li>
-                  <li className="text-base" style={{ lineHeight: 1.7, listStyleType: 'disc' }}>
-                    Business Inquiries: To manage your project request, process Non-Disclosure Agreements (NDAs), and maintain relevant commercial communication.
-                  </li>
+                  {(sections.purposeOfProcessing?.items ?? []).map((item, i) => (
+                    <li key={i} className="text-base" style={{ lineHeight: 1.7, listStyleType: 'disc' }}>
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </section>
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Privacy and Storage</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>{sections.privacyAndStorage?.title}</p>
                 </div>
                 <p className="text-base" style={{ lineHeight: 1.7 }}>
-                  Your data is strictly for internal use. We do not sell, rent, or share your information with third parties. The data and links provided are stored in our internal management systems under secure protocols.
+                  {sections.privacyAndStorage?.body}
                 </p>
               </section>
 
               <section>
                 <div style={{ marginBottom: 'var(--space-5)' }}>
-                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>Your Rights</p>
+                  <p className="text-l" style={{ textTransform: 'uppercase', marginBottom: 'var(--space-3)', borderBottom: 'var(--border)', paddingBottom: 'var(--space-3)', borderRadius: 0 }}>{sections.yourRights?.title}</p>
                 </div>
                 <p className="text-base" style={{ lineHeight: 1.7 }}>
-                  You can request access to, modification, or permanent deletion of your data and materials at any time. To exercise these rights, please contact us at:{' '}
+                  {sections.yourRights?.body}{' '}
                   <a href="mailto:info@senzostudio.com" className="link">
                     info@senzostudio.com
                   </a>
@@ -105,7 +108,7 @@ export default function ModalPrivacy({ isOpen, onClose }: ModalPrivacyProps) {
               {/* Accept */}
               <div>
                 <Btn variant="accept" as="button" onClick={onClose}>
-                  Accept
+                  {t('common:buttons.accept')}
                 </Btn>
               </div>
 

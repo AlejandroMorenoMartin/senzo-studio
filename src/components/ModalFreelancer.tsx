@@ -3,6 +3,7 @@ import { useForm, Controller, type Control } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import BtnIcon from './BtnIcon';
 import Btn from './Btn';
 import Callout from './Callout';
@@ -20,7 +21,7 @@ interface ModalFreelancerProps {
   onPrivacyClick: () => void;
 }
 
-const STEPS = ['Personal information', 'Professional Profile', 'Portfolio & Links', 'Final Details'];
+// STEPS and stepTitles are initialized inside component using useTranslation
 
 const DEPARTMENT_OPTIONS = [
   { value: 'FX', label: 'FX' },
@@ -125,13 +126,14 @@ const stepVariants = {
   exit: { opacity: 0, y: -16 },
 };
 
-const stepTitles = ['Personal Information', 'Professional Profile', 'Portfolio & Links', 'Final Details'];
+// stepTitles initialized inside component
 
 function PrivacyCheckbox({ control, error, onPrivacyClick }: {
   control: Control<FormValues>;
   error: boolean;
   onPrivacyClick: () => void;
 }) {
+  const { t } = useTranslation('contact');
   return (
     <Controller
       name="privacyPolicy"
@@ -164,9 +166,9 @@ function PrivacyCheckbox({ control, error, onPrivacyClick }: {
               )}
             </span>
             <span className="text-base" style={{ color: error ? 'var(--color-input-error)' : 'var(--color-neutral-400)', lineHeight: 1.5 }}>
-              I agree to the{' '}
+              {t('contact:modalFreelancer.fields.privacyPolicy.label')}{' '}
               <button type="button" onClick={onPrivacyClick} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px', font: 'inherit' }}>
-                Privacy Policy
+                {t('contact:modalFreelancer.fields.privacyPolicy.linkLabel')}
               </button>
             </span>
           </label>
@@ -177,6 +179,9 @@ function PrivacyCheckbox({ control, error, onPrivacyClick }: {
 }
 
 export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: ModalFreelancerProps) {
+  const { t } = useTranslation(['contact', 'common']);
+  const STEPS = t('contact:modalFreelancer.steps', { returnObjects: true }) as string[];
+  const stepTitles = t('contact:modalFreelancer.stepTitles', { returnObjects: true }) as string[];
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -298,7 +303,7 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
       sessionStorage.removeItem(SESSION_KEY);
       setSubmitted(true);
     } catch {
-      setSubmitError('Something went wrong. Please try again.');
+      setSubmitError(t('contact:modalFreelancer.errors.submitGeneric'));
     } finally {
       setIsSubmitting(false);
     }
@@ -332,8 +337,8 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
             }}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-5)', marginBottom: 'var(--space-6)' }}>
-              <h2 className="title-l">Freelancer Applications</h2>
-              <BtnIcon as="button" variant="outline" label="Close" onClick={handleClose} style={{ flexShrink: 0 }}>
+              <h2 className="title-l">{t('contact:modalFreelancer.title')}</h2>
+              <BtnIcon as="button" variant="outline" label={t('common:buttons.close')} onClick={handleClose} style={{ flexShrink: 0 }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -341,13 +346,13 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
             </div>
             {!submitted && (
               <p className="text-base" style={{ marginBottom: 'var(--space-5)' }}>
-                Join our talent roster and be considered for future productions. Fill out the form — our team reviews all applications.
+                {t('contact:modalFreelancer.intro')}
               </p>
             )}
             {!submitted && (
               <div style={{ marginBottom: 'var(--space-6)' }}>
                 <Callout>
-                  <p className="text-s">Please note that we currently only collaborate with freelancers. You must be officially registered as a freelancer or self-employed in your country of residence to apply.</p>
+                  <p className="text-s">{t('contact:modalFreelancer.callout')}</p>
                 </Callout>
               </div>
             )}
@@ -363,9 +368,9 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
                 {submitted ? (
                   <motion.div key="success" variants={stepVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}>
                     <p className="text-base" style={{ lineHeight: 1.7, marginBottom: 'var(--space-7)', maxWidth: '640px' }}>
-                      Thank you for your interest in joining Senzo Studio. We have received your profile and portfolio successfully. Our production team will review your materials and contact you directly when your profile and availability align with our production needs.
+                      {t('contact:modalFreelancer.success')}
                     </p>
-                    <Btn variant="accept" as="button" onClick={handleClose}>Accept</Btn>
+                    <Btn variant="accept" as="button" onClick={handleClose}>{t('common:buttons.accept')}</Btn>
                   </motion.div>
                 ) : (
                   <motion.div key={currentStep} variants={stepVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}>
@@ -385,24 +390,24 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
 
                       {currentStep === 0 && (
                         <>
-                          <FormField label="First name" required error={errors.firstName?.message ?? fieldErrors.firstName}>
-                            <InputText registration={register('firstName')} placeholder="Your name" error={!!errors.firstName || !!fieldErrors.firstName} value={watch('firstName')} autoComplete="name" />
+                          <FormField label={t('contact:modalFreelancer.fields.firstName.label')} required error={errors.firstName?.message ?? fieldErrors.firstName}>
+                            <InputText registration={register('firstName')} placeholder={t('contact:modalFreelancer.fields.firstName.placeholder')} error={!!errors.firstName || !!fieldErrors.firstName} value={watch('firstName')} autoComplete="name" />
                           </FormField>
-                          <FormField label="Last name" required error={errors.lastName?.message ?? fieldErrors.lastName}>
-                            <InputText registration={register('lastName')} placeholder="Your last name" error={!!errors.lastName || !!fieldErrors.lastName} value={watch('lastName')} autoComplete="family-name" />
+                          <FormField label={t('contact:modalFreelancer.fields.lastName.label')} required error={errors.lastName?.message ?? fieldErrors.lastName}>
+                            <InputText registration={register('lastName')} placeholder={t('contact:modalFreelancer.fields.lastName.placeholder')} error={!!errors.lastName || !!fieldErrors.lastName} value={watch('lastName')} autoComplete="family-name" />
                           </FormField>
-                          <FormField label="Email address" required error={errors.email?.message ?? fieldErrors.email}>
-                            <InputText registration={register('email')} type="email" placeholder="Your email address @email.com" error={!!errors.email || !!fieldErrors.email} value={watch('email')} autoComplete="email" />
+                          <FormField label={t('contact:modalFreelancer.fields.email.label')} required error={errors.email?.message ?? fieldErrors.email}>
+                            <InputText registration={register('email')} type="email" placeholder={t('contact:modalFreelancer.fields.email.placeholder')} error={!!errors.email || !!fieldErrors.email} value={watch('email')} autoComplete="email" />
                           </FormField>
-                          <FormField label="Country of residence" required error={errors.country?.message ?? fieldErrors.country}>
-                            <InputSelect registration={register('country')} placeholder="Your country" options={COUNTRY_OPTIONS} error={!!errors.country || !!fieldErrors.country} autoComplete="country-name" />
+                          <FormField label={t('contact:modalFreelancer.fields.country.label')} required error={errors.country?.message ?? fieldErrors.country}>
+                            <InputSelect registration={register('country')} placeholder={t('contact:modalFreelancer.fields.country.placeholder')} options={COUNTRY_OPTIONS} error={!!errors.country || !!fieldErrors.country} autoComplete="country-name" />
                           </FormField>
                         </>
                       )}
 
                       {currentStep === 1 && (
                         <>
-                          <FormField label="Department(s)" required error={fieldErrors.department}>
+                          <FormField label={t('contact:modalFreelancer.fields.department.label')} required error={fieldErrors.department}>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'repeat(7, auto)', gridAutoFlow: 'column', gap: 'var(--space-4)' }}>
                               {DEPARTMENT_OPTIONS.map((opt) => (
                                 <InputCheckbox
@@ -416,54 +421,54 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
                             </div>
                           </FormField>
                           {selectedDepartments.includes('Other') && (
-                            <FormField label="Specify your department" required error={fieldErrors.departmentOther}>
-                              <InputText registration={register('departmentOther')} placeholder="Describe your area of work" error={!!fieldErrors.departmentOther} value={watch('departmentOther')} autoComplete="off" />
+                            <FormField label={t('contact:modalFreelancer.fields.departmentOther.label')} required error={fieldErrors.departmentOther}>
+                              <InputText registration={register('departmentOther')} placeholder={t('contact:modalFreelancer.fields.departmentOther.placeholder')} error={!!fieldErrors.departmentOther} value={watch('departmentOther')} autoComplete="off" />
                             </FormField>
                           )}
-                          <FormField label="Main Software(s)" required error={fieldErrors.mainSoftware}>
-                            <InputText registration={register('mainSoftware')} placeholder="Your software(s)" error={!!fieldErrors.mainSoftware} value={watch('mainSoftware')} autoComplete="off" />
+                          <FormField label={t('contact:modalFreelancer.fields.mainSoftware.label')} required error={fieldErrors.mainSoftware}>
+                            <InputText registration={register('mainSoftware')} placeholder={t('contact:modalFreelancer.fields.mainSoftware.placeholder')} error={!!fieldErrors.mainSoftware} value={watch('mainSoftware')} autoComplete="off" />
                           </FormField>
-                          <FormField label="Years of experience" required error={fieldErrors.yearsExperience}>
-                            <InputText registration={register('yearsExperience')} type="number" placeholder="Your years of experience" error={!!fieldErrors.yearsExperience} value={watch('yearsExperience')} autoComplete="off" />
+                          <FormField label={t('contact:modalFreelancer.fields.yearsExperience.label')} required error={fieldErrors.yearsExperience}>
+                            <InputText registration={register('yearsExperience')} type="number" placeholder={t('contact:modalFreelancer.fields.yearsExperience.placeholder')} error={!!fieldErrors.yearsExperience} value={watch('yearsExperience')} autoComplete="off" />
                           </FormField>
-                          <FormField label="Daily Rate (EUR)" required error={fieldErrors.expectedRate}>
-                            <InputText registration={register('expectedRate')} type="number" placeholder="e.g. 350" error={!!fieldErrors.expectedRate} value={watch('expectedRate')} autoComplete="off" />
+                          <FormField label={t('contact:modalFreelancer.fields.expectedRate.label')} required error={fieldErrors.expectedRate}>
+                            <InputText registration={register('expectedRate')} type="number" placeholder={t('contact:modalFreelancer.fields.expectedRate.placeholder')} error={!!fieldErrors.expectedRate} value={watch('expectedRate')} autoComplete="off" />
                           </FormField>
-                          <FormField label="Availability" required error={fieldErrors.availability}>
-                            <InputText registration={register('availability')} placeholder="Your availability" error={!!fieldErrors.availability} value={watch('availability')} autoComplete="off" />
+                          <FormField label={t('contact:modalFreelancer.fields.availability.label')} required error={fieldErrors.availability}>
+                            <InputText registration={register('availability')} placeholder={t('contact:modalFreelancer.fields.availability.placeholder')} error={!!fieldErrors.availability} value={watch('availability')} autoComplete="off" />
                           </FormField>
                         </>
                       )}
 
                       {currentStep === 2 && (
                         <>
-                          <FormField label="Reel link" required error={errors.reelLink?.message ?? fieldErrors.reelLink}>
-                            <InputText registration={register('reelLink')} type="url" placeholder="Your reel link" error={!!errors.reelLink || !!fieldErrors.reelLink} value={watch('reelLink')} autoComplete="off" />
+                          <FormField label={t('contact:modalFreelancer.fields.reelLink.label')} required error={errors.reelLink?.message ?? fieldErrors.reelLink}>
+                            <InputText registration={register('reelLink')} type="url" placeholder={t('contact:modalFreelancer.fields.reelLink.placeholder')} error={!!errors.reelLink || !!fieldErrors.reelLink} value={watch('reelLink')} autoComplete="off" />
                           </FormField>
-                          <FormField label="Reel password" error={fieldErrors.reelPassword}>
-                            <InputText registration={register('reelPassword')} placeholder="Your reel password" error={!!fieldErrors.reelPassword} value={watch('reelPassword')} autoComplete="off" />
+                          <FormField label={t('contact:modalFreelancer.fields.reelPassword.label')} error={fieldErrors.reelPassword}>
+                            <InputText registration={register('reelPassword')} placeholder={t('contact:modalFreelancer.fields.reelPassword.placeholder')} error={!!fieldErrors.reelPassword} value={watch('reelPassword')} autoComplete="off" />
                           </FormField>
-                          <FormField label="Personal Website" error={errors.websiteUrl?.message ?? fieldErrors.websiteUrl}>
-                            <InputText registration={register('websiteUrl')} type="url" placeholder="Your website" error={!!errors.websiteUrl || !!fieldErrors.websiteUrl} value={watch('websiteUrl')} autoComplete="url" />
+                          <FormField label={t('contact:modalFreelancer.fields.websiteUrl.label')} error={errors.websiteUrl?.message ?? fieldErrors.websiteUrl}>
+                            <InputText registration={register('websiteUrl')} type="url" placeholder={t('contact:modalFreelancer.fields.websiteUrl.placeholder')} error={!!errors.websiteUrl || !!fieldErrors.websiteUrl} value={watch('websiteUrl')} autoComplete="url" />
                           </FormField>
-<FormField label="Other link" error={errors.otherLinks?.message ?? fieldErrors.otherLinks}>
-                            <InputText registration={register('otherLinks')} type="url" placeholder="Your other link" error={!!errors.otherLinks || !!fieldErrors.otherLinks} value={watch('otherLinks')} autoComplete="off" />
+                          <FormField label={t('contact:modalFreelancer.fields.otherLinks.label')} error={errors.otherLinks?.message ?? fieldErrors.otherLinks}>
+                            <InputText registration={register('otherLinks')} type="url" placeholder={t('contact:modalFreelancer.fields.otherLinks.placeholder')} error={!!errors.otherLinks || !!fieldErrors.otherLinks} value={watch('otherLinks')} autoComplete="off" />
                           </FormField>
                         </>
                       )}
 
                       {currentStep === 3 && (
                         <>
-                          <FormField label="How did you hear from us?" required error={fieldErrors.source}>
-                            <InputSelect registration={register('source')} placeholder="Select one" options={SOURCE_OPTIONS} error={!!fieldErrors.source} />
+                          <FormField label={t('contact:modalFreelancer.fields.source.label')} required error={fieldErrors.source}>
+                            <InputSelect registration={register('source')} placeholder={t('contact:modalFreelancer.fields.source.placeholder')} options={SOURCE_OPTIONS} error={!!fieldErrors.source} />
                           </FormField>
                           {watch('source') === 'Other' && (
-                            <FormField label="Please specify" error={fieldErrors.sourceOther}>
-                              <InputText registration={register('sourceOther')} placeholder="Tell us how you found us" error={!!fieldErrors.sourceOther} value={watch('sourceOther')} />
+                            <FormField label={t('contact:modalFreelancer.fields.sourceOther.label')} error={fieldErrors.sourceOther}>
+                              <InputText registration={register('sourceOther')} placeholder={t('contact:modalFreelancer.fields.sourceOther.placeholder')} error={!!fieldErrors.sourceOther} value={watch('sourceOther')} />
                             </FormField>
                           )}
-                          <FormField label="Additional Message" error={fieldErrors.message}>
-                            <InputTextarea registration={register('message')} placeholder="Your additional message" watchValue={messageValue} rows={5} />
+                          <FormField label={t('contact:modalFreelancer.fields.message.label')} error={fieldErrors.message}>
+                            <InputTextarea registration={register('message')} placeholder={t('contact:modalFreelancer.fields.message.placeholder')} watchValue={messageValue} rows={5} />
                           </FormField>
 
                           <PrivacyCheckbox
@@ -481,10 +486,10 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
 
                     {/* Navigation */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginTop: 'var(--space-8)' }}>
-                      <Btn variant="secondary" as="button" type="button" size="md" onClick={handleBack} active={false} disabled={currentStep === 0}>Back</Btn>
+                      <Btn variant="secondary" as="button" type="button" size="md" onClick={handleBack} active={false} disabled={currentStep === 0}>{t('common:buttons.back')}</Btn>
                       {currentStep < 3
-                        ? <Btn variant="accept" as="button" type="button" onClick={handleNext} disabled={!isStepValid}>Next</Btn>
-                        : <Btn variant="accept" as="button" type="button" onClick={handleSubmitForm} disabled={!isStepValid || isSubmitting}>{isSubmitting ? 'Sending...' : 'Submit'}</Btn>
+                        ? <Btn variant="accept" as="button" type="button" onClick={handleNext} disabled={!isStepValid}>{t('common:buttons.next')}</Btn>
+                        : <Btn variant="accept" as="button" type="button" onClick={handleSubmitForm} disabled={!isStepValid || isSubmitting}>{isSubmitting ? t('common:buttons.sending') : t('common:buttons.submit')}</Btn>
                       }
                     </div>
                     {submitError && <p className="text-s" style={{ color: 'var(--color-input-error)', marginTop: 'var(--space-4)' }}>{submitError}</p>}

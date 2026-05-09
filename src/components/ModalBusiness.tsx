@@ -3,6 +3,7 @@ import { useForm, Controller, type Control } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import BtnIcon from './BtnIcon';
 import Btn from './Btn';
 import FormField from './form/FormField';
@@ -19,7 +20,7 @@ interface ModalBusinessProps {
   onPrivacyClick: () => void;
 }
 
-const STEPS = ['Contact Information', 'Nature of inquiry', 'Project Specifications', 'Message & Attachments'];
+// STEPS and stepTitles are initialized inside component using useTranslation
 
 const ROLE_OPTIONS = [
   { value: 'Producer', label: 'Producer' },
@@ -163,13 +164,14 @@ const stepVariants = {
   exit: { opacity: 0, y: -16 },
 };
 
-const stepTitles = ['Contact Information', 'Nature of Inquiry', 'Project Specifications', 'Message & Attachments'];
+// stepTitles initialized inside component
 
 function PrivacyCheckbox({ control, error, onPrivacyClick }: {
   control: Control<FormValues>;
   error: boolean;
   onPrivacyClick: () => void;
 }) {
+  const { t } = useTranslation('contact');
   return (
     <Controller
       name="privacyPolicy"
@@ -202,9 +204,9 @@ function PrivacyCheckbox({ control, error, onPrivacyClick }: {
               )}
             </span>
             <span className="text-base" style={{ color: error ? 'var(--color-input-error)' : 'var(--color-neutral-400)', lineHeight: 1.5 }}>
-              I agree to the{' '}
+              {t('contact:modalBusiness.fields.privacyPolicy.label')}{' '}
               <button type="button" onClick={onPrivacyClick} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px', font: 'inherit' }}>
-                Privacy Policy
+                {t('contact:modalBusiness.fields.privacyPolicy.linkLabel')}
               </button>
             </span>
           </label>
@@ -215,6 +217,9 @@ function PrivacyCheckbox({ control, error, onPrivacyClick }: {
 }
 
 export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: ModalBusinessProps) {
+  const { t } = useTranslation(['contact', 'common']);
+  const STEPS = t('contact:modalBusiness.steps', { returnObjects: true }) as string[];
+  const stepTitles = t('contact:modalBusiness.stepTitles', { returnObjects: true }) as string[];
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [skippedSteps, setSkippedSteps] = useState<number[]>([]);
@@ -230,12 +235,12 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
     if (!file) return;
     const ACCEPTED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      setFileError('Only PDF, DOC and DOCX files are accepted.');
+      setFileError(t('contact:modalBusiness.errors.fileType'));
       e.target.value = '';
       return;
     }
     if (file.size > 30 * 1024 * 1024) {
-      setFileError('File exceeds the 30 MB limit.');
+      setFileError(t('contact:modalBusiness.errors.fileSize'));
       e.target.value = '';
       return;
     }
@@ -401,15 +406,15 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
         } catch { /* non-JSON response */ }
 
         if (res.status === 400) {
-          setSubmitError(serverMessage || 'Some fields are invalid. Please review your answers and try again.');
+          setSubmitError(serverMessage || t('contact:modalBusiness.errors.submit400'));
         } else if (res.status === 413) {
-          setSubmitError('The attached file is too large. Please reduce the file size and try again.');
+          setSubmitError(t('contact:modalBusiness.errors.submit413'));
         } else if (res.status === 429) {
-          setSubmitError('Too many requests. Please wait a few minutes and try again.');
+          setSubmitError(t('contact:modalBusiness.errors.submit429'));
         } else if (res.status >= 500) {
-          setSubmitError('The server encountered an error. Please try again in a few minutes or contact us directly at info@senzostudio.com.');
+          setSubmitError(t('contact:modalBusiness.errors.submit500'));
         } else {
-          setSubmitError(serverMessage || 'Submission failed. Please try again or contact us at info@senzostudio.com.');
+          setSubmitError(serverMessage || t('contact:modalBusiness.errors.submitGeneric'));
         }
         return;
       }
@@ -418,9 +423,9 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
       setSubmitted(true);
     } catch (err) {
       if (err instanceof TypeError && err.message.includes('fetch')) {
-        setSubmitError('No internet connection. Please check your network and try again.');
+        setSubmitError(t('contact:modalBusiness.errors.networkError'));
       } else {
-        setSubmitError('An unexpected error occurred. Please try again or contact us at info@senzostudio.com.');
+        setSubmitError(t('contact:modalBusiness.errors.unexpectedError'));
       }
     } finally {
       setIsSubmitting(false);
@@ -455,8 +460,8 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
             }}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-5)', marginBottom: 'var(--space-6)' }}>
-              <h2 className="title-l">Business Inquiries</h2>
-              <BtnIcon as="button" variant="outline" label="Close" onClick={handleClose} style={{ flexShrink: 0 }}>
+              <h2 className="title-l">{t('contact:modalBusiness.title')}</h2>
+              <BtnIcon as="button" variant="outline" label={t('common:buttons.close')} onClick={handleClose} style={{ flexShrink: 0 }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -464,7 +469,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
             </div>
             {!submitted && (
               <p className="text-base" style={{ marginBottom: 'var(--space-6)' }}>
-                Looking for high-end VFX or CGI for your next production? Fill out the form below, and our team will get back to you within one business day.
+                {t('contact:modalBusiness.intro')}
               </p>
             )}
             {!submitted && (
@@ -485,9 +490,9 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                 {submitted ? (
                   <motion.div key="success" variants={stepVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}>
                     <p className="text-base" style={{ lineHeight: 1.7, marginBottom: 'var(--space-7)', maxWidth: '640px' }}>
-                      Thank you for contacting Senzo Studio. We have registered your inquiry and, if applicable, the non-disclosure agreement (NDA). Our team will review the details and contact you within one business day.
+                      {t('contact:modalBusiness.success')}
                     </p>
-                    <Btn variant="accept" as="button" onClick={handleClose}>Accept</Btn>
+                    <Btn variant="accept" as="button" onClick={handleClose}>{t('common:buttons.accept')}</Btn>
                   </motion.div>
                 ) : (
                   <motion.div key={currentStep} variants={stepVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}>
@@ -508,28 +513,28 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                       {/* STEP 1 — Contact */}
                       {currentStep === 0 && (
                         <>
-                          <FormField label="Full name" required error={errors.fullName?.message}>
-                            <InputText registration={register('fullName')} placeholder="Your name" error={!!errors.fullName} value={watch('fullName')} autoComplete="name" />
+                          <FormField label={t('contact:modalBusiness.fields.fullName.label')} required error={errors.fullName?.message}>
+                            <InputText registration={register('fullName')} placeholder={t('contact:modalBusiness.fields.fullName.placeholder')} error={!!errors.fullName} value={watch('fullName')} autoComplete="name" />
                           </FormField>
-                          <FormField label="Work email" required error={errors.workEmail?.message}>
-                            <InputText registration={register('workEmail')} type="email" placeholder="Your email address @email.com" error={!!errors.workEmail} value={watch('workEmail')} autoComplete="email" />
+                          <FormField label={t('contact:modalBusiness.fields.workEmail.label')} required error={errors.workEmail?.message}>
+                            <InputText registration={register('workEmail')} type="email" placeholder={t('contact:modalBusiness.fields.workEmail.placeholder')} error={!!errors.workEmail} value={watch('workEmail')} autoComplete="email" />
                           </FormField>
-                          <FormField label="Company / Organization" required error={errors.company?.message}>
-                            <InputText registration={register('company')} placeholder="Your company or organization" error={!!errors.company} value={watch('company')} autoComplete="organization" />
+                          <FormField label={t('contact:modalBusiness.fields.company.label')} required error={errors.company?.message}>
+                            <InputText registration={register('company')} placeholder={t('contact:modalBusiness.fields.company.placeholder')} error={!!errors.company} value={watch('company')} autoComplete="organization" />
                           </FormField>
-                          <FormField label="Company Website" error={errors.companyWebsite?.message}>
-                            <InputText registration={register('companyWebsite')} type="url" placeholder="Your company website" error={!!errors.companyWebsite} value={watch('companyWebsite')} autoComplete="url" />
+                          <FormField label={t('contact:modalBusiness.fields.companyWebsite.label')} error={errors.companyWebsite?.message}>
+                            <InputText registration={register('companyWebsite')} type="url" placeholder={t('contact:modalBusiness.fields.companyWebsite.placeholder')} error={!!errors.companyWebsite} value={watch('companyWebsite')} autoComplete="url" />
                           </FormField>
-                          <FormField label="Role" required error={errors.role?.message}>
-                            <InputSelect registration={register('role')} placeholder="Your role" options={ROLE_OPTIONS} error={!!errors.role} autoComplete="organization-title" />
+                          <FormField label={t('contact:modalBusiness.fields.role.label')} required error={errors.role?.message}>
+                            <InputSelect registration={register('role')} placeholder={t('contact:modalBusiness.fields.role.placeholder')} options={ROLE_OPTIONS} error={!!errors.role} autoComplete="organization-title" />
                           </FormField>
                           {watch('role') === 'Other' && (
-                            <FormField label="Specify your role" error={errors.roleOther?.message}>
-                              <InputText registration={register('roleOther')} placeholder="Describe your role" error={!!errors.roleOther} value={watch('roleOther')} autoComplete="organization-title" />
+                            <FormField label={t('contact:modalBusiness.fields.roleOther.label')} error={errors.roleOther?.message}>
+                              <InputText registration={register('roleOther')} placeholder={t('contact:modalBusiness.fields.roleOther.placeholder')} error={!!errors.roleOther} value={watch('roleOther')} autoComplete="organization-title" />
                             </FormField>
                           )}
-                          <FormField label="Country" required error={errors.country?.message}>
-                            <InputSelect registration={register('country')} placeholder="Your country" options={COUNTRY_OPTIONS} error={!!errors.country} autoComplete="country-name" />
+                          <FormField label={t('contact:modalBusiness.fields.country.label')} required error={errors.country?.message}>
+                            <InputSelect registration={register('country')} placeholder={t('contact:modalBusiness.fields.country.placeholder')} options={COUNTRY_OPTIONS} error={!!errors.country} autoComplete="country-name" />
                           </FormField>
                         </>
                       )}
@@ -545,7 +550,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                           <InputCheckbox
                             registration={register('inquiryType')}
                             checked={inquiryType === 'specific'}
-                            label="Option A. I have a specific project to discuss (Step 3)."
+                            label={t('contact:modalBusiness.inquiryOptions.specific')}
                             error={!!fieldErrors.inquiryType}
                             value="specific"
                             type="radio"
@@ -553,7 +558,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                           <InputCheckbox
                             registration={register('inquiryType')}
                             checked={inquiryType === 'general'}
-                            label="Option B. General inquiry / Partnership / Just saying hi (Step 4)."
+                            label={t('contact:modalBusiness.inquiryOptions.general')}
                             error={!!fieldErrors.inquiryType}
                             value="general"
                             type="radio"
@@ -564,30 +569,30 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                       {/* STEP 3 — Project specs */}
                       {currentStep === 2 && (
                         <>
-                          <FormField label="Project Category" required error={errors.projectCategory?.message}>
-                            <InputSelect registration={register('projectCategory')} placeholder="Your project category" options={CATEGORY_OPTIONS} error={!!errors.projectCategory} />
+                          <FormField label={t('contact:modalBusiness.fields.projectCategory.label')} required error={errors.projectCategory?.message}>
+                            <InputSelect registration={register('projectCategory')} placeholder={t('contact:modalBusiness.fields.projectCategory.placeholder')} options={CATEGORY_OPTIONS} error={!!errors.projectCategory} />
                           </FormField>
                           {watch('projectCategory') === 'Other' && (
-                            <FormField label="Specify category" error={errors.projectCategoryOther?.message}>
-                              <InputText registration={register('projectCategoryOther')} placeholder="Describe your project type" error={!!errors.projectCategoryOther} value={watch('projectCategoryOther')} />
+                            <FormField label={t('contact:modalBusiness.fields.projectCategoryOther.label')} error={errors.projectCategoryOther?.message}>
+                              <InputText registration={register('projectCategoryOther')} placeholder={t('contact:modalBusiness.fields.projectCategoryOther.placeholder')} error={!!errors.projectCategoryOther} value={watch('projectCategoryOther')} />
                             </FormField>
                           )}
-                          <FormField label="Industry / Brand" error={errors.industry?.message}>
-                            <InputText registration={register('industry')} placeholder="Your industry / brand" error={!!errors.industry} value={watch('industry')} />
+                          <FormField label={t('contact:modalBusiness.fields.industry.label')} error={errors.industry?.message}>
+                            <InputText registration={register('industry')} placeholder={t('contact:modalBusiness.fields.industry.placeholder')} error={!!errors.industry} value={watch('industry')} />
                           </FormField>
-                          <FormField label="Estimated Budget (EUR)" required error={errors.budget?.message}>
-                            <InputSelect registration={register('budget')} placeholder="Your estimated budget (EUR)" options={BUDGET_OPTIONS} error={!!errors.budget} />
+                          <FormField label={t('contact:modalBusiness.fields.budget.label')} required error={errors.budget?.message}>
+                            <InputSelect registration={register('budget')} placeholder={t('contact:modalBusiness.fields.budget.placeholder')} options={BUDGET_OPTIONS} error={!!errors.budget} />
                           </FormField>
-                          <FormField label="Target Deadline" error={errors.targetDeadline?.message}>
-                            <InputSelect registration={register('targetDeadline')} placeholder="Your target deadline" options={DEADLINE_OPTIONS} error={!!errors.targetDeadline} />
+                          <FormField label={t('contact:modalBusiness.fields.targetDeadline.label')} error={errors.targetDeadline?.message}>
+                            <InputSelect registration={register('targetDeadline')} placeholder={t('contact:modalBusiness.fields.targetDeadline.placeholder')} options={DEADLINE_OPTIONS} error={!!errors.targetDeadline} />
                           </FormField>
                           {watch('targetDeadline') === 'Other' && (
-                            <FormField label="Specify date" error={errors.targetDeadlineOther?.message}>
+                            <FormField label={t('contact:modalBusiness.fields.targetDeadlineOther.label')} error={errors.targetDeadlineOther?.message}>
                               <InputText registration={register('targetDeadlineOther')} type="date" error={!!errors.targetDeadlineOther} value={watch('targetDeadlineOther')} />
                             </FormField>
                           )}
-                          <FormField label="Estimated Start Date" required error={errors.startDate?.message}>
-                            <InputSelect registration={register('startDate')} placeholder="Your estimated start date" options={START_DATE_OPTIONS} error={!!errors.startDate} />
+                          <FormField label={t('contact:modalBusiness.fields.startDate.label')} required error={errors.startDate?.message}>
+                            <InputSelect registration={register('startDate')} placeholder={t('contact:modalBusiness.fields.startDate.placeholder')} options={START_DATE_OPTIONS} error={!!errors.startDate} />
                           </FormField>
                         </>
                       )}
@@ -595,10 +600,10 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                       {/* STEP 4 — Message */}
                       {currentStep === 3 && (
                         <>
-                          <FormField label="Your Message" required error={errors.message?.message}>
+                          <FormField label={t('contact:modalBusiness.fields.message.label')} required error={errors.message?.message}>
                             <InputTextarea
                               registration={register('message')}
-                              placeholder="Tell us more about your project, vision, or anything you'd like us to know before we connect."
+                              placeholder={t('contact:modalBusiness.fields.message.placeholder')}
                               maxLength={3000}
                               watchValue={messageValue}
                               rows={7}
@@ -609,7 +614,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                           {/* File attachment */}
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                             <label className="text-s" style={{ color: 'var(--color-neutral-400)' }}>
-                              Attach Brief <span className="text-xs" style={{ color: 'var(--color-neutral-600)' }}>— PDF, DOC or DOCX, max 30 MB</span>
+                              {t('contact:modalBusiness.fields.attachBrief.label')} <span className="text-xs" style={{ color: 'var(--color-neutral-600)' }}>{t('contact:modalBusiness.fields.attachBrief.hint')}</span>
                             </label>
                             {!attachedFile ? (
                               <label style={{
@@ -624,7 +629,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, color: 'var(--color-neutral-500)' }}>
                                   <path d="M7 1v8M4 4l3-3 3 3M1 10v1.5A1.5 1.5 0 002.5 13h9a1.5 1.5 0 001.5-1.5V10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                <span className="text-s" style={{ color: 'var(--color-neutral-500)' }}>Click to upload PDF, DOC or DOCX</span>
+                                <span className="text-s" style={{ color: 'var(--color-neutral-500)' }}>{t('contact:modalBusiness.fields.attachBrief.uploadCta')}</span>
                                 <input type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={handleFileChange} style={{ display: 'none' }} />
                               </label>
                             ) : (
@@ -653,21 +658,21 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                             {fileError && <p className="text-xs" style={{ color: 'var(--color-input-error)' }}>{fileError}</p>}
                           </div>
 
-                          <FormField label="Brief Link" error={errors.externalLinks?.message}>
-                            <InputText registration={register('externalLinks')} type="url" placeholder="Your link" error={!!errors.externalLinks} value={watch('externalLinks')} />
+                          <FormField label={t('contact:modalBusiness.fields.externalLinks.label')} error={errors.externalLinks?.message}>
+                            <InputText registration={register('externalLinks')} type="url" placeholder={t('contact:modalBusiness.fields.externalLinks.placeholder')} error={!!errors.externalLinks} value={watch('externalLinks')} />
                           </FormField>
-                          <FormField label="How did you hear from us?" required error={errors.source?.message || fieldErrors.source}>
-                            <InputSelect registration={register('source')} placeholder="Select one" options={SOURCE_OPTIONS} error={!!errors.source || !!fieldErrors.source} />
+                          <FormField label={t('contact:modalBusiness.fields.source.label')} required error={errors.source?.message || fieldErrors.source}>
+                            <InputSelect registration={register('source')} placeholder={t('contact:modalBusiness.fields.source.placeholder')} options={SOURCE_OPTIONS} error={!!errors.source || !!fieldErrors.source} />
                           </FormField>
                           {watch('source') === 'Other' && (
-                            <FormField label="Please specify" error={errors.sourceOther?.message}>
-                              <InputText registration={register('sourceOther')} placeholder="Tell us how you found us" error={!!errors.sourceOther} value={watch('sourceOther')} />
+                            <FormField label={t('contact:modalBusiness.fields.sourceOther.label')} error={errors.sourceOther?.message}>
+                              <InputText registration={register('sourceOther')} placeholder={t('contact:modalBusiness.fields.sourceOther.placeholder')} error={!!errors.sourceOther} value={watch('sourceOther')} />
                             </FormField>
                           )}
                           <InputCheckbox
                             registration={register('ndaRequested')}
                             checked={!!ndaChecked}
-                            label="NDA Requirement — I'd like to discuss a Non-Disclosure Agreement before sharing project details."
+                            label={t('contact:modalBusiness.fields.ndaRequested.label')}
                           />
                           <PrivacyCheckbox
                             control={control}
@@ -686,10 +691,10 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
 
                     {/* Navigation */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginTop: 'var(--space-8)' }}>
-                      <Btn variant="secondary" as="button" type="button" size="md" onClick={handleBack} active={false} disabled={currentStep === 0}>Back</Btn>
+                      <Btn variant="secondary" as="button" type="button" size="md" onClick={handleBack} active={false} disabled={currentStep === 0}>{t('common:buttons.back')}</Btn>
                       {currentStep < 3
-                        ? <Btn variant="accept" as="button" type="button" onClick={handleNext} disabled={!isStepValid}>Next</Btn>
-                        : <Btn variant="accept" as="button" type="button" onClick={handleSubmitForm} disabled={!isStepValid || isSubmitting}>{isSubmitting ? 'Sending...' : 'Submit'}</Btn>
+                        ? <Btn variant="accept" as="button" type="button" onClick={handleNext} disabled={!isStepValid}>{t('common:buttons.next')}</Btn>
+                        : <Btn variant="accept" as="button" type="button" onClick={handleSubmitForm} disabled={!isStepValid || isSubmitting}>{isSubmitting ? t('common:buttons.sending') : t('common:buttons.submit')}</Btn>
                       }
                     </div>
                     {submitError && <p className="text-s" style={{ color: 'var(--color-input-error)', marginTop: 'var(--space-4)' }}>{submitError}</p>}
