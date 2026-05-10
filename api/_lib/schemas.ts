@@ -31,11 +31,11 @@ export const businessSchema = z.object({
   ndaRequested: z.boolean().optional(),
   source: z.string().optional(),
   sourceOther: z.string().optional(),
-  privacyPolicy: z.boolean().optional(),
+  privacyPolicy: z.literal(true),
   honeypot: z.string().optional(),
   attachedFile: z.object({
     name: z.string(),
-    base64: z.string(),
+    base64: z.string().max(524288),
   }).optional(),
 });
 
@@ -57,7 +57,7 @@ export const freelancerSchema = z.object({
   source: z.string().optional(),
   sourceOther: z.string().optional(),
   message: z.string().optional(),
-  privacyPolicy: z.boolean().optional(),
+  privacyPolicy: z.literal(true),
   honeypot: z.string().optional(),
 });
 

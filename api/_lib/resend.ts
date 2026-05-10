@@ -15,9 +15,13 @@ function getTo(): string {
   return process.env.RESEND_TO ?? 'info@senzostudio.com';
 }
 
+function esc(s: string | undefined): string | undefined {
+  return s?.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 function row(label: string, value: string | undefined): string {
   if (!value) return '';
-  return `<tr><td style="padding:6px 12px;color:#888;font-size:13px;white-space:nowrap">${label}</td><td style="padding:6px 12px;color:#eee;font-size:13px">${value}</td></tr>`;
+  return `<tr><td style="padding:6px 12px;color:#888;font-size:13px;white-space:nowrap">${label}</td><td style="padding:6px 12px;color:#eee;font-size:13px">${esc(value)}</td></tr>`;
 }
 
 export async function sendBusinessNotification(data: BusinessPayload): Promise<void> {
@@ -42,7 +46,7 @@ export async function sendBusinessNotification(data: BusinessPayload): Promise<v
         ${row('NDA', data.ndaRequested ? 'Requested' : undefined)}
         ${row('Attached file', data.attachedFile?.name)}
       </table>
-      ${data.message ? `<p style="color:#ccc;font-size:14px;margin:24px 0 0;padding:16px;background:#111;border-left:2px solid #333">${data.message}</p>` : ''}
+      ${data.message ? `<p style="color:#ccc;font-size:14px;margin:24px 0 0;padding:16px;background:#111;border-left:2px solid #333">${esc(data.message)}</p>` : ''}
     </div>
   `;
 
@@ -76,7 +80,7 @@ export async function sendFreelancerNotification(data: FreelancerPayload): Promi
         ${row('Website', data.websiteUrl)}
         ${row('Source', data.source === 'Other' ? data.sourceOther : data.source)}
       </table>
-      ${data.message ? `<p style="color:#ccc;font-size:14px;margin:24px 0 0;padding:16px;background:#111;border-left:2px solid #333">${data.message}</p>` : ''}
+      ${data.message ? `<p style="color:#ccc;font-size:14px;margin:24px 0 0;padding:16px;background:#111;border-left:2px solid #333">${esc(data.message)}</p>` : ''}
     </div>
   `;
 
