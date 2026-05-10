@@ -26,6 +26,7 @@
     "@tailwindcss/vite": "^4.2.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vercel/node": "^5.7.16",
     "@vitejs/plugin-react": "^4.3.0",
     "sharp": "^0.33.0",
     "tailwindcss": "^4.0.0",
