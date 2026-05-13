@@ -94,12 +94,13 @@
         "placeholder": "Tell us more about your project, vision, or anything you'd like us to know before we connect."
       },
       "attachBrief": {
-        "label": "Attach Brief",
+        "label": "Attach Brief Document",
         "hint": "— PDF, DOC or DOCX, max 30 MB",
-        "uploadCta": "Click to upload PDF, DOC or DOCX"
+        "uploadCta": "Click to upload PDF, DOC or DOCX",
+        "dropCta": "Drop the file here"
       },
       "externalLinks": {
-        "label": "Brief Link",
+        "label": "Or share it via link",
         "placeholder": "Your link"
       },
       "source": {
@@ -149,7 +150,7 @@
       "networkError": "No internet connection. Please check your network and try again.",
       "unexpectedError": "An unexpected error occurred. Please try again or contact us at info@senzostudio.com."
     },
-    "success": "Thank you for contacting Senzo Studio. We have registered your inquiry and, if applicable, the non-disclosure agreement (NDA). Our team will review the details and contact you within one business day."
+    "success": "Thank you for contacting Senzo Studio. We have received your inquiry and our team will review the details and get back to you within one business day. If you requested an NDA, we will reach out to arrange it on our end before moving forward."
   },
   "modalFreelancer": {
     "title": "Freelancer Applications",

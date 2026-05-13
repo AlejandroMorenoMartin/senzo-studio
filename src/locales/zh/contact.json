@@ -94,12 +94,13 @@
         "placeholder": "请向我们介绍您的项目、创作构想，或任何在沟通前希望我们了解的内容。"
       },
       "attachBrief": {
-        "label": "上传 Brief",
+        "label": "上传 Brief 文件",
         "hint": "— PDF、DOC 或 DOCX，最大 30 MB",
-        "uploadCta": "点击上传 PDF、DOC 或 DOCX"
+        "uploadCta": "点击上传 PDF、DOC 或 DOCX",
+        "dropCta": "将文件拖放至此处"
       },
       "externalLinks": {
-        "label": "Brief 链接",
+        "label": "或通过链接分享",
         "placeholder": "您的链接"
       },
       "source": {
@@ -149,7 +150,7 @@
       "networkError": "无网络连接，请检查您的网络后重试。",
       "unexpectedError": "发生意外错误，请重试或联系我们 info@senzostudio.com。"
     },
-    "success": "感谢您联系 Senzo Studio。我们已收到您的咨询，如有需要，亦已登记保密协议（NDA）请求。我们的团队将审阅相关详情，并在一个工作日内与您取得联系。"
+    "success": "感谢您联系 Senzo Studio。我们已收到您的咨询，团队将审阅相关详情并在一个工作日内与您取得联系。如您申请了保密协议（NDA），我们将主动与您联系，在推进合作前完成我们这一方的签署手续。"
   },
   "modalFreelancer": {
     "title": "自由职业者申请",

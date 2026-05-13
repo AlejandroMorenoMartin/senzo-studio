@@ -231,19 +231,17 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [attachedFile, setAttachedFile] = useState<{ name: string; base64: string } | null>(null);
   const [fileError, setFileError] = useState('');
+  const [isDragOver, setIsDragOver] = useState(false);
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const ACCEPTED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+  const ACCEPTED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+
+  function processFile(file: File) {
     if (!ACCEPTED_TYPES.includes(file.type)) {
       setFileError(t('contact:modalBusiness.errors.fileType'));
-      e.target.value = '';
       return;
     }
     if (file.size > 30 * 1024 * 1024) {
       setFileError(t('contact:modalBusiness.errors.fileSize'));
-      e.target.value = '';
       return;
     }
     setFileError('');
@@ -253,6 +251,31 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
       setAttachedFile({ name: file.name, base64: reader.result });
     };
     reader.readAsDataURL(file);
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    processFile(file);
+    e.target.value = '';
+  }
+
+  function handleDragOver(e: React.DragEvent<HTMLLabelElement>) {
+    e.preventDefault();
+    setIsDragOver(true);
+  }
+
+  function handleDragLeave(e: React.DragEvent<HTMLLabelElement>) {
+    e.preventDefault();
+    setIsDragOver(false);
+  }
+
+  function handleDrop(e: React.DragEvent<HTMLLabelElement>) {
+    e.preventDefault();
+    setIsDragOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+    processFile(file);
   }
 
   function handleFileRemove() {
@@ -623,19 +646,26 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
                               {t('contact:modalBusiness.fields.attachBrief.label')} <span className="text-xs" style={{ color: 'var(--color-neutral-600)' }}>{t('contact:modalBusiness.fields.attachBrief.hint')}</span>
                             </label>
                             {!attachedFile ? (
-                              <label style={{
-                                display: 'flex', alignItems: 'center', gap: 'var(--space-3)',
-                                background: 'var(--color-input-bg)',
-                                border: `0.5px dashed ${fileError ? 'var(--color-input-error)' : 'var(--color-input-border)'}`,
-                                borderRadius: 'var(--radius)',
-                                padding: 'var(--space-4) var(--space-5)',
-                                cursor: 'pointer',
-                                transition: 'border-color var(--transition-hover)',
-                              }}>
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, color: 'var(--color-neutral-500)' }}>
+                              <label
+                                onDragOver={handleDragOver}
+                                onDragEnter={handleDragOver}
+                                onDragLeave={handleDragLeave}
+                                onDrop={handleDrop}
+                                style={{
+                                  display: 'flex', alignItems: 'center', gap: 'var(--space-3)',
+                                  background: isDragOver ? 'var(--color-input-bg-hover, var(--color-input-bg))' : 'var(--color-input-bg)',
+                                  border: `0.5px dashed ${fileError ? 'var(--color-input-error)' : isDragOver ? 'var(--color-green)' : 'var(--color-input-border)'}`,
+                                  borderRadius: 'var(--radius)',
+                                  padding: 'var(--space-4) var(--space-5)',
+                                  cursor: 'pointer',
+                                  transition: 'border-color var(--transition-hover), background var(--transition-hover)',
+                                }}>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, color: isDragOver ? 'var(--color-green)' : 'var(--color-neutral-500)', transition: 'color var(--transition-hover)' }}>
                                   <path d="M7 1v8M4 4l3-3 3 3M1 10v1.5A1.5 1.5 0 002.5 13h9a1.5 1.5 0 001.5-1.5V10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                <span className="text-s" style={{ color: 'var(--color-neutral-500)' }}>{t('contact:modalBusiness.fields.attachBrief.uploadCta')}</span>
+                                <span className="text-s" style={{ color: isDragOver ? 'var(--color-green)' : 'var(--color-neutral-500)', transition: 'color var(--transition-hover)' }}>
+                                  {isDragOver ? t('contact:modalBusiness.fields.attachBrief.dropCta') : t('contact:modalBusiness.fields.attachBrief.uploadCta')}
+                                </span>
                                 <input type="file" accept="application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={handleFileChange} style={{ display: 'none' }} />
                               </label>
                             ) : (

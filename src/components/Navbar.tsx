@@ -119,7 +119,7 @@ export default function Navbar() {
 
         {/* Desktop links */}
         {!isMobile && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               {NAV_LINKS.map((link) => (
                 <Btn

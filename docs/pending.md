@@ -4,6 +4,10 @@
 <!-- Contexto opcional:  > descripción ampliada -->
 <!-- Próximo paso:       > next: acción concreta y ejecutable -->
 
+- [ ] **Desarrollar caso de estudio Senzo Studio en el portfolio** `[ALTA]` — _entrada: 2026-05-09_
+
+- [ ] **Conectar Hotjar** `[ALTA]` — _entrada: 2026-05-09_
+
 - [ ] **Conectar formularios a Airtable — endpoint serverless en Vercel** `[ALTA]` — _entrada: 2026-05-09_
   > Los formularios de Business y Freelancer hacen POST a `/api/submit-business` y `/api/submit-freelancer`. Ambos endpoints no existen aún. Conectar via Airtable API + Vercel Functions.
   > next: tras el deploy, crear Vercel Function en `api/submit-business.ts`, configurar Airtable base y API key, probar end-to-end con el cliente

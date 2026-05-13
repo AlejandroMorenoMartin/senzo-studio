@@ -1,12 +1,8 @@
-import { useKittScheduler } from '../hooks/useKittScheduler';
-
 interface SectionLabelProps {
   children: React.ReactNode;
 }
 
 export default function SectionLabel({ children }: SectionLabelProps) {
-  const active = useKittScheduler();
-
   return (
     <div style={{ position: 'relative' }}>
       <p className="title-l" style={{ textTransform: 'uppercase' }}>{children}</p>
@@ -21,8 +17,7 @@ export default function SectionLabel({ children }: SectionLabelProps) {
             height: 'clamp(2px, 0.5vw, 3.5px)',
             background: 'linear-gradient(to right, transparent, var(--color-red-500), transparent)',
             filter: 'blur(1px)',
-            opacity: active ? 1 : 0,
-            animation: active ? 'kitt-scan 5s linear 0s 1' : 'none',
+            animation: 'kitt-scan 5s linear infinite',
           }} />
         </div>
       </div>

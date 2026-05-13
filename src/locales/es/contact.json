@@ -94,12 +94,13 @@
         "placeholder": "Cuéntanos más sobre tu proyecto, tu visión o cualquier detalle que quieras que conozcamos antes de conectar."
       },
       "attachBrief": {
-        "label": "Adjuntar Brief",
+        "label": "Adjuntar documento del brief",
         "hint": "— PDF, DOC o DOCX, máx. 30 MB",
-        "uploadCta": "Clic para subir PDF, DOC o DOCX"
+        "uploadCta": "Clic para subir PDF, DOC o DOCX",
+        "dropCta": "Suelta el archivo aquí"
       },
       "externalLinks": {
-        "label": "Enlace al Brief",
+        "label": "O compártelo mediante un enlace",
         "placeholder": "Tu enlace"
       },
       "source": {
@@ -149,7 +150,7 @@
       "networkError": "Sin conexión a internet. Por favor, comprueba tu red e inténtalo de nuevo.",
       "unexpectedError": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo o contáctanos en info@senzostudio.com."
     },
-    "success": "Gracias por contactar con Senzo Studio. Hemos registrado tu consulta y, si procede, el acuerdo de no divulgación (NDA). Nuestro equipo revisará los detalles y se pondrá en contacto contigo en un día hábil."
+    "success": "Gracias por contactar con Senzo Studio. Hemos recibido tu consulta y nuestro equipo revisará los detalles y se pondrá en contacto contigo en un día hábil. Si has solicitado un acuerdo de confidencialidad (NDA), nos pondremos en contacto contigo para tramitarlo por nuestra parte antes de continuar."
   },
   "modalFreelancer": {
     "title": "Solicitud de Freelancer",

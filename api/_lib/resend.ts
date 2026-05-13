@@ -38,7 +38,7 @@ export async function sendBusinessNotification(data: BusinessPayload): Promise<v
         ${row('Website', data.companyWebsite)}
         ${row('Role', data.role === 'Other' ? data.roleOther : data.role)}
         ${row('Country', data.country)}
-        ${row('Inquiry', data.inquiryType)}
+        ${row('Inquiry', data.inquiryType === 'specific' ? 'Specific Project' : data.inquiryType === 'general' ? 'General Inquiry' : data.inquiryType)}
         ${row('Category', data.projectCategory === 'Other' ? data.projectCategoryOther : data.projectCategory)}
         ${row('Budget', data.budget)}
         ${row('Start date', data.startDate)}
@@ -71,7 +71,7 @@ export async function sendFreelancerNotification(data: FreelancerPayload): Promi
         ${row('Name', `${data.firstName} ${data.lastName}`)}
         ${row('Email', data.email)}
         ${row('Country', data.country)}
-        ${row('Departments', (data.department ?? []).join(', '))}
+        ${row('Departments', (data.department ?? []).map(d => d === 'Other' && data.departmentOther ? data.departmentOther : d).join(', '))}
         ${row('Software', data.mainSoftware)}
         ${row('Experience', data.yearsExperience ? `${data.yearsExperience} years` : undefined)}
         ${row('Rate', data.expectedRate)}

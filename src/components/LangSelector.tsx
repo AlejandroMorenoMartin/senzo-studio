@@ -76,6 +76,7 @@ export default function LangSelector({ borderless = false, inline = false }: Lan
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 'var(--space-2)',
     cursor: 'pointer',
     fontFamily: 'var(--font-body)',
     letterSpacing: '0.08em',
@@ -160,6 +161,10 @@ export default function LangSelector({ borderless = false, inline = false }: Lan
         style={triggerStyle}
       >
         {activeCode.toUpperCase()}
+        <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
       </button>
 
       <AnimatePresence>
