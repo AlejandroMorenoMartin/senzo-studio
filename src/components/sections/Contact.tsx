@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
 import { contact } from '../../data/content';
+import { highlightFX } from '../../utils/highlightFX';
 
 interface ContactProps {
   onBusinessClick: () => void;
@@ -27,7 +28,7 @@ function ContactCard({ title, description, cta, onClick }: {
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
         <p className="text-l" style={{ color: 'var(--color-neutral-100)' }}>{title}</p>
-        <p className="text-base" style={{ color: 'var(--color-neutral-500)' }}>{description}</p>
+        <p className="text-base" style={{ color: 'var(--color-neutral-500)' }}>{highlightFX(description)}</p>
       </div>
 
       <div style={{ alignSelf: 'flex-start' }}>

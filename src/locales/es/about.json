@@ -1,15 +1,15 @@
 {
   "sectionLabel": "Nosotros",
   "intro": "Dos especialistas. Una obsesión compartida por el oficio.",
-  "body": "Senzo Studio fue fundado en 2020 por Rubén y Sergio. Tras un camino de esfuerzo, aprendizaje y mejora constante, el estudio se ha consolidado como un <bold>líder internacional</bold> en efectos visuales, colaborando con algunas de las empresas más destacadas de la industria. Hoy seguimos creciendo con la mirada puesta en el futuro y con la ilusión de ampliar nuestro equipo para afrontar nuevos retos.",
+  "body": "Fundado por Rubén Hinarejos y Sergio Nieto, Senzo Studio cuenta con más de 15 años de trayectoria. Lo que nació como un equipo especializado en <red>FX</red> es hoy un estudio de V<red>FX</red> y CGI para Cine, Publicidad, TV y Animación. Nuestro vínculo personal y visión compartida nos permiten liderar el equipo con una fluidez natural, garantizando una calidad máxima y resultados impecables en cada producción.",
   "crew": {
     "sergio": {
       "role": "CEO, VFX Artist & Supervisor",
-      "bio": "Sergio lidera el área de FX y simulaciones en cada proyecto. Con una sólida visión creativa, impulsa la innovación y soluciones visuales únicas — aportando la ambición técnica que define la identidad y el trabajo de Senzo."
+      "bio": "Sergio es reconocido por su visión técnica y resolución de problemas en cada proyecto de VFX. Desarrolla soluciones sólidas y avanzadas fusionando habilidades técnicas con la visión artística, asegurando que cada producción cumpla las necesidades del cliente mientras fortalece el pipeline del estudio."
     },
     "ruben": {
       "role": "CEO, VFX Artist & Supervisor",
-      "bio": "Rubén aporta más de 10 años de experiencia en simulaciones complejas. Su precisión técnica y atención al detalle garantizan resultados visuales de alta calidad en todos los formatos — desde largometrajes hasta publicidad de alto impacto."
+      "bio": "Rubén aporta más de 10 años de experiencia trabajando en algunos de los mejores estudios de VFX, donde su creatividad y pasión por la industria garantizan resultados visuales de alta calidad en una amplia variedad de producciones cinematográficas y comerciales."
     }
   },
   "labels": {

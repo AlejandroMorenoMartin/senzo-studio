@@ -1,15 +1,15 @@
 {
   "sectionLabel": "About",
   "intro": "Two specialists. One shared obsession with craft.",
-  "body": "Senzo Studio was founded in 2020 by Rubén and Sergio. After a journey of hard work, learning, and improvement, the studio has established itself as an <bold>international leader</bold> in visual effects, collaborating with some of the most prominent companies in the industry. Today, we continue to grow with our eyes set on the future and with the excitement of expanding our team to take on new challenges.",
+  "body": "Founded by Rubén Hinarejos and Sergio Nieto, Senzo Studio is built on over 15 years of history. What began as a specialized <red>FX</red> team is now a full-service V<red>FX</red> and CGI studio for Feature Films, Advertising, TV, and Animation. Our seamless synergy and shared vision allow us to lead the team with a natural flow, ensuring top-tier quality and flawless results in every production.",
   "crew": {
     "sergio": {
       "role": "CEO, VFX Artist & Supervisor",
-      "bio": "Sergio leads the FX and simulation side of every project. With a strong creative vision, he drives innovation and unique visual solutions — bringing the kind of technical ambition that defines Senzo's identity and output."
+      "bio": "Sergio is recognized for his technical vision and problem-solving in every VFX project. He deploys advanced, solid solutions by blending technical precision with artistic vision, ensuring every production meets client needs while fortifying the studio's pipeline."
     },
     "ruben": {
       "role": "CEO, VFX Artist & Supervisor",
-      "bio": "Rubén brings over 10 years of experience in complex simulations. His technical precision and attention to detail guarantee high-quality visual results across every format — from feature films to high-impact advertising."
+      "bio": "Rubén brings over 10 years of experience working at some of the best VFX studios, where his creativity and passion for the industry ensure high-quality visual results across a wide range of cinematic and commercial productions."
     }
   },
   "labels": {

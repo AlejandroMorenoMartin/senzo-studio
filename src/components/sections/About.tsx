@@ -3,6 +3,7 @@ import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
 import BtnIcon from '../BtnIcon';
 import { about } from '../../data/content';
+import { highlightFX } from '../../utils/highlightFX';
 
 const IconLinkedin = () => (
   <svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -52,7 +53,7 @@ export default function About() {
         >
           <Trans
             i18nKey="about:body"
-            components={{ bold: <strong /> }}
+            components={{ bold: <strong />, red: <span style={{ color: 'var(--color-red-500)' }} /> }}
           />
         </p>
 
@@ -79,16 +80,12 @@ export default function About() {
                     {member.name}
                   </p>
                   <p className="text-s" style={{ color: 'var(--color-neutral-500)' }}>
-                    {t(`about:crew.${member.id}.role`).split('FX').map((part: string, i: number, arr: string[]) =>
-                      i < arr.length - 1
-                        ? <span key={i}>{part}<span style={{ color: 'var(--color-red-500)' }}>FX</span></span>
-                        : <span key={i}>{part}</span>
-                    )}
+                    {highlightFX(t(`about:crew.${member.id}.role`))}
                   </p>
                 </div>
 
                 <p className="text-base" style={{ color: 'var(--color-neutral-400)', lineHeight: 1.6 }}>
-                  {t(`about:crew.${member.id}.bio`)}
+                  {highlightFX(t(`about:crew.${member.id}.bio`))}
                 </p>
 
                 <div>

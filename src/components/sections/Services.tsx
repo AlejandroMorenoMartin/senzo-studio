@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import SectionReveal from '../SectionReveal';
 import SectionLabel from '../SectionLabel';
+import { highlightFX } from '../../utils/highlightFX';
 
 export default function Services() {
   const { t } = useTranslation('services');
@@ -22,7 +23,7 @@ export default function Services() {
             </p>
             <div className="chips">
               {chips.map((chip) => (
-                <span key={chip} className="chip">{chip}</span>
+                <span key={chip} className="chip">{highlightFX(chip)}</span>
               ))}
             </div>
           </div>

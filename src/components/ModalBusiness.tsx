@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useForm, Controller, type Control } from 'react-hook-form';
+import { highlightFX } from '../utils/highlightFX';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -498,7 +499,7 @@ export default function ModalBusiness({ isOpen, onClose, onPrivacyClick }: Modal
             </div>
             {!submitted && (
               <p className="text-base" style={{ marginBottom: 'var(--space-6)' }}>
-                {t('contact:modalBusiness.intro')}
+                {highlightFX(t('contact:modalBusiness.intro'))}
               </p>
             )}
             {!submitted && (

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ModalVimeo from '../ModalVimeo';
 import Btn from '../Btn';
 import { hero } from '../../data/content';
+import { highlightFX } from '../../utils/highlightFX';
 
 const OVERLAY_INSET = 'var(--space-6)';
 
@@ -121,7 +122,7 @@ export default function Hero() {
             High-End V<span style={{ color: 'var(--color-red-500)' }}>FX</span> · CGI
           </p>
           <p className="text-base" style={{ maxWidth: '36rem', lineHeight: 1.6 }}>
-            {t('hero:description')}
+            {highlightFX(t('hero:description'))}
           </p>
         </div>
 

@@ -236,7 +236,7 @@ export default function Work() {
                 <p className="text-base" style={{ lineHeight: 1.6 }}>
                   <Trans
                     i18nKey={`work:projects.${work[lightboxIndex].id}.description`}
-                    components={{ bold: <strong /> }}
+                    components={{ bold: <strong />, red: <span style={{ color: 'var(--color-red-500)' }} /> }}
                   />
                 </p>
               </div>

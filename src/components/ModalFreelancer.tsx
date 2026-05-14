@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useForm, Controller, type Control } from 'react-hook-form';
+import { highlightFX } from '../utils/highlightFX';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -443,7 +444,7 @@ export default function ModalFreelancer({ isOpen, onClose, onPrivacyClick }: Mod
                                 <InputCheckbox
                                   key={opt.value}
                                   registration={register('department')}
-                                  label={opt.label}
+                                  label={highlightFX(opt.label)}
                                   checked={selectedDepartments.includes(opt.value)}
                                   value={opt.value}
                                 />
