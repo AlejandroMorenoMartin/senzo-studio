@@ -195,12 +195,12 @@ export default function Work() {
               {/* Top bar */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-                  <BtnIcon as="button" variant="outline" label="Anterior" onClick={prev}>
+                  <BtnIcon as="button" variant="outline" label={t('work:nav.prev')} onClick={prev}>
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </BtnIcon>
-                  <BtnIcon as="button" variant="outline" label="Siguiente" onClick={next}>
+                  <BtnIcon as="button" variant="outline" label={t('work:nav.next')} onClick={next}>
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -209,7 +209,7 @@ export default function Work() {
                     {String(lightboxIndex + 1).padStart(2, '0')} / {String(work.length).padStart(2, '0')}
                   </span>
                 </div>
-                <BtnIcon as="button" variant="outline" label="Cerrar" onClick={closeModal}>
+                <BtnIcon as="button" variant="outline" label={t('work:nav.close')} onClick={closeModal}>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                   </svg>

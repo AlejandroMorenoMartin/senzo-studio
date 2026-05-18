@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import SectionReveal from '../SectionReveal';
 import SectionLabel from '../SectionLabel';
-import { highlightFX } from '../../utils/highlightFX';
 
 const IconChevron = ({ open }: { open: boolean }) => (
   <svg
@@ -52,7 +51,7 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
         }}
       >
         <p className="text-l" style={{ color: 'var(--color-neutral-200)', fontWeight: 400 }}>
-          {highlightFX(q)}
+          {q}
         </p>
         <IconChevron open={open} />
       </button>
@@ -74,7 +73,7 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
                 lineHeight: 1.6,
               }}
             >
-              {highlightFX(a)}
+              {a}
             </p>
           </motion.div>
         )}

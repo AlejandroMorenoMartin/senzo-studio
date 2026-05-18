@@ -40,5 +40,10 @@
     "avatar": {
       "description": "In collaboration with Netflix, we spearheaded the technical execution of the complex <bold>elemental-bending <red>FX</red></bold>. Our team developed advanced fluid simulations for waterbending and high-velocity smoke and air systems for airbending maneuvers. We also managed the creature <red>FX</red> and grooming for Appa, ensuring photorealistic fur dynamics during high-altitude flight. The project showcased our ability to integrate procedural environments with high-stakes character action. A pinnacle of <bold>elemental simulation</bold> and creature feature execution for a global streaming phenomenon."
     }
+  },
+  "nav": {
+    "prev": "Previous",
+    "next": "Next",
+    "close": "Close"
   }
 }

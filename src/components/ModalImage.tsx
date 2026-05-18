@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import BtnIcon from './BtnIcon';
 
 interface ModalImageProps {
@@ -10,6 +11,7 @@ interface ModalImageProps {
 }
 
 export default function ModalImage({ src, alt, isOpen, onClose }: ModalImageProps) {
+  const { t } = useTranslation('work');
   useEffect(() => {
     if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -41,7 +43,7 @@ export default function ModalImage({ src, alt, isOpen, onClose }: ModalImageProp
         >
           {/* Close */}
           <div style={{ position: 'absolute', top: 'var(--space-6)', right: 'var(--space-6)' }} onClick={(e) => e.stopPropagation()}>
-            <BtnIcon as="button" label="Cerrar" onClick={onClose}>
+            <BtnIcon as="button" label={t('nav.close')} onClick={onClose}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>

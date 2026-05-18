@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import BtnIcon from '../BtnIcon';
 import LinkExternal from '../LinkExternal';
 import { footer } from '../../data/content';
@@ -38,10 +38,6 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
   const year = new Date().getFullYear();
   const [privacyHovered, setPrivacyHovered] = useState(false);
 
-  const tagline = t('common:footer.tagline');
-  const fxIndex = tagline.indexOf('FX');
-  const taglineBefore = fxIndex >= 0 ? tagline.slice(0, fxIndex) : tagline;
-  const taglineAfter = fxIndex >= 0 ? tagline.slice(fxIndex + 2) : '';
 
   return (
     <footer id="footer" style={{ borderTop: 'var(--border)' }}>
@@ -70,9 +66,7 @@ export default function Footer({ onPrivacyClick }: FooterProps) {
             Senzo Studio
           </p>
           <p className="text-s" style={{ color: 'var(--color-neutral-400)' }}>
-            {taglineBefore}
-            {fxIndex >= 0 && <span style={{ color: 'var(--color-accent)' }}>FX</span>}
-            {taglineAfter}
+            <Trans i18nKey="common:footer.tagline" components={{ red: <span style={{ color: 'var(--color-red-500)' }} /> }} />
           </p>
         </div>
 

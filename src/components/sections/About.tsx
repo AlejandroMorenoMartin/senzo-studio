@@ -1,9 +1,10 @@
 import { Trans, useTranslation } from 'react-i18next';
+
+const redSpan = <span style={{ color: 'var(--color-red-500)' }} />;
 import SectionLabel from '../SectionLabel';
 import Btn from '../Btn';
 import BtnIcon from '../BtnIcon';
 import { about } from '../../data/content';
-import { highlightFX } from '../../utils/highlightFX';
 
 const IconLinkedin = () => (
   <svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -40,12 +41,12 @@ function WaveformSvg() {
 }
 
 export default function About() {
-  const { t } = useTranslation('about');
+  const { t } = useTranslation(['about', 'common']);
 
   return (
     <section id="about">
       <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
-        <SectionLabel>{t('about:sectionLabel')}</SectionLabel>
+        <SectionLabel>{t('sectionLabel')}</SectionLabel>
 
         <p
           className="text-base"
@@ -80,16 +81,16 @@ export default function About() {
                     {member.name}
                   </p>
                   <p className="text-s" style={{ color: 'var(--color-neutral-500)' }}>
-                    {highlightFX(t(`about:crew.${member.id}.role`))}
+                    <Trans i18nKey={`crew.${member.id}.role`} ns="about" components={{ red: redSpan }} />
                   </p>
                 </div>
 
                 <p className="text-base" style={{ color: 'var(--color-neutral-400)', lineHeight: 1.6 }}>
-                  {highlightFX(t(`about:crew.${member.id}.bio`))}
+                  {t(`crew.${member.id}.bio`)}
                 </p>
 
                 <div>
-                  <Btn variant="primary" as="a" href={member.reel}>{t('about:labels.watchReel')}</Btn>
+                  <Btn variant="primary" as="a" href={member.reel}>{t('labels.watchReel')}</Btn>
                 </div>
 
                 <BtnIcon

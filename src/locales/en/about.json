@@ -1,14 +1,14 @@
 {
   "sectionLabel": "About",
   "intro": "Two specialists. One shared obsession with craft.",
-  "body": "Founded by Rubén Hinarejos and Sergio Nieto, Senzo Studio is built on over 15 years of history. What began as a specialized <red>FX</red> team is now a full-service V<red>FX</red> and CGI studio for Feature Films, Advertising, TV, and Animation. Our seamless synergy and shared vision allow us to lead the team with a natural flow, ensuring top-tier quality and flawless results in every production.",
+  "body": "Founded by Rubén Hinarejos and Sergio Nieto, Senzo Studio is built on over 15 years of history. What began as a specialized <red>FX</red> team is now a full-service <red>VFX</red> and CGI studio for Feature Films, Advertising, TV, and Animation. Our seamless synergy and shared vision allow us to lead the team with a natural flow, ensuring top-tier quality and flawless results in every production.",
   "crew": {
     "sergio": {
-      "role": "CEO, VFX Artist & Supervisor",
+      "role": "Co-founder & <red>VFX</red> Supervisor",
       "bio": "Sergio is recognized for his technical vision and problem-solving in every VFX project. He deploys advanced, solid solutions by blending technical precision with artistic vision, ensuring every production meets client needs while fortifying the studio's pipeline."
     },
     "ruben": {
-      "role": "CEO, VFX Artist & Supervisor",
+      "role": "Co-founder & <red>VFX</red> Supervisor",
       "bio": "Rubén brings over 10 years of experience working at some of the best VFX studios, where his creativity and passion for the industry ensure high-quality visual results across a wide range of cinematic and commercial productions."
     }
   },

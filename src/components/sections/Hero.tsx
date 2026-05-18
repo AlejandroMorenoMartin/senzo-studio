@@ -1,10 +1,9 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import ModalVimeo from '../ModalVimeo';
 import Btn from '../Btn';
 import { hero } from '../../data/content';
-import { highlightFX } from '../../utils/highlightFX';
 
 const OVERLAY_INSET = 'var(--space-6)';
 
@@ -119,10 +118,10 @@ export default function Hero() {
             Senzo Studio
           </h1>
           <p className="text-xl" style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            High-End V<span style={{ color: 'var(--color-red-500)' }}>FX</span> · CGI
+            <Trans i18nKey="hero:tagline" components={{ red: <span style={{ color: 'var(--color-red-500)' }} /> }} />
           </p>
           <p className="text-base" style={{ maxWidth: '36rem', lineHeight: 1.6 }}>
-            {highlightFX(t('hero:description'))}
+            {t('hero:description')}
           </p>
         </div>
 

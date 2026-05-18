@@ -4,11 +4,11 @@
   "body": "Senzo Studio 由 Rubén 和 Sergio 于 2020 年创立。经过不断努力、学习与精进，工作室已确立其作为视觉效果领域<bold>国际领军者</bold>的地位，与业内最具影响力的公司展开合作。如今，我们目光朝向未来，怀着扩充团队、迎接新挑战的热忱，持续成长。",
   "crew": {
     "sergio": {
-      "role": "CEO, VFX Artist & Supervisor",
+      "role": "Co-founder & <red>VFX</red> Supervisor",
       "bio": "Sergio 主导每个项目的 FX 与模拟工作。凭借强烈的创意视野，他推动创新，探索独特的视觉解决方案——带来定义 Senzo 身份与产出的技术雄心。"
     },
     "ruben": {
-      "role": "CEO, VFX Artist & Supervisor",
+      "role": "Co-founder & <red>VFX</red> Supervisor",
       "bio": "Rubén 拥有逾 10 年复杂模拟经验。他的技术精准性与对细节的严苛要求，确保了从故事长片到高影响力广告各类格式中始终如一的卓越视觉成果。"
     }
   },

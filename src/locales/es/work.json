@@ -40,5 +40,10 @@
     "avatar": {
       "description": "En colaboración con Netflix, lideramos la ejecución técnica de los complejos <bold>FX de control elemental</bold>. Nuestro equipo desarrolló avanzadas simulaciones de fluidos para el control del agua, y sistemas de humo y aire de alta velocidad para las maniobras de control del aire. También gestionamos los FX de criatura y el grooming de Appa, garantizando dinámicas de pelo fotorrealistas durante el vuelo a gran altitud. El proyecto demostró nuestra capacidad para integrar entornos procedurales con acción de personaje de alto riesgo. Un pináculo de la <bold>simulación elemental</bold> y la ejecución de criaturas para un fenómeno global de streaming."
     }
+  },
+  "nav": {
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "close": "Cerrar"
   }
 }
