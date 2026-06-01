@@ -38,6 +38,7 @@ const DEPARTMENT_OPTIONS = [
   { value: 'Rotoscope', label: 'Rotoscope' },
   { value: 'Keying', label: 'Keying' },
   { value: 'Paint-Prep', label: 'Paint-Prep' },
+  { value: 'Crowds', label: 'Crowds' },
   { value: 'Other', label: 'Other' },
 ];
 

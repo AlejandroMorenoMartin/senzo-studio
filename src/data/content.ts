@@ -222,6 +222,7 @@ export const servicesSection = {
     '3D Modeling & Texturing',
     'Tracking & Match-Move',
     'Rotoscope, Keying & Paint-Prep',
+    'Crowds',
   ],
 };
 
