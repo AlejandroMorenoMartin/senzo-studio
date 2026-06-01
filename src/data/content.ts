@@ -216,13 +216,13 @@ export const servicesSection = {
   description: 'End-to-end or just the parts you need.',
   chips: [
     'FX & CFX Simulations',
+    'Crowds',
     'Lighting & Render',
     'Compositing',
     '3D Animation',
     '3D Modeling & Texturing',
     'Tracking & Match-Move',
     'Rotoscope, Keying & Paint-Prep',
-    'Crowds',
   ],
 };
 

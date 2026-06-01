@@ -47,12 +47,12 @@
   },
   "chips": [
     "FX & CFX Simulations",
+    "Crowds",
     "Lighting & Render",
     "Compositing",
     "3D 动画",
     "3D 建模与贴图",
     "Tracking & Match-Move",
-    "Rotoscope、Keying & Paint-Prep",
-    "Crowds"
+    "Rotoscope、Keying & Paint-Prep"
   ]
 }

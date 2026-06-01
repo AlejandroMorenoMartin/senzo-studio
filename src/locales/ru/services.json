@@ -47,12 +47,12 @@
   },
   "chips": [
     "FX & CFX Simulations",
+    "Crowds",
     "Lighting & Render",
     "Compositing",
     "3D-анимация",
     "3D-моделирование и текстурирование",
     "Tracking & Match-Move",
-    "Ротоскопинг, Keying & Paint-Prep",
-    "Crowds"
+    "Ротоскопинг, Keying & Paint-Prep"
   ]
 }
